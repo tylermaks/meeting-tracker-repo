@@ -1,9 +1,20 @@
-import React from "react";
+import "../Styles/Nav.scss"
 
 function Nav(){
+
+    const links=["About", "Events", "Learn", "Reports", "Media"]
+
     return(
         <nav>
-            <h1>Hello World</h1>
+            <ul id="nav-links">
+                {
+                    links.map( (link, id) => {
+                        return(
+                            <li key={id}>{link}</li>
+                        )
+                    })
+                }
+            </ul>
         </nav>
     )
 }

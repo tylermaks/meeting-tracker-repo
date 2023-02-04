@@ -1,3 +1,12 @@
+//VARIABLES
+$teal: #008B92;
+$grey: #4D4D4D;
+$lt-grey: #aaaaaa;
+$lt-blue: #FAF7FB;
+$orange: #ff6900;
+
+
+//SETUP
 *,
 *::before, 
 *::after{
@@ -6,6 +15,51 @@
     padding: 0;
 }
 
+html, body, .App{ 
+    min-height: 100vh;
+}
+
+body{
+    font-family: "Poppins", sans-serif;
+}
+
+.App{
+    display: flex; 
+    flex-direction: column;
+}
+
+//FONTS & BUTTONS
 h1{
-    color: red;
+    color: $grey;
+}
+
+button{
+    background-color: $orange;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 1rem;
+    padding: 0.75rem;
+}
+
+
+
+//GLOBAL UTILITY CLASSES
+.flex-row{
+    display: flex;
+
+    &--center{
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+.flex-column{ 
+    display: flex;
+    flex-direction: column;
+
+    &--center{
+        align-items: center;
+        justify-content: center;
+    }
 }

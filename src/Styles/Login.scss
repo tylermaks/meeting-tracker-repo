@@ -1,0 +1,45 @@
+$lt-grey: #aaaaaa;
+$orange: #ff6900;
+
+
+#login{
+    flex-grow: 1;
+    gap: 2rem;
+}
+
+#login-form{
+    border: 1px solid $lt-grey;
+    gap: 1rem;
+    padding: 3rem;
+    width: 27.5%;
+
+    label{
+        position: absolute;
+        left: -99999px;
+    }
+
+    input{
+        border: 1px solid $lt-grey;
+        color: $lt-grey;
+        font-size: 1rem;
+        display: block;
+        padding: 0.75rem 1.5rem;
+    }
+
+    button{
+        margin-top: 1.5rem
+    }
+
+    a{
+        color: $orange;
+        display: block;
+        font-size: 0.75rem;
+        text-align: center;
+        text-decoration: none;
+
+        &:first-child{
+            margin: 1rem 0 0.75rem 0;
+        }
+    }
+
+}
