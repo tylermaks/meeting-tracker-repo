@@ -1,11 +1,11 @@
-import "../Styles/Nav.scss"
+import "../Styles/MainNav.scss"
 
-function Nav(){
+function MainNav(){
 
     const links=["About", "Events", "Learn", "Reports", "Media"]
 
     return(
-        <nav>
+        <nav id="main-nav">
             <ul id="nav-links">
                 {
                     links.map( (link, id) => {
@@ -19,4 +19,4 @@ function Nav(){
     )
 }
 
-export default Nav;
+export default MainNav;

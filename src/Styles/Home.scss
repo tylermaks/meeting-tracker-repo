@@ -1,0 +1,19 @@
+$lt-blue: #FAF7FB;
+
+#home{
+    background-color: $lt-blue;
+    display: grid;
+    flex-grow: 1;
+    grid-template-columns: 0.35fr 1fr;
+    grid-template-rows: 0.25fr 1fr;
+    grid-template-areas:
+        "homenav homenav"
+        "menu dashboard"
+    ;
+    padding-inline: 10rem;
+    padding-bottom: 1rem;
+
+    & #home-nav{
+        grid-area: homenav;
+    }
+}

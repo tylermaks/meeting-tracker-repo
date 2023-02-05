@@ -52,6 +52,11 @@ button{
         align-items: center;
         justify-content: center;
     }
+
+    &--space{
+        align-items: center;
+        justify-content: space-between;
+    }
 }
 
 .flex-column{ 
