@@ -1,4 +1,18 @@
 #menu-nav{
+    gap: 1.5rem;
     grid-area: menu;
-    padding-top: 1rem;
+    padding-top: 1.35rem;
+
+    div{
+        cursor: pointer;
+    }
+
+    p{
+        font-size: 1.125rem;
+    }
+
+    & .icon{
+        margin-right: 0.5rem;
+    }
+
 }

@@ -30,8 +30,9 @@ $orange: #ff6900;
         margin-top: 1.5rem
     }
 
-    a{
+    a, span{
         color: $orange;
+        cursor: pointer;
         display: block;
         font-size: 0.75rem;
         text-align: center;

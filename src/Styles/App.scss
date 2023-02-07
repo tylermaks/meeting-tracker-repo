@@ -15,7 +15,9 @@ $orange: #ff6900;
     padding: 0;
 }
 
-html, body, .App{ 
+html, 
+body, 
+.App{ 
     min-height: 100vh;
 }
 
@@ -28,8 +30,9 @@ body{
     flex-direction: column;
 }
 
-//FONTS & BUTTONS
-h1{
+//FONTS & BUTTONS & ICONS
+h1, 
+h2{
     color: $grey;
 }
 
@@ -42,19 +45,30 @@ button{
     padding: 0.75rem;
 }
 
+.icon{
+    &--small{
+        height: 0.825rem;
+        width: 0.825rem;
+    }
+
+    &--md{
+        height: 1.125rem;
+        width: 1.125rem;
+    }
+}
+
 
 
 //GLOBAL UTILITY CLASSES
 .flex-row{
     display: flex;
+    align-items: center;
 
     &--center{
-        align-items: center;
         justify-content: center;
     }
 
     &--space{
-        align-items: center;
         justify-content: space-between;
     }
 }

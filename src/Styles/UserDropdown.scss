@@ -1,0 +1,22 @@
+$grey: #4D4D4D;
+
+#user-dropdown{ 
+    gap: 1.25rem;
+
+    div{
+        background-color: $grey;
+        border-radius: 50%;
+        color: #fff;
+        height:2.25rem;
+        width: 2.25rem;
+    }
+
+    p{
+        cursor: pointer;
+    }
+
+    & .icon{
+        margin-left: 0.5rem;
+    }
+
+}

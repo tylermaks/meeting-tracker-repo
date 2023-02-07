@@ -1,17 +1,12 @@
-import { useState } from 'react'
+import { useState } from "react"
 
-import "../Styles/Login.scss"
-
-function Login(){
-
+function LoginForm({ handleClick }){
     const [userName, setUserName] = useState('')
     const [password, setPassword] = useState('')
 
     return(
-        <section id="login" class="flex-column flex-column--center">
-            <h1>Logo</h1>
-            <form id="login-form" className="flex-column" onSubmit={e => e.preventDefault()}>
-                <label htmlFor="email">Email</label>
+        <>
+            <label htmlFor="email">Email</label>
                 <input 
                     type="text" 
                     placeholder="Email"
@@ -30,13 +25,11 @@ function Login(){
                 <button>Log in</button>
 
                 <div>
-                    <a href='.login'>Register Here</a>
+                    <span onClick={handleClick}>Register Here</span>
                     <a href=".login">Lost you password?</a>
                 </div>
-            </form>
-
-        </section>
+        </>
     )
 }
 
-export default Login;
+export default LoginForm;

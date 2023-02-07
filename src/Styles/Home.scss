@@ -4,8 +4,8 @@ $lt-blue: #FAF7FB;
     background-color: $lt-blue;
     display: grid;
     flex-grow: 1;
-    grid-template-columns: 0.35fr 1fr;
-    grid-template-rows: 0.25fr 1fr;
+    grid-template-columns: 0.3fr 1fr;
+    grid-template-rows: 0.35fr 1fr;
     grid-template-areas:
         "homenav homenav"
         "menu dashboard"
