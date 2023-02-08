@@ -1,0 +1,38 @@
+$grey: #4D4D4D;
+$lt-grey: #aaaaaa;
+$lt-blue: #FAF7FB;
+$teal: #008B92;
+
+.spreadsheet-row{
+    display:grid;
+    font-size: 0.825rem;
+    grid-template-columns: 0.4fr 0.2fr 0.35fr 0.2fr 0.5fr;
+    text-align: center;
+
+    & > * {
+        padding: 0.5rem;
+    }
+
+    &--header{
+        background-color: $teal;
+        border: 1px solid $grey;
+        border-top-left-radius: 1rem;
+        border-top-right-radius: 1rem;
+        color: #fff;
+
+        & > *:not(:last-child){
+            border-right: 1px solid $grey;
+        }
+    }
+
+    &--meeting{
+        & > *{
+            border-right: 1px solid $lt-grey;
+            border-bottom: 1px solid $lt-grey;
+        }
+
+        & > :first-child{
+            border-left: 1px solid $lt-grey;
+        }
+    }
+}

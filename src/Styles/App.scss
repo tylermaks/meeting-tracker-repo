@@ -45,6 +45,20 @@ button{
     padding: 0.75rem;
 }
 
+.btn-alt{
+    border: 1px solid $teal;
+    border-radius: 2rem;
+    color: $teal;
+    cursor: pointer;
+    font-size: 0.75rem;
+    padding: 0.5rem;
+
+    &:hover{
+        background-color: $teal;
+        color: #fff;
+    }
+}
+
 .icon{
     &--small{
         height: 0.825rem;
@@ -81,4 +95,9 @@ button{
         align-items: center;
         justify-content: center;
     }
+}
+
+//GLOBAL CLASSES
+.dash-header{
+    margin-bottom: 4rem;
 }

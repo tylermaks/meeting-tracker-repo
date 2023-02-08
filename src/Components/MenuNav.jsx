@@ -19,7 +19,7 @@ const menuOpt = [
 
     {
         id:3, 
-        name:"Files",
+        name:"Documents",
         icon: files
     },
 
@@ -31,13 +31,13 @@ const menuOpt = [
 ]
 
 
-function MenuNav(){
+function MenuNav({ handleClick }){
     return(
         <nav id="menu-nav" className="flex-column">
             {
                 menuOpt.map( opt => {
                     return(
-                        <div key={opt.id} className="menu-opt flex-row">
+                        <div key={opt.id} className="menu-opt flex-row" onClick={() => handleClick(opt.id)}>
                             <img className="icon icon--md" src={opt.icon} alt={`${opt.name} Icon`} />
                             <p>{opt.name}</p>
                         </div>
