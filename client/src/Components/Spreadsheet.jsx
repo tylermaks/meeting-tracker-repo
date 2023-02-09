@@ -1,5 +1,5 @@
-import SpreadsheetRow from "./SpreadsheetRow";
-import testData from "../testData";
+// import SpreadsheetRow from "./SpreadsheetRow";
+// import testData from "../testData";
 import "../Styles/Spreadsheet.scss"
 
 function Spreadsheet (){ 
@@ -17,13 +17,13 @@ function Spreadsheet (){
                 }
             </div>
             
-            {
+            {/* {
                 testData.map(data => {
                     return(
                         <SpreadsheetRow row={data} />
                     )
                 })
-            }
+            } */}
 
         </section>
     )
