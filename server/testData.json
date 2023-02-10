@@ -4,7 +4,8 @@
         "username": "testtest@test.com",
         "fName": "Bob",
         "lName": "Ross",
-        "pswd": "hellopassword!"
+        "reference": "hellopassword!",
+        "pswd": "$2a$10$KSqtoQ27A2E/atZWLTw3qO4oJjZJrb70ckOiLuVotQMr9ItF3ddt2"
     },
 
     {
@@ -12,7 +13,8 @@
         "username": "tester@test.com",
         "fName": "John",
         "lName": "Smith",
-        "pswd": "hello!"
+        "reference":"hello!",
+        "pswd": "$2a$10$4x3e2i7Qn448ZdeSCd0uru.i72vPwzBzHCRZ/FARU3qRhIkBBy36C"
     },
 
     {
@@ -20,6 +22,7 @@
         "username": "user@test.com",
         "fName": "Jane",
         "lName": "Doe",
-        "pswd": "password1234"
+        "reference": "password1234",
+        "pswd": "$2a$10$soRMRwgufEyn7XwRsxZdCuxfkT8XEc.c3XuA2CQgFkZVliJuytiGW"
     }
 ]

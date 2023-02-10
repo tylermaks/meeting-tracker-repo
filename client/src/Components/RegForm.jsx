@@ -11,7 +11,7 @@ function RegForm({ handleClick }) {
         e.preventDefault();
 
         try{
-            api.post("/users", {
+            api.post("/register", {
                 "fName": fName, 
                 "lName": lName,
                 "email": email, 
