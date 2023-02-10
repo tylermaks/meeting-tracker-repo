@@ -1,6 +1,6 @@
+const bcrypt = require('bcrypt')
 const data = {}
-data.users = require('../testData')
-
+data.users = require('../testData.json')
 
 const getAllUsers = (req, res) => {
     res.json(data.users)
@@ -15,21 +15,31 @@ const getUser = (req, res) => {
     res.json(user)
 }
 
-const createNewUser = (req, res) => {
-    const newUser = {
-        id: data.users[data.users.length - 1].id + 1 || 1,
-        fName: req.body.firstname,
-        lName: req.body.lastname,
-        email: req.body.email,
-        pswd: req.body.pswd
-    }
+const createNewUser = async (req, res) => {
+    const { fName, lName, email, pswd} = req.body
+    if (!email || !pswd) return res.status(400).json({"message": "Email and password are required"})
+    
+    //Check of duplicate users
+    const duplicateUser = data.users.find(user => user.email === email)
+    if (duplicateUser) return res.sendStatus(409)
 
-    if (!newUser.email || !newUser.pswd) {
-        return res.status(400).json({"message": "Email and password are required"})
-    }
+    try{
+        const hashedPswrd = await bcrypt.hash(pswd, 10)
+        
+        const newUser = {
+            id: data.users[data.users.length - 1].id + 1 || 1,
+            fName: fName,
+            lName: lName,
+            email: email,
+            pswd: hashedPswrd
+        }
 
-    data.setUsers([...data.users, newUser])
-    res.json(data.users)
+        console.log(newUser)
+        // data.setUsers([...data.users, newUser])
+        // res.json(data.users)
+    } catch (error){
+        res.status(500).json({'message': error.message})
+    }
 }
 
 const updateUser = (req, res) => {

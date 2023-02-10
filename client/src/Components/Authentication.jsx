@@ -6,7 +6,7 @@ import "../Styles/Login.scss"
 
 function Authentication(){
     const [user, setUser] = useState('')
-    const [reg, setReg] = useState(false)
+    const [regForm, setRegForm] = useState(false)
 
     useEffect(() =>{
         const fetchUser = async () => {
@@ -28,7 +28,7 @@ function Authentication(){
     }, [])
 
     const handleClick = () => {
-        setReg(!reg)
+        setRegForm(!regForm)
     }
 
     console.log(user)
@@ -37,7 +37,7 @@ function Authentication(){
         <section id="login" className="flex-column flex-column--center">
             <h1>Logo</h1>
             <form id="login-form" className="flex-column" onSubmit={e => e.preventDefault()}>
-                { reg ? <RegForm handleClick={handleClick}/> : <LoginForm handleClick={handleClick}/> }
+                { regForm ? <RegForm handleClick={handleClick}/> : <LoginForm handleClick={handleClick}/> }
             </form>
 
         </section>

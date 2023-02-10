@@ -1,0 +1,25 @@
+[
+    {
+        "id": "0",
+        "username": "testtest@test.com",
+        "fName": "Bob",
+        "lName": "Ross",
+        "pswd": "hellopassword!"
+    },
+
+    {
+        "id": "1",
+        "username": "tester@test.com",
+        "fName": "John",
+        "lName": "Smith",
+        "pswd": "hello!"
+    },
+
+    {
+        "id": "2",
+        "username": "user@test.com",
+        "fName": "Jane",
+        "lName": "Doe",
+        "pswd": "password1234"
+    }
+]
