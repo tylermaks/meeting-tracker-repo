@@ -8,32 +8,9 @@ function Authentication(){
     const [user, setUser] = useState('')
     const [regForm, setRegForm] = useState(false)
 
-
-
-    // useEffect(() =>{
-    //     const fetchUser = async () => {
-    //         try{
-    //             const response = await api.get('/users')
-    //             setUser(response.data)
-    //         } catch (err) {
-    //             if (err.repsonse) {
-    //                 console.log(err.response.data)
-    //                 console.log(err.response.status)
-    //                 console.log(err.response.headers)
-    //             } else {
-    //                 console.log(`Error: ${err.message}`)
-    //             }
-    //         }
-    //     }
-
-    //     fetchUser()
-    // }, [])
-
     const handleClick = () => {
         setRegForm(!regForm)
     }
-
-    console.log(user)
 
     return(
         <section id="login" className="flex-column flex-column--center">

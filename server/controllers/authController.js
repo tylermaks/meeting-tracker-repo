@@ -34,33 +34,12 @@ const handleLogin = async (req, res) => {
         //Returning to include Airtable Database Api
         //Will need to save refreshToken to current user to log out
 
-        res.cookie('jwt', refreshToken, {httpOnly: true, maxAge: 24 * 60 * 60 * 1000})
+        res.cookie('jwt', refreshToken, {httpOnly: true, sameSite:'None', secure: true, maxAge: 24 * 60 * 60 * 1000})
         res.json({ accessToken })
     } else {
         return res.sendStatus(401)
     }
 }
 
-
-
-// const updateUser = (req, res) => {
-//     const user = data.users.find(user => user.id === parseInt(req.body.id))
-//     if (!user) {
-//         return res.status(400).json({"message": "User not found"})
-//     }
-
-//     //Returning to complete this function later
-// }
-
-// const deleteUser = (req, res) => {
-//     const user = data.users.find(user => user.id === parseInt(req.body.id))
-//     if (!user) {
-//         return res.status(400).json({"message": "User not found"})
-//     }
-    
-//     const filteredArray = data.users.filter(user => user.id !== parseInt(req.body.id))
-//     data.setUsers([...filteredArray])
-//     res.json(data.users)
-// }
 
 module.exports = { handleLogin }

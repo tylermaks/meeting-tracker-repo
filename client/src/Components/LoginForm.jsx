@@ -6,6 +6,8 @@ function LoginForm({ handleClick }){
     const [password, setPassword] = useState('')
 
 
+    
+    //ADD CREDENTIALS FLAG TO AXIOS TO ACCESS AUTH/CORS
     const handlePost = async (e) => {
         e.preventDefault()
 
