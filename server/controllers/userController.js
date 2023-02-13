@@ -3,11 +3,7 @@ data.users = require('../testData.json')
 
 
 const getUser = (req, res) => {
-    // const user = data.users.find(user => user.username === req.body.email)
-    // if (!user) return res.status(400).json({"message": `User not found: ${req.params.email}`})
-
-    // return res.json({ "test": "test", "fName": user.fName, "lName": user.lName})
-    return res.json(data.users)
+    return res.json({ "id": req.params.id})
 }
 
 const updateUser = (req, res) => {

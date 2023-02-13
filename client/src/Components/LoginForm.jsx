@@ -5,14 +5,12 @@ function LoginForm({ handleClick }){
     const [userName, setUserName] = useState('')
     const [password, setPassword] = useState('')
 
-
-    
     //ADD CREDENTIALS FLAG TO AXIOS TO ACCESS AUTH/CORS
     const handlePost = async (e) => {
         e.preventDefault()
 
         try{
-            api.post("/users", {
+            api.post("/auth", {
                 "email": userName, 
                 "pswd": password
             })
@@ -45,7 +43,7 @@ function LoginForm({ handleClick }){
                     value={password}
                     onChange={e => setPassword(e.target.value)}
                 />
-                <button>Log in</button>
+                <button onClick={handlePost}>Log in</button>
 
                 <div>
                     <span onClick={handleClick}>Register Here</span>
