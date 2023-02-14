@@ -9,24 +9,24 @@ function Home(){
     const [dash, setDash] = useState(1)
     const [userName, setUserName] = useState('')
 
-    useEffect( () => {
-        const getData = async () => { 
-            try{
-                const response = await axios.get("http://localhost:5000/user/1")
-                setUserName(`${response.data.fName} ${response.data.lName}`)
-            } catch (error) {
-                if (error.repsonse) {
-                    console.log(error.response.data)
-                    console.log(error.response.status)
-                    console.log(error.response.headers)
-                } else {
-                    console.log(`Error: ${error.message}`)
-                }
-            }
-        }
+    // useEffect( () => {
+    //     const getData = async () => { 
+    //         try{
+    //             const response = await axios.get("http://localhost:5000/user/1")
+    //             setUserName(`${response.data.fName} ${response.data.lName}`)
+    //         } catch (error) {
+    //             if (error.repsonse) {
+    //                 console.log(error.response.data)
+    //                 console.log(error.response.status)
+    //                 console.log(error.response.headers)
+    //             } else {
+    //                 console.log(`Error: ${error.message}`)
+    //             }
+    //         }
+    //     }
 
-        getData()
-    },[])
+    //     getData()
+    // },[])
 
     const handleClick = (id) => { 
         setDash(id - 1)

@@ -1,13 +1,19 @@
 import MainNav from "./MainNav"
-import { Outlet } from "react-router-dom"
+import { Routes, Route } from "react-router-dom"
 import '../Styles/App.scss';
+
+import Authentication from "./Authentication"
+import Home from "./Home"
 
 function App() {
   return (
     <>
       <main className="App">
         <MainNav />
-        <Outlet />
+        <Routes>
+          <Route path="/" element={<Authentication />} />
+          <Route path="home" element={<Home />} />
+        </Routes>
       </main>
     </>
   );

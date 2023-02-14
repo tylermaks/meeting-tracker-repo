@@ -13,7 +13,7 @@ const handleLogout= (req, res) => {
     const refreshToken = cookies.jwt
     const foundUser = data.users.find(user => user.refreshToken === refreshToken)
     if (!foundUser){
-        res.clearCookie('jwt', {httpOnly: true, sameSite:'None', secure: true, maxAge: 24 * 60 * 60 * 1000})
+        res.clearCookie('jwt', {httpOnly: true, sameSite:'None', secure: true})
         return res.sendStatus(204)
     } 
 

@@ -1,55 +1,87 @@
-import { useState } from "react"
-import api from "../API/userData"
+import { useState, useEffect, errRef, useContext } from "react"
+import AuthContext from "../context/AuthProvider"
+import axios from "../API/userData"
+const LOGIN_URL = '/auth'
 
-function LoginForm({ handleClick }){
+function LoginForm(){
+    const { setAuth } = useContext(AuthContext)
+
     const [userName, setUserName] = useState('')
     const [password, setPassword] = useState('')
+    const [errorMsg, setErrorMsg] = useState('')
 
-    //ADD CREDENTIALS FLAG TO AXIOS TO ACCESS AUTH/CORS
-    const handlePost = async (e) => {
+    useEffect(() => {
+        setErrorMsg('')
+    }, [userName, password])
+
+
+    const handleSubmit = async (e) => {
         e.preventDefault()
 
         try{
-            api.post("/auth", {
-                "email": userName, 
-                "pswd": password
-            })
-        } catch (error) {
-            if (error.repsonse) {
-                console.log(error.response.data)
-                console.log(error.response.status)
-                console.log(error.response.headers)
-            } else {
-                console.log(`Error: ${error.message}`)
+            const response = await axios.post(
+                LOGIN_URL, 
+                JSON.stringify({"email":userName, "pswd":password}),
+                {
+                    headers: {'Content-Type': 'application/json'},
+                    withCredentials: true
+                }
+            )
+
+            console.log(JSON.stringify(response.data))
+
+            const accessToken = response.data.accessToken
+            const roles = response.data.roles
+            
+            setAuth({ userName, password, roles, accessToken })
+            setUserName('')
+            setPassword('')
+        } catch (err) {
+            if(!err.response){
+                setErrorMsg('No Server Response')
+            } else if (err.reponse.status === 400) { 
+                setErrorMsg("Missing Username or Password")
+            } else if (err.reponse.status === 401) {
+                setErrorMsg("Username or Password is incorrect")
+            } else { 
+                setErrorMsg("Login Failed")
             }
+
+            errRef.current.focus()
         }
     }
+  
 
     return(
-        <>
-            <label htmlFor="email">Email</label>
+        <form id="login-form" className="flex-column" onSubmit={handleSubmit}>
+            <label htmlFor="email" className="offscreen">Email</label>
                 <input 
+                    id="email"
                     type="text" 
                     placeholder="Email"
                     required
                     value={userName}
                     onChange={e => setUserName(e.target.value)}
                 />
-                <label htmlFor="password">Password</label>
+                <label htmlFor="password" className="offscreen">Password</label>
                 <input 
+                    id="password"
                     type="password"
                     placeholder="Password"
                     required 
                     value={password}
                     onChange={e => setPassword(e.target.value)}
                 />
-                <button onClick={handlePost}>Log in</button>
+
+                <p ref={errRef} className={errorMsg ? "errormsg" : "offscreen"} aria-live="assertive">{errorMsg}</p>
+
+                <button>Log in</button>
 
                 <div>
-                    <span onClick={handleClick}>Register Here</span>
+                    <span>Register Here</span>
                     <a href=".login">Lost you password?</a>
                 </div>
-        </>
+        </form>
     )
 }
 
