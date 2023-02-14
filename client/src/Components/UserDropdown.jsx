@@ -1,12 +1,12 @@
 import '../Styles/UserDropdown.scss'
 import chevron from "../Images/chevron-down-solid.svg"
 
-function UserDropdown(){ 
+function UserDropdown({ userName }){ 
     return(
         <div id="user-dropdown" className="flex-row">
-            <div className="flex-row flex-row--center">TM</div>
+            <div className="flex-row flex-row--center">{userName[0]}</div>
             <p>
-                Tyler M 
+                {userName}
                 <img className="icon icon--small" src={chevron} alt="User Dropdown Button" />
             </p>
         </div>

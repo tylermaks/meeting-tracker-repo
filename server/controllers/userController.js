@@ -3,7 +3,12 @@ data.users = require('../testData.json')
 
 
 const getUser = (req, res) => {
-    return res.json({ "id": req.params.id})
+    const foundUser = data.users.find(user => user.id === req.params.id)
+    if (!foundUser) {
+        return res.sendStatus(401)
+    }
+
+    return res.json({"fName":foundUser.fName, "lName":foundUser.lName})
 }
 
 const updateUser = (req, res) => {

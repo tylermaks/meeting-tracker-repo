@@ -1,10 +1,12 @@
 import UserDropdown from "./UserDropdown";
 
-function HomeNav(){
+function HomeNav({ userName }){
     return(
         <div id="home-nav" className="flex-row flex-row--space">
             <h2>Logo</h2>
-            <UserDropdown />
+            <UserDropdown 
+                userName={userName}
+            />
         </div>
     )
 }

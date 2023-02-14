@@ -1,24 +1,32 @@
 import { useState, useEffect } from 'react'
+import axios from 'axios';
 import HomeNav from "./HomeNav";
 import MenuNav from "./MenuNav";
 import Dashboard from "./Dashboard";
-
 import "../Styles/Home.scss"
-import axios from 'axios';
 
 function Home(){
     const [dash, setDash] = useState(1)
+    const [userName, setUserName] = useState('')
 
+    useEffect( () => {
+        const getData = async () => { 
+            try{
+                const response = await axios.get("http://localhost:5000/user/1")
+                setUserName(`${response.data.fName} ${response.data.lName}`)
+            } catch (error) {
+                if (error.repsonse) {
+                    console.log(error.response.data)
+                    console.log(error.response.status)
+                    console.log(error.response.headers)
+                } else {
+                    console.log(`Error: ${error.message}`)
+                }
+            }
+        }
 
-    //NEED TO FIX THIS
-    // useEffect( () => {
-    //     const getData = async () => { 
-    //         const user = await axios.get( "/testtest@test.com")
-    //         console.log(user)
-    //     }
-
-    //     getData()
-    // },[])
+        getData()
+    },[])
 
     const handleClick = (id) => { 
         setDash(id - 1)
@@ -26,7 +34,9 @@ function Home(){
 
     return(
         <section id="home">
-            <HomeNav />
+            <HomeNav 
+                userName={userName}
+            />
             <MenuNav 
                 handleClick={handleClick}
             />
