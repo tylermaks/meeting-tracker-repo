@@ -23,25 +23,22 @@ function LoginForm(){
                 LOGIN_URL, 
                 JSON.stringify({"email":userName, "pswd":password}),
                 {
-                    headers: {'Content-Type': 'application/json'},
-                    withCredentials: true
+                    headers: {'Content-Type': 'application/json'}
                 }
             )
-
-            console.log(JSON.stringify(response.data))
-
-            const accessToken = response.data.accessToken
-            const roles = response.data.roles
+           
+            const accessToken = response?.data?.accessToken
+            const roles = response?.data?.roles
             
             setAuth({ userName, password, roles, accessToken })
             setUserName('')
             setPassword('')
         } catch (err) {
-            if(!err.response){
+            if(!err?.response){
                 setErrorMsg('No Server Response')
-            } else if (err.reponse.status === 400) { 
+            } else if (err.reponse?.status === 400) { 
                 setErrorMsg("Missing Username or Password")
-            } else if (err.reponse.status === 401) {
+            } else if (err.reponse?.status === 401) {
                 setErrorMsg("Username or Password is incorrect")
             } else { 
                 setErrorMsg("Login Failed")
