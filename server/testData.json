@@ -5,6 +5,9 @@
         "fName": "Bob",
         "lName": "Ross",
         "reference": "hellopassword!",
+        "role": {
+            "Admin": 5150
+        },
         "pswd": "$2a$10$KSqtoQ27A2E/atZWLTw3qO4oJjZJrb70ckOiLuVotQMr9ItF3ddt2"
     },
 
@@ -14,6 +17,9 @@
         "fName": "John",
         "lName": "Smith",
         "reference":"hello!",
+        "role": {
+            "Editor": 1984
+        },
         "pswd": "$2a$10$4x3e2i7Qn448ZdeSCd0uru.i72vPwzBzHCRZ/FARU3qRhIkBBy36C"
     },
 
@@ -23,6 +29,9 @@
         "fName": "Jane",
         "lName": "Doe",
         "reference": "password1234",
+        "role": {
+            "User": 2001
+        },
         "pswd": "$2a$10$soRMRwgufEyn7XwRsxZdCuxfkT8XEc.c3XuA2CQgFkZVliJuytiGW"
     }
 ]

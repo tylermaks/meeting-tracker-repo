@@ -29,11 +29,15 @@ function LoginForm(){
            
             const accessToken = response?.data?.accessToken
             const roles = response?.data?.roles
+
+            console.log(accessToken)
+            console.log(roles)
             
             setAuth({ userName, password, roles, accessToken })
             setUserName('')
             setPassword('')
         } catch (err) {
+            console.log(err.response.status)
             if(!err?.response){
                 setErrorMsg('No Server Response')
             } else if (err.reponse?.status === 400) { 
@@ -44,7 +48,7 @@ function LoginForm(){
                 setErrorMsg("Login Failed")
             }
 
-            errRef.current.focus()
+            // errRef.current.focus()
         }
     }
   

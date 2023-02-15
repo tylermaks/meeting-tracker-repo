@@ -9,7 +9,7 @@ const PORT = 5000
 
 //SETUP
 //ADD REFRESH ROUTE ONCE AIRTABLE API IS WORKING
-app.use(credentials)
+// app.use(credentials) 
 app.use(cors(corsOptions))
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json())

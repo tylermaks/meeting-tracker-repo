@@ -1,9 +1,13 @@
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
+// const path = require('path')
+// const fsPromises = require('fs').promises
 require('dotenv').config()
 
-const data = {}
-data.users = require('../testData.json')
+const data = {
+    users: require('../testData.json'),
+    setUsers: function (thing) {this.users = thing}
+}
 
 
 const handleLogin = async (req, res) => {
@@ -18,9 +22,14 @@ const handleLogin = async (req, res) => {
     //Confirm Password and Create JWT
     const match = await bcrypt.compare(pswd, foundUser.pswd)
     if (match) {
-        //create JWTs
+        const roles = Object.values(foundUser.role).filter(Boolean);
         const accessToken = jwt.sign(
-            { "username": foundUser.username},
+            { 
+                "UserInfo": {
+                    "username": foundUser.username,
+                    "roles": roles
+                }
+            },
             process.env.ACCESS_TOKEN,
             { expiresIn: '59s'}
         )
@@ -34,8 +43,17 @@ const handleLogin = async (req, res) => {
         //Returning to include Airtable Database Api
         //Will need to save refreshToken to current user to log out
 
+        // const otherUsers = data.users.filter(person => person.username !== foundUser.username)
+        // const currentUser = {...foundUser, refreshToken}
+
+        // data.setUsers([...otherUsers, currentUser])
+        // await fsPromises.writeFile(
+        //     path.join(__dirname, "..", "testData.json"),
+        //     JSON.stringify(data.users)
+        // )
+        
         res.cookie('jwt', refreshToken, {httpOnly: true, sameSite:'None', secure: true, maxAge: 24 * 60 * 60 * 1000})
-        res.json({ accessToken })
+        res.json({ roles, accessToken })
         console.log("Success!")
     } else {
         return res.sendStatus(401)
