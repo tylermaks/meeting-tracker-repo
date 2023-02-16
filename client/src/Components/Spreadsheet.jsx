@@ -9,9 +9,9 @@ function Spreadsheet (){
         <section>
             <div className="spreadsheet-row spreadsheet-row--header">
                 {
-                    colHeaders.map(col => {
+                    colHeaders.map((col, i) => {
                         return(
-                            <p>{col}</p>
+                            <p key={i}>{col}</p>
                         )
                     })
                 }

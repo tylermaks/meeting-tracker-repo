@@ -1,23 +1,29 @@
-import { useState, useEffect, errRef, useContext } from "react"
-import AuthContext from "../context/AuthProvider"
+import { useState, useEffect, errRef } from "react"
+import { useNavigate, useLocation } from "react-router-dom"
+import useAuth from "../hooks/useAuth"
 import axios from "../API/userData"
 const LOGIN_URL = '/auth'
 
 function LoginForm(){
-    const { setAuth } = useContext(AuthContext)
+    //VARIABLES
+    const { setAuth } = useAuth()
+    const navigate = useNavigate()
+    const location = useLocation()
+    const from = location.state?.from?.pathname
 
+    //STATES
     const [userName, setUserName] = useState('')
     const [password, setPassword] = useState('')
     const [errorMsg, setErrorMsg] = useState('')
 
+    //EFFECTS
     useEffect(() => {
         setErrorMsg('')
     }, [userName, password])
 
-
+    //FUNCTIONS
     const handleSubmit = async (e) => {
         e.preventDefault()
-
         try{
             const response = await axios.post(
                 LOGIN_URL, 
@@ -29,13 +35,14 @@ function LoginForm(){
            
             const accessToken = response?.data?.accessToken
             const roles = response?.data?.roles
+            const fName = response?.data?.fName
+            const lName = response?.data?.lName
 
-            console.log(accessToken)
-            console.log(roles)
-            
-            setAuth({ userName, password, roles, accessToken })
+            setAuth({ userName, roles, fName, lName, accessToken })
             setUserName('')
             setPassword('')
+            navigate(from, { replace: true })
+
         } catch (err) {
             console.log(err.response.status)
             if(!err?.response){

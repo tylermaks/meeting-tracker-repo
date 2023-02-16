@@ -1,9 +1,11 @@
 import MainNav from "./MainNav"
+import Authentication from "./Authentication"
+import Home from "./Home"
+import RequireAuth from "./RequireAuth";
 import { Routes, Route } from "react-router-dom"
 import '../Styles/App.scss';
 
-import Authentication from "./Authentication"
-import Home from "./Home"
+
 
 function App() {
   return (
@@ -12,7 +14,9 @@ function App() {
         <MainNav />
         <Routes>
           <Route path="/" element={<Authentication />} />
-          <Route path="home" element={<Home />} />
+          <Route element={<RequireAuth allowedRoles={[2001]} />}>
+            <Route path="home" element={<Home />} />
+          </Route>
         </Routes>
       </main>
     </>

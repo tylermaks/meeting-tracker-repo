@@ -18,7 +18,8 @@
         "lName": "Smith",
         "reference":"hello!",
         "role": {
-            "Editor": 1984
+            "Editor": 1984,
+            "User": 2001
         },
         "pswd": "$2a$10$4x3e2i7Qn448ZdeSCd0uru.i72vPwzBzHCRZ/FARU3qRhIkBBy36C"
     },

@@ -19,10 +19,14 @@ const handleLogin = async (req, res) => {
     if (!foundUser) {
         return res.sendStatus(401)
     }
+
     //Confirm Password and Create JWT
     const match = await bcrypt.compare(pswd, foundUser.pswd)
     if (match) {
         const roles = Object.values(foundUser.role).filter(Boolean);
+        const fName = foundUser.fName
+        const lName = foundUser.lName
+
         const accessToken = jwt.sign(
             { 
                 "UserInfo": {
@@ -53,7 +57,7 @@ const handleLogin = async (req, res) => {
         // )
         
         res.cookie('jwt', refreshToken, {httpOnly: true, sameSite:'None', secure: true, maxAge: 24 * 60 * 60 * 1000})
-        res.json({ roles, accessToken })
+        res.json({ roles, accessToken, fName, lName })
         console.log("Success!")
     } else {
         return res.sendStatus(401)
