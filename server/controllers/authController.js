@@ -1,8 +1,35 @@
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
-// const path = require('path')
-// const fsPromises = require('fs').promises
+const Airtable = require('airtable')
 require('dotenv').config()
+
+const base = new Airtable({ apiKey: process.env.AIRTABLE_API_KEY }).base(process.env.AIRTABLE_BASE_ID)
+const table = process.env.AIRTABLE_TABLE_ID
+
+ const getData = () => {
+    base(table).select({
+        // Selecting the first 3 records in Grid view:
+        maxRecords: 1,
+        view: "Grid view"
+    }).eachPage(function page(records, fetchNextPage) {
+        // This function (`page`) will get called for each page of records.
+    
+        records.forEach(function(record) {
+            console.log('Retrieved', record.get('id'));
+        });
+    
+        // To fetch the next page of records, call `fetchNextPage`.
+        // If there are more records, `page` will get called again.
+        // If there are no more records, `done` will get called.
+        fetchNextPage();
+    
+    }, function done(err) {
+        if (err) { console.error(err); return; }
+    });
+
+ }
+
+
 
 const data = {
     users: require('../testData.json'),
@@ -11,7 +38,9 @@ const data = {
 
 
 const handleLogin = async (req, res) => {
-    //Validate POST request
+    getData()
+
+    // //Validate POST request
     const { email, pswd } = req.body
     if (!email || !pswd) return res.status(400).json({"message": "Email and password are required"})
     //Find User in Database
