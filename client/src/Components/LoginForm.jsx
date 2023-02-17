@@ -41,7 +41,7 @@ function LoginForm(){
             setAuth({ userName, roles, fName, lName, accessToken })
             setUserName('')
             setPassword('')
-            navigate(from, { replace: true })
+            navigate("/home", { replace: true })
 
         } catch (err) {
             console.log(err.response.status)

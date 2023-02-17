@@ -11,7 +11,7 @@ const createNewUser = async (req, res) => {
     if (duplicateUser) return res.sendStatus(409)
 
     try{
-        const hashedPswrd = await bcrypt.hash(pswd, 10)
+        const hashedPswrd = await bcrypt.hash(pswd, 12)
         
         const newUser = {
             id: parseInt(data.users[data.users.length - 1].id) + 1 || 1,
