@@ -5,8 +5,6 @@ const verifyJWT = (req, res, next) => {
     if (!authHeader) return res.sendStatus(401)
 
     console.log(authHeader)
-    console.log(req.user)
-    console.log(req.email)
 
     const token = authHeader.split(' ')[1]
     jwt.verify(

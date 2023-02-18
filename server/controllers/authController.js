@@ -5,7 +5,7 @@ const Airtable = require('airtable')
 
 //SETUP AIRTABLE DATABASE
 const base = new Airtable({ apiKey: process.env.AIRTABLE_API_KEY }).base(process.env.AIRTABLE_BASE_ID)
-const table = process.env.AIRTABLE_TABLE_ID
+const table = process.env.AIRTABLE_ADVISORS_ID
 
 //LOGIN 
 const handleLogin = (req, res) => {
@@ -26,8 +26,8 @@ const handleLogin = (req, res) => {
         //MATCH PASSWORD
         const match = await bcrypt.compare(pswd, foundUser.fields.password)
         if (match) {
-            //For testing only: change this to roles, record id, email and password....keep in React authContext and use to retrieve and write data in the spreadsheet component
-            const roles = foundUser.fields.role // likely need to change this when adding Admin functionality
+           
+            const roles = foundUser.fields.role 
             const fName = foundUser.fields.firstName
             const lName = foundUser.fields.lastName
     
@@ -59,7 +59,7 @@ const handleLogin = (req, res) => {
             })
 
             res.cookie('jwt', refreshToken, {httpOnly: true, sameSite:'None', secure: true, maxAge: 24 * 60 * 60 * 1000})
-            res.json({ roles, accessToken, fName, lName })
+            res.json({ roles, accessToken, fName, lName})
             console.log("Success!")
         } else {
             return res.sendStatus(401)

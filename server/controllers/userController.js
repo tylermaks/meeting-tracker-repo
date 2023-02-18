@@ -1,16 +1,33 @@
-const data = {}
-data.users = require('../testData.json')
+const { Table } = require('airtable')
+const Airtable = require('airtable')
+
+//SETUP AIRTABLE DATABASE
+const base = new Airtable({ apiKey: process.env.AIRTABLE_API_KEY }).base(process.env.AIRTABLE_BASE_ID)
+const table = process.env.AIRTABLE_MEETING_ID
 
 
 const getUser = (req, res) => {
-    const foundUser = data.users.find(user => user.id === req.params.id)
-    if (!foundUser) {
-        return res.sendStatus(401)
-    }
+    const meetingArr = []
 
-    return res.json({"fName":foundUser.fName, "lName":foundUser.lName})
-}
+    base(table).select({
+        filterByFormula: `advisorLink = "${req.params.id}"`
+    }).eachPage(function page(records, fetchNextPage) {
+        records.forEach( record => {
+            meetingArr.push(record.fields)
+        })
+        res.json({ meetingArr })  
+              
+        fetchNextPage()
+    }, function done(err){
+        //Catching empty Array might be needed here...return later
 
+        if (err) {
+            console.log(err)
+            return
+        }
+    })
+} 
+    
 const updateUser = (req, res) => {
     //Returning to complete this function later
 }

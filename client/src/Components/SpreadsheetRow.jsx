@@ -1,11 +1,11 @@
-function SpreadsheetRow({ row }) {
+function SpreadsheetRow({ data }) {
     return(
         <div className="spreadsheet-row spreadsheet-row--meeting">
-            <p>{row.Company}</p>
-            <p>{row.Date}</p>
-            <p>{row.MeetingType}</p>
-            <p>{row.Duration}</p>
-            <p>{row.Notes}</p>
+            <p>{data.Company}</p>
+            <p>{data.Date}</p>
+            <p>{data.MeetingType}</p>
+            <p>{data.Duration}</p>
+            <p>{data.Notes}</p>
         </div>
     )     
 }
