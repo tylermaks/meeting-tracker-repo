@@ -1,10 +1,10 @@
+import { Routes, Route } from "react-router-dom"
 import MainNav from "./MainNav"
 import Authentication from "./Authentication"
 import Home from "./Home"
 import RequireAuth from "./RequireAuth";
-import { Routes, Route } from "react-router-dom"
-import '../Styles/App.scss';
 import Unauthorized from "./Unauthorized";
+import '../Styles/App.scss';
 
 
 function App() {
@@ -12,16 +12,15 @@ function App() {
     <>
       <main className="App">
         <MainNav />
-        <Routes>
-          <Route path="/" element={<Authentication />} />
-          <Route path="/unauthorized" element={<Unauthorized />} />
+          <Routes>
+            <Route path="/" element={<Authentication />} />
+            <Route path="/unauthorized" element={<Unauthorized />} />
 
-          {/* PROTECTED ROUTE */}
-          <Route element={<RequireAuth allowedRoles={[2001]} />}>
-            <Route path="home" element={<Home />} />
-          </Route>
-
-        </Routes>
+            {/* PROTECTED ROUTE */}
+            <Route element={<RequireAuth allowedRoles={[2001]} />}>
+                <Route path="home" element={<Home />} />
+            </Route>
+          </Routes>
       </main>
     </>
   );

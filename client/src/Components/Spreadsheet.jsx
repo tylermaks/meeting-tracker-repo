@@ -1,8 +1,33 @@
+import { useState, useEffect } from "react"
+import useAuth from "../hooks/useAuth"
+import axios from '../API/userData'
 import SpreadsheetRow from "./SpreadsheetRow";
 import "../Styles/Spreadsheet.scss"
 
 function Spreadsheet (){ 
+    const { auth } = useAuth()
+    const [rows, setRowsData] = useState()
     const colHeaders = ["Company Name", "Date", "Meeting Type", "Duartion", "Notes"]
+
+    useEffect( () => {
+        const getData = async () => { 
+            try{
+                const response = await axios.get(`/user/${auth.userName}`)
+                const data = response?.data?.meetingArr
+                setRowsData(data)
+            } catch (error) { 
+                if (error.repsonse) {
+                    console.log(error.response.data)
+                    console.log(error.response.status)
+                    console.log(error.response.headers)
+                } else {
+                    console.log(`Error: ${error.message}`)
+                } 
+            }
+        } 
+
+        getData()
+    },[auth]) 
 
     return(
         <section>
@@ -16,15 +41,12 @@ function Spreadsheet (){
                 }
             </div>
             <>
-                {/* {
-                    meetingArr.map( (meeting, i) => {
-                        return(
-                            <SpreadsheetRow key={i} data={{meeting}} />
-                        ) 
-                    })
-                } */}
+                {
+                    rows 
+                        ? rows.map( (row, i) => { return(<SpreadsheetRow key={i} data={row} />)})
+                        : <p>Loading...</p>
+                }
             </>
-
 
         </section>
     )
