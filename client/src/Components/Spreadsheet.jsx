@@ -1,18 +1,19 @@
 import { useState, useEffect } from "react"
 import useAuth from "../hooks/useAuth"
-import axios from '../API/userData'
+import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import SpreadsheetRow from "./SpreadsheetRow";
 import "../Styles/Spreadsheet.scss"
 
 function Spreadsheet (){ 
     const { auth } = useAuth()
+    const axiosPrivate = useAxiosPrivate()
     const [rows, setRowsData] = useState()
     const colHeaders = ["Company Name", "Date", "Meeting Type", "Duartion", "Notes"]
 
     useEffect( () => {
         const getData = async () => { 
             try{
-                const response = await axios.get(`/user/${auth.userName}`)
+                const response = await axiosPrivate.get(`/user/${auth.userName}`)
                 const data = response?.data?.meetingArr
                 setRowsData(data)
             } catch (error) { 

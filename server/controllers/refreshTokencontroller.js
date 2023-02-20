@@ -10,17 +10,16 @@ const table = process.env.AIRTABLE_TABLE_ID
 const handleRefreshToken = (req, res) => {
     const cookies = req.cookies
     if (!cookies?.jwt) return res.sendStatus(401)
+    console.log(cookies)
 
     const refreshToken = cookies.jwt
 
     base(table).select({
         view: "Grid view"
-    }).eachPage(async function page(records, fetchNextPage) {
+    }).eachPage(function page(records, fetchNextPage) {
         //FIND USER
         const foundUser = records.find(record => record.get('refreshToken') === refreshToken)
-        if (!foundUser) {
-            return res.sendStatus(403)
-        }
+        if (!foundUser) return res.sendStatus(403)
 
         //VARIFY TOKEN
         jwt.verify(

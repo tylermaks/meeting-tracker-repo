@@ -1,4 +1,3 @@
-const { Table } = require('airtable')
 const Airtable = require('airtable')
 
 //SETUP AIRTABLE DATABASE

@@ -26,7 +26,7 @@ const handleLogin = (req, res) => {
         //MATCH PASSWORD
         const match = await bcrypt.compare(pswd, foundUser.fields.password)
         if (match) {
-           
+            const username = foundUser.fields.id
             const roles = foundUser.fields.role 
             const fName = foundUser.fields.firstName
             const lName = foundUser.fields.lastName
@@ -34,7 +34,7 @@ const handleLogin = (req, res) => {
             const accessToken = jwt.sign(
                 { 
                     "UserInfo": {
-                        "username": foundUser.username,
+                        "username": username,
                         "roles": roles
                     }
                 },
@@ -43,7 +43,7 @@ const handleLogin = (req, res) => {
             )
             
             const refreshToken = jwt.sign(
-                { "username": foundUser.username},
+                { "username": username},
                 process.env.REFRESH_TOKEN,
                 { expiresIn: '1d'}
             )
