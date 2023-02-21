@@ -1,5 +1,6 @@
 require('dotenv').config()
 const express = require('express')
+const credentials = require('./middleware/credentials')
 const cors = require('cors')
 const cookieParser = require('cookie-parser')
 const corsOptionsDelegate = require('./config/cors')
@@ -8,6 +9,7 @@ const verifyJWT = require('./middleware/verifyJWT')
 const PORT = 5000
 
 //SETUP
+app.use(credentials)
 app.use(cors(corsOptionsDelegate))
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json())

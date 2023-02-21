@@ -4,13 +4,12 @@ const Airtable = require('airtable')
 
 //SETUP AIRTABLE DATABASE
 const base = new Airtable({ apiKey: process.env.AIRTABLE_API_KEY }).base(process.env.AIRTABLE_BASE_ID)
-const table = process.env.AIRTABLE_TABLE_ID
+const table = process.env.AIRTABLE_ADVISORS_ID
 
 //FUNCTION
 const handleRefreshToken = (req, res) => {
     const cookies = req.cookies
     if (!cookies?.jwt) return res.sendStatus(401)
-    console.log(cookies)
 
     const refreshToken = cookies.jwt
 
@@ -26,7 +25,7 @@ const handleRefreshToken = (req, res) => {
             refreshToken,
             process.env.REFRESH_TOKEN,
             (err, decoded) => {
-                if (err || foundUser.username !== decoded.username) return res.sendStatus(403) //invalid token
+                if (err || foundUser.fields.id !== decoded.username) return res.sendStatus(403) //invalid token
                 const accessToken = jwt.sign(
                     { "username" : decoded.username },
                     process.env.ACCESS_TOKEN,

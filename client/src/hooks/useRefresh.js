@@ -12,8 +12,6 @@ const useRefresh = () => {
         const data = response.data.accessToken
 
         setAuth(prev => {
-            console.log(JSON.stringify(prev))
-            console.log(data)
             return { ...prev, accessToken: data}
         })
         return data
