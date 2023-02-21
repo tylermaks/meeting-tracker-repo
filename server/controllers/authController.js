@@ -43,7 +43,12 @@ const handleLogin = (req, res) => {
             )
             
             const refreshToken = jwt.sign(
-                { "username": username},
+                {           
+                    "UserInfo": {
+                        "username": username,
+                        "roles": roles
+                    }
+                },
                 process.env.REFRESH_TOKEN,
                 { expiresIn: '1d'}
             )

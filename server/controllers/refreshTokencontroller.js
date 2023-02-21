@@ -25,9 +25,12 @@ const handleRefreshToken = (req, res) => {
             refreshToken,
             process.env.REFRESH_TOKEN,
             (err, decoded) => {
-                if (err || foundUser.fields.id !== decoded.username) return res.sendStatus(403) //invalid token
+                if (err || foundUser.fields.id !== decoded.UserInfo.username) return res.sendStatus(403) //invalid token
                 const accessToken = jwt.sign(
-                    { "username" : decoded.username },
+                    { 
+                        "username" : decoded.UserInfo.username,
+                        "roles": decoded.UserInfo.roles
+                    },
                     process.env.ACCESS_TOKEN,
                     { expiresIn: '59s'} 
                 )
