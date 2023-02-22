@@ -1,3 +1,6 @@
+$orange: #ff6900;
+$teal: #008B92;
+
 .modal{
     position: absolute;
     top: 0;
@@ -14,13 +17,15 @@
     box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
     padding: 2rem;
     position:relative;
+    overflow: scroll;
+    height: 75%;
+    width: 500px;
 
-    img{
-        position: absolute;
-        top: 2rem;
-        right: 2rem;
-        cursor: pointer;
+    h2{
+        color: $teal;
+        margin-bottom: 1rem;
     }
+
 
     input, select{
         margin-bottom: 1rem;
@@ -28,5 +33,31 @@
 
     label{
         display:block;
+        margin-bottom: 0.5rem;
     }
+}
+
+
+#company-name{
+    width: 100%;
+}
+
+#notes{
+    height: 10rem;
+    width: 100%;
+    resize: none;
+}
+
+.exit{
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    cursor: pointer;
+}
+
+.add-meeting{
+    cursor: pointer;
+    gap: 0.5rem;
+    padding: 1rem 0;
+    font-size: 0.825rem;
 }

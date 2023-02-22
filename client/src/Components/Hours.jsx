@@ -3,7 +3,7 @@ import Spreadsheet from "./Spreadsheet";
 import HoursModal from "./HoursModal";
 
 function Hours() {
-    const [modal, setModal] = useState(true)
+    const [modal, setModal] = useState(false)
 
     const handleClick = () => {
         setModal(!modal)
