@@ -11,7 +11,6 @@ function Logout(){
             if (response.status === 204) {
                 setAuth({})
             }
-
         } catch (error) {
             if (error.repsonse) {
                 console.log(error.response.data)

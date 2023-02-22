@@ -6,7 +6,7 @@ import '../Styles/UserDropdown.scss'
 
 function UserDropdown(){ 
     const { auth } = useAuth()
-    const [dropdown, setDropdown] = useState(true)
+    const [dropdown, setDropdown] = useState(false)
 
     const handleClick = () => {
         setDropdown(!dropdown)

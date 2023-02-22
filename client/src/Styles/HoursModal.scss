@@ -1,0 +1,32 @@
+.modal{
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    background-color: rgba(0,0,0, 0.6);
+    height: 100%;
+    width: 100%;
+}
+
+.hours-form{
+    background-color: #fff;
+    border-radius: 1rem;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+    padding: 2rem;
+    position:relative;
+
+    img{
+        position: absolute;
+        top: 2rem;
+        right: 2rem;
+        cursor: pointer;
+    }
+
+    input, select{
+        margin-bottom: 1rem;
+    } 
+
+    label{
+        display:block;
+    }
+}

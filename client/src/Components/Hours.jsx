@@ -1,12 +1,21 @@
+import { useState } from 'react'
 import Spreadsheet from "./Spreadsheet";
+import HoursModal from "./HoursModal";
 
 function Hours() {
+    const [modal, setModal] = useState(true)
+
+    const handleClick = () => {
+        setModal(!modal)
+    }
+ 
     return(
         <section>
+            {modal ? <HoursModal handleClick={handleClick}/> : null}
             <div className="dash-header flex-row flex-row--space">
                 <h2>Hours</h2>
-                <div className="btn-alt">
-                    Import CSV
+                <div onClick={handleClick} className="btn-alt">
+                    Add Hours
                 </div>
             </div>
             <Spreadsheet />

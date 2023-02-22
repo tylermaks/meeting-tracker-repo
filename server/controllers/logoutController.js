@@ -7,7 +7,7 @@ const table = process.env.AIRTABLE_ADVISORS_ID
 
 const handleLogout= (req, res) => {
     const cookies = req.cookies
-    if (!cookies?.jwt) return res.sendStatus(204)
+    if (!cookies?.jwt) return res.sendStatus(204) //Cookie doesn't exist 
 
     const refreshToken = cookies.jwt
 
@@ -16,15 +16,28 @@ const handleLogout= (req, res) => {
     }).eachPage(function page(records, fetchNextPage) {
         //FIND USER
         const foundUser = records.find(record => record.get('refreshToken') === refreshToken)
-        if (foundUser){
-            res.clearCookie('jwt', {httpOnly: true, sameSite:'None', secure: true})
+        //DELETE TOKEN IF USER FOUND
+        if (foundUser) {
+            base(table).update(foundUser.id, {
+                "refreshToken": ''
+            }, err => {
+                if (err) {
+                    console.error(err)
+                    return
+                }
+            })
             return res.sendStatus(204)
-        } 
-        
+        }
+
         fetchNextPage()
     }, function done(err) {
         if (err) {
-            if (!foundUser) return res.sendStatus(403)
+            //IF USER IS NOT FOUND AND COOKIE EXISTS, CLEAR COOKIE
+            if (!foundUser){
+                res.clearCookie('jwt', {httpOnly: true, sameSite:'None', secure: true})
+                return res.sendStatus(204)
+            }
+            
             console.error(err) 
             return
         } 

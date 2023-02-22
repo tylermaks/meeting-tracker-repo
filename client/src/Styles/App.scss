@@ -30,7 +30,7 @@ body{
     flex-direction: column;
 }
 
-//FONTS & BUTTONS & ICONS
+//FONTS & BUTTONS & ICONS & FORMS
 h1, 
 h2{
     color: $grey;
@@ -46,17 +46,25 @@ button{
 }
 
 .btn-alt{
-    border: 1px solid $teal;
+    border: 1px solid $orange;
     border-radius: 2rem;
-    color: $teal;
+    color: $orange;
     cursor: pointer;
     font-size: 0.75rem;
     padding: 0.5rem;
 
     &:hover{
-        background-color: $teal;
+        background-color: $orange;
         color: #fff;
     }
+}
+
+input, textarea, select{
+    border: 1px solid $lt-grey;
+    color: $lt-grey;
+    font-size: 1rem;
+    display: block;
+    padding: 0.75rem 1.5rem;
 }
 
 .icon{
