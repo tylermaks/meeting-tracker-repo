@@ -21,6 +21,7 @@ app.use('/auth', require('./routes/api/auth'))
 app.use('/refresh', require('./routes/api/refresh'))
 app.use(verifyJWT)
 app.use('/user', require('./routes/api/user'))
+app.use('/logout', require('./routes/api/logout'))
 
 
 app.listen(PORT, () => console.log(`Server is running on Port: ${PORT}`))

@@ -1,5 +1,5 @@
 import { useState, useEffect, errRef } from "react"
-import { useNavigate, useLocation} from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import useAuth from "../hooks/useAuth"
 import axios from "../API/userData"
 const LOGIN_URL = '/auth'
@@ -8,8 +8,6 @@ function LoginForm(){
     //VARIABLES
     const { setAuth } = useAuth()
     const navigate = useNavigate()
-    const location = useLocation()
-    const from = location.state?.from?.pathname
 
     //STATES
     const [userName, setUserName] = useState('')
@@ -43,7 +41,7 @@ function LoginForm(){
             setAuth({ roles, userName, fName, lName, accessToken })
             setUserName('')
             setPassword('')
-            navigate(from, { replace: true })
+            navigate("/home", { replace: true })
 
         } catch (err) {
             console.log(err.response.status)

@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react"
+import { useNavigate, useLocation} from "react-router-dom"
 import useAuth from "../hooks/useAuth"
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import SpreadsheetRow from "./SpreadsheetRow";
@@ -8,6 +9,8 @@ function Spreadsheet (){
     const [rows, setRowsData] = useState()
     const { auth } = useAuth()
     const axiosPrivate = useAxiosPrivate()
+    const navigate = useNavigate()
+    const location = useLocation()
     const colHeaders = ["Company Name", "Date", "Meeting Type", "Duartion", "Notes"]
 
     useEffect( () => {
@@ -22,11 +25,14 @@ function Spreadsheet (){
                 )
                 const data = response?.data?.meetingArr
                 isMounted && setRowsData(data)
+
             } catch (error) { 
-                if (error.repsonse) {
+                if (error?.response?.status === 403) {
+                    navigate("/", {from: location}, {replace: true})
+                } else if (error.repsonse) {
                     console.log(error.response.data)
                     console.log(error.response.status)
-                    console.log(error.response.headers)
+                    console.log(error.response.headers) 
                 } 
             }
         } 
@@ -37,7 +43,7 @@ function Spreadsheet (){
             isMounted = false
             controller.abort()
         }
-    },[auth, axiosPrivate]) 
+    },[auth, axiosPrivate, location, navigate]) 
 
     return(
         <section>

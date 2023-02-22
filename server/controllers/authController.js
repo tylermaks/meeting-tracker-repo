@@ -39,7 +39,7 @@ const handleLogin = (req, res) => {
                     }
                 },
                 process.env.ACCESS_TOKEN,
-                { expiresIn: '59s'}
+                { expiresIn: '900s'}
             )
             
             const refreshToken = jwt.sign(

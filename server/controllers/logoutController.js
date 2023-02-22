@@ -1,22 +1,36 @@
-require('dotenv').config()
 const jwt = require('jsonwebtoken')
-const data = {}
-data.users = require('../testData.json')
+const Airtable = require('airtable')
 
-//WILL NEED TO UPDATE ONCE AIRTABLE API IS CREATED
+//SETUP AIRTABLE DATABASE
+const base = new Airtable({ apiKey: process.env.AIRTABLE_API_KEY }).base(process.env.AIRTABLE_BASE_ID)
+const table = process.env.AIRTABLE_ADVISORS_ID
+
 const handleLogout= (req, res) => {
-    //On client, also delete the access token
     const cookies = req.cookies
     if (!cookies?.jwt) return res.sendStatus(204)
 
-    //Check Token Exists
     const refreshToken = cookies.jwt
-    const foundUser = data.users.find(user => user.refreshToken === refreshToken)
-    if (!foundUser){
-        res.clearCookie('jwt', {httpOnly: true, sameSite:'None', secure: true})
-        return res.sendStatus(204)
-    } 
 
-    //Delete refreshToken
-    //Return once Airable API is working
+    base(table).select({
+        view: "Grid view"
+    }).eachPage(function page(records, fetchNextPage) {
+        //FIND USER
+        const foundUser = records.find(record => record.get('refreshToken') === refreshToken)
+        if (foundUser){
+            res.clearCookie('jwt', {httpOnly: true, sameSite:'None', secure: true})
+            return res.sendStatus(204)
+        } 
+        
+        fetchNextPage()
+    }, function done(err) {
+        if (err) {
+            if (!foundUser) return res.sendStatus(403)
+            console.error(err) 
+            return
+        } 
+    })
+
+
 }
+
+module.exports = { handleLogout }

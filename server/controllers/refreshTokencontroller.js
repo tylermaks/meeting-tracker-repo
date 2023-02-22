@@ -32,7 +32,7 @@ const handleRefreshToken = (req, res) => {
                         "roles": decoded.UserInfo.roles
                     },
                     process.env.ACCESS_TOKEN,
-                    { expiresIn: '59s'} 
+                    { expiresIn: '30s'} 
                 )
                 res.json({ accessToken })
             }

@@ -1,22 +1,40 @@
 $grey: #4D4D4D;
 
 #user-dropdown{ 
-    gap: 1.25rem;
-
-    div{
-        background-color: $grey;
-        border-radius: 50%;
-        color: #fff;
-        height:2.25rem;
-        width: 2.25rem;
-    }
+    position: relative;
 
     p{
         cursor: pointer;
     }
+}
+
+.user-info{
+
+    gap: 1.25rem;
 
     & .icon{
         margin-left: 0.5rem;
     }
 
+}
+
+.user-profile{
+        background-color: $grey;
+        border-radius: 50%;
+        color: #fff;
+        height:2.25rem;
+        width: 2.25rem;
+}
+
+.logout{ 
+    position: absolute;
+    top: 2.75rem;
+    right:0;
+
+    border-radius: 0.25rem;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+    background-color: #fff;
+    padding: 0.75rem 1.5rem;
+    text-align: right;
+    width: 100%;
 }
