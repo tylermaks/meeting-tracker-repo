@@ -33,12 +33,13 @@ function LoginForm(){
             )
            
             const accessToken = response?.data?.accessToken
+            const id = response?.data?.id
             const roles = response?.data?.roles
             const fName = response?.data?.fName
             const lName = response?.data?.lName
 
 
-            setAuth({ roles, userName, fName, lName, accessToken })
+            setAuth({ id, roles, userName, fName, lName, accessToken })
             setUserName('')
             setPassword('')
             navigate("/home", { replace: true })

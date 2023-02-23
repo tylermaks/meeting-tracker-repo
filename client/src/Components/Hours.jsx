@@ -11,7 +11,7 @@ function Hours() {
  
     return(
         <section>
-            {modal ? <HoursModal handleClick={handleClick}/> : null}
+            {modal ? <HoursModal handleClick={handleClick} setModal={setModal}/> : null}
             <div className="dash-header flex-row flex-row--space">
                 <h2>Hours</h2>
                 <div onClick={handleClick} className="btn-alt">

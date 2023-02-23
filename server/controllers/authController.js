@@ -26,6 +26,7 @@ const handleLogin = (req, res) => {
         //MATCH PASSWORD
         const match = await bcrypt.compare(pswd, foundUser.fields.password)
         if (match) {
+            const id = foundUser.id
             const username = foundUser.fields.id
             const roles = foundUser.fields.role 
             const fName = foundUser.fields.firstName
@@ -64,7 +65,7 @@ const handleLogin = (req, res) => {
             })
 
             res.cookie('jwt', refreshToken, {httpOnly: true, sameSite:'None', secure: true, maxAge: 24 * 60 * 60 * 1000})
-            res.json({ roles, accessToken, fName, lName})
+            res.json({ id, roles, accessToken, fName, lName})
             console.log("Success!")
         } else {
             return res.sendStatus(401)

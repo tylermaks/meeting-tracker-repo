@@ -1,5 +1,6 @@
 $orange: #ff6900;
 $teal: #008B92;
+$grey: #4D4D4D;
 
 .modal{
     position: absolute;
@@ -21,13 +22,14 @@ $teal: #008B92;
     height: 75%;
     width: 500px;
 
+
     h2{
         color: $teal;
         margin-bottom: 1rem;
     }
 
 
-    input, select{
+    input, select, textarea{
         margin-bottom: 1rem;
     } 
 
@@ -60,4 +62,16 @@ $teal: #008B92;
     gap: 0.5rem;
     padding: 1rem 0;
     font-size: 0.825rem;
+}
+
+.inner-form{
+    margin-top: 3rem;
+    border-top: 1px solid $grey;
+    padding-top: 3rem;
+
+    &:first-child{
+        margin-top: 0;
+        border: none;
+        padding-top: 0;
+    }
 }
