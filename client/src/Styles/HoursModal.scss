@@ -16,16 +16,16 @@ $grey: #4D4D4D;
     background-color: #fff;
     border-radius: 1rem;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
-    padding: 2rem;
+    padding: 3rem;
     position:relative;
     overflow: scroll;
-    height: 75%;
-    width: 500px;
+    // height: 85%;
+    width: 550px;
 
 
     h2{
         color: $teal;
-        margin-bottom: 1rem;
+        // margin-bottom: 1rem;
     }
 
 
@@ -50,10 +50,15 @@ $grey: #4D4D4D;
     resize: none;
 }
 
+.modal-header{
+    margin: 1.25rem 0;
+}
+
+
 .exit{
     position: absolute;
-    top: 2rem;
-    right: 2rem;
+    top: 1.5rem;
+    right: 1.5rem;
     cursor: pointer;
 }
 
