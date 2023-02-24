@@ -1,39 +1,65 @@
+import { useState } from 'react'
+import useAxiosPrivate from "../hooks/useAxiosPrivate";
+// import useAuth from "../hooks/useAuth"
 import "../Styles/Import.scss"
+const CSV = '/csv'
 
 function ImportFile(){
+    const axiosPrivate = useAxiosPrivate()
+    const [dragActive, setDragActive] = useState(false)
 
-    const dragOver = (e) => { 
-        e.preventDefault();
-        e.target.className = "import import--active"
+    const handleDrag = (e) => {
+        e.preventDefault()
+        e.stopPropagation()
+
+        if(e.type === 'dragenter' || e.type === 'dragover'){
+            setDragActive(true)
+        } else if (e.type === 'dragleave') {
+            setDragActive(false)
+        }
+
     }
 
-    const dragLeave = (e) => { 
-        e.target.className = "import"
-    }
 
     const dropHandler = async (e) => {
-        e.preventDefault();
-        e.target.className = "import"
-        const files = e.dataTransfer.files
+        e.preventDefault()
+        e.stopPropagation()
+        setDragActive(false)
 
-        console.log(files)
+        if (e.dataTransfer.files && e.dataTransfer.files[0]){
+            try{
+                const data = e.dataTransfer.files[0]
+                const response = await axiosPrivate.post(
+                    CSV,
+                    data,
+                    {
+                        headers: {'Content-Type': 'multipart/form-data'},
+                        withCredentials: true
+                    },
+                )
+                
+                console.log(response)
+            } catch (err) {
+                if (err) console.log(err.status)
+            }
+        }
 
-        // for(let i = 0; i <= files.length - 1; i++){
-        //     const extension = files[i].name.split(".").pop()
-
-        //     if (extension === "csv") {
-        //         console.log("Working!")
-        //     }
-        // }
     }
+
 
     return(
         <section id="csv-loader" className="flex-row flex-row--center">
-            <div className="import" onDrop={dropHandler} onDragOver={dragOver} onDragLeave={dragLeave}>
-                    {/* <img className="icon icon--lg" src={fileIcon} alt="" /> */}
-                    <h3>Select a CSV file to import</h3>
-                    <span>drag and drop it here</span>
-                </div>
+            <form 
+                className={ dragActive ? "import import--active" : "import"} 
+                onDrop={dropHandler} 
+                onDragOver={handleDrag} 
+                onDragLeave={handleDrag}
+                onSubmit={(e) => e.preventDefault()}
+            >
+                {/* <img className="icon icon--lg" src={fileIcon} alt="" /> */}
+                <h3>Select a CSV file to import</h3>
+                <span>drag and drop it here</span>
+            </form>
         </section>
     )
 }

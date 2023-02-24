@@ -29,7 +29,7 @@ function Spreadsheet (){
             } catch (error) { 
                 if (error?.response?.status === 403) {
                     navigate("/", {from: location}, {replace: true})
-                } else if (error.repsonse) {
+                } else if (error.response) {
                     console.log(error.response.data)
                     console.log(error.response.status)
                     console.log(error.response.headers) 
