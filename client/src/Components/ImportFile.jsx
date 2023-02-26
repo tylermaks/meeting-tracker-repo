@@ -17,7 +17,6 @@ function ImportFile(){
         } else if (e.type === 'dragleave') {
             setDragActive(false)
         }
-
     }
 
 
@@ -26,24 +25,27 @@ function ImportFile(){
         e.stopPropagation()
         setDragActive(false)
 
-        if (e.dataTransfer.files && e.dataTransfer.files[0]){
-            try{
-                const data = e.dataTransfer.files[0]
-                const response = await axiosPrivate.post(
-                    CSV,
-                    data,
-                    {
-                        headers: {'Content-Type': 'multipart/form-data'},
-                        withCredentials: true
-                    },
-                )
-                
-                console.log(response)
-            } catch (err) {
-                if (err) console.log(err.status)
+        let csv = e.dataTransfer.items[0].getAsFile()
+        let formData = new FormData()
+        formData.append('csv', csv)
+
+        console.log(formData.get('csv'))
+        
+        try{
+            const response = await axiosPrivate.post(
+                CSV, 
+                formData,
+                {
+                    withCredentials: true
+                } 
+            )
+            console.log(response)
+        } catch (err) {
+            if (err){
+                console.error(err)
+                return
             }
         }
-
     }
 
 
@@ -55,8 +57,10 @@ function ImportFile(){
                 onDragOver={handleDrag} 
                 onDragLeave={handleDrag}
                 onSubmit={(e) => e.preventDefault()}
+                encType="multipart/form-data"
             >
                 {/* <img className="icon icon--lg" src={fileIcon} alt="" /> */}
+                {/* <input type='file' id="fileInput" name="csvFile" /> */}
                 <h3>Select a CSV file to import</h3>
                 <span>drag and drop it here</span>
             </form>
