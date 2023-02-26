@@ -5,9 +5,7 @@ const storage = multer.memoryStorage()
 const upload = multer({storage: storage})
 const csvController = require("../../controllers/csvController")
 
-router.post("/", upload.single('csv'), function (req, res) {
-    console.log(req.file)
-})
+router.post("/", upload.single('file'), csvController.handleParse)
 
 
 module.exports = router

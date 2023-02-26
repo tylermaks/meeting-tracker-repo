@@ -25,19 +25,16 @@ function ImportFile(){
         e.stopPropagation()
         setDragActive(false)
 
-        let csv = e.dataTransfer.items[0].getAsFile()
+        let csv = e.dataTransfer.files[0]
         let formData = new FormData()
-        formData.append('csv', csv)
+        formData.append('file', csv, 'test.csv')
 
-        console.log(formData.get('csv'))
+        console.log(formData.get('file'))
         
         try{
             const response = await axiosPrivate.post(
                 CSV, 
-                formData,
-                {
-                    withCredentials: true
-                } 
+                formData
             )
             console.log(response)
         } catch (err) {
