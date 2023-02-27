@@ -24,17 +24,18 @@ function ImportFile(){
         e.preventDefault()
         e.stopPropagation()
         setDragActive(false)
-
-        let csv = e.dataTransfer.files[0]
-        let formData = new FormData()
-        formData.append('file', csv, 'test.csv')
-
-        console.log(formData.get('file'))
         
         try{
+            let csv = e.dataTransfer.files[0]
             const response = await axiosPrivate.post(
                 CSV, 
-                formData
+                {
+                    file: csv
+                },
+                {
+                    headers:{'Content-Type': 'multipart/form-data'},
+                    withCredentials: true
+                }
             )
             console.log(response)
         } catch (err) {
