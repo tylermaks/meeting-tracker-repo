@@ -7,6 +7,7 @@ const CSV = '/csv'
 function ImportFile(){
     const axiosPrivate = useAxiosPrivate()
     const [dragActive, setDragActive] = useState(false)
+    const [data, setData] = useState()
 
     const handleDrag = (e) => {
         e.preventDefault()
@@ -24,25 +25,22 @@ function ImportFile(){
         e.preventDefault()
         e.stopPropagation()
         setDragActive(false)
-        
-        try{
-            let csv = e.dataTransfer.files[0]
-            const response = await axiosPrivate.post(
-                CSV, 
-                {
-                    file: csv
-                },
-                {
-                    headers:{'Content-Type': 'multipart/form-data'},
-                    withCredentials: true
-                }
-            )
-            console.log(response)
-        } catch (err) {
-            if (err){
-                console.error(err)
-                return
-            }
+
+        const csv = e.dataTransfer.files[0]
+        const reader = new FileReader()
+        const csvData = []
+
+        reader.readAsText(csv)
+       
+        reader.onload = function() {
+            const dataset = reader.result
+            const result = dataset.split('\r')
+            result.map( data => {
+                let row = []
+                row.push(data.split(','))
+                csvData.push(row)
+            })
+            console.log(csvData)
         }
     }
 
