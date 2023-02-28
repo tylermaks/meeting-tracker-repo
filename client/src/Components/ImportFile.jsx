@@ -7,7 +7,7 @@ const CSV = '/csv'
 function ImportFile(){
     const axiosPrivate = useAxiosPrivate()
     const [dragActive, setDragActive] = useState(false)
-    const [data, setData] = useState()
+    const [data, setData] = useState('')
 
     const handleDrag = (e) => {
         e.preventDefault()
@@ -34,32 +34,40 @@ function ImportFile(){
        
         reader.onload = function() {
             const dataset = reader.result
-            const result = dataset.split('\r')
+            const cleanedData = dataset.replace(RegExp(/,\s/g), " ").replace(RegExp(/"/g), "")
+
+            const result = cleanedData.split('\r')
             result.map( data => {
                 let row = []
                 row.push(data.split(','))
                 csvData.push(row)
             })
-            console.log(csvData)
+            setData(csvData)
         }
     }
 
 
     return(
         <section id="csv-loader" className="flex-row flex-row--center">
-            <form 
-                className={ dragActive ? "import import--active" : "import"} 
-                onDrop={dropHandler} 
-                onDragOver={handleDrag} 
-                onDragLeave={handleDrag}
-                onSubmit={(e) => e.preventDefault()}
-                encType="multipart/form-data"
-            >
-                {/* <img className="icon icon--lg" src={fileIcon} alt="" /> */}
-                {/* <input type='file' id="fileInput" name="csvFile" /> */}
-                <h3>Select a CSV file to import</h3>
-                <span>drag and drop it here</span>
-            </form>
+            {/* Will return to clean this up */}
+            {
+                data 
+                    ? <table>
+                   
+                    </table>
+                    
+                    
+                    : <form 
+                        className={ dragActive ? "import import--active" : "import"} 
+                        onDrop={dropHandler} 
+                        onDragOver={handleDrag} 
+                        onDragLeave={handleDrag}
+                        onSubmit={(e) => e.preventDefault()}
+                    >
+                        <h3>Select a CSV file to import</h3>
+                        <span>drag and drop it here</span>
+                    </form>
+            } 
         </section>
     )
 }
