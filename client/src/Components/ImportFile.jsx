@@ -29,24 +29,28 @@ function ImportFile(){
         const csv = e.dataTransfer.files[0]
         const reader = new FileReader()
         const csvData = []
-        const tableData = []
-
 
         reader.readAsText(csv)
-       
         reader.onload = function() {
             const dataset = reader.result
             const cleanedData = dataset.replace(RegExp(/,\s/g), " ").replace(RegExp(/"/g), "")
             const result = cleanedData.split('\r')
-            
-            result.map( data => {
-                let row = []
-                row.push(data.split(','))
-                csvData.push(row)
 
+            result.map( (data, i) => {
+                let splitData = data.split(',')
+                let rowObj = {
+                    companyName: splitData[0].replace(RegExp(/\n/g), ""),
+                    date: splitData[1],
+                    duration: splitData[2],
+                    meetingType: splitData[3],
+                    notes: splitData[4]
+                }
+                
+                if (i > 0) {
+                    csvData.push(rowObj)
+                }
             })
 
-            console.log(csvData)
             setData(csvData)
         }
     }
@@ -58,13 +62,30 @@ function ImportFile(){
             {
                 data 
                     ? <table>
-                        <tr>
-                            <th>Company Name</th>
-                            <th>Date</th>
-                            <th>Duration (Hrs)</th>
-                            <th>Meeting Type</th>
-                            <th>Notes</th>
-                        </tr>
+                        <thead>
+                            <tr>
+                                <th>Company Name</th>
+                                <th>Date</th>
+                                <th>Duration (Hrs)</th>
+                                <th>Meeting Type</th>
+                                <th>Notes</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {
+                                data.map( row => {
+                                    return(
+                                        <tr>
+                                            <td>{row.companyName}</td>
+                                            <td>{row.date}</td>
+                                            <td>{row.duration}</td>
+                                            <td>{row.meetingType}</td>
+                                            <td>{row.notes}</td>
+                                        </tr>
+                                    )
+                                })
+                            }
+                        </tbody>
                     </table>
                     
                     
