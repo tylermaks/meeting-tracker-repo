@@ -1,11 +1,11 @@
 import { useState } from 'react'
-import useAxiosPrivate from "../hooks/useAxiosPrivate";
+// import useAxiosPrivate from "../hooks/useAxiosPrivate";
 // import useAuth from "../hooks/useAuth"
 import "../Styles/Import.scss"
-const CSV = '/csv'
+// const CSV = '/csv'
 
 function ImportFile(){
-    const axiosPrivate = useAxiosPrivate()
+    // const axiosPrivate = useAxiosPrivate()
     const [dragActive, setDragActive] = useState(false)
     const [data, setData] = useState('')
 
@@ -29,19 +29,24 @@ function ImportFile(){
         const csv = e.dataTransfer.files[0]
         const reader = new FileReader()
         const csvData = []
+        const tableData = []
+
 
         reader.readAsText(csv)
        
         reader.onload = function() {
             const dataset = reader.result
             const cleanedData = dataset.replace(RegExp(/,\s/g), " ").replace(RegExp(/"/g), "")
-
             const result = cleanedData.split('\r')
+            
             result.map( data => {
                 let row = []
                 row.push(data.split(','))
                 csvData.push(row)
+
             })
+
+            console.log(csvData)
             setData(csvData)
         }
     }
@@ -53,7 +58,13 @@ function ImportFile(){
             {
                 data 
                     ? <table>
-                   
+                        <tr>
+                            <th>Company Name</th>
+                            <th>Date</th>
+                            <th>Duration (Hrs)</th>
+                            <th>Meeting Type</th>
+                            <th>Notes</th>
+                        </tr>
                     </table>
                     
                     

@@ -36,3 +36,11 @@ $teal: #008B92;
         border: 2px solid $teal;
     }
 }
+
+table{
+    border-collapse: collapse;
+}
+
+tr, th, td{
+    border: 1px solid $grey;
+}
