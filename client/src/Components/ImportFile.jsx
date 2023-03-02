@@ -1,11 +1,8 @@
 import { useState } from 'react'
-// import useAxiosPrivate from "../hooks/useAxiosPrivate";
-// import useAuth from "../hooks/useAuth"
+import HoursTable from './HoursTable'
 import "../Styles/Import.scss"
-// const CSV = '/csv'
 
-function ImportFile(){
-    // const axiosPrivate = useAxiosPrivate()
+function ImportFile({ setModal }){
     const [dragActive, setDragActive] = useState(false)
     const [data, setData] = useState('')
 
@@ -61,44 +58,16 @@ function ImportFile(){
             {/* Will return to clean this up */}
             {
                 data 
-                    ? <table>
-                        <thead>
-                            <tr>
-                                <th>Company Name</th>
-                                <th>Date</th>
-                                <th>Duration (Hrs)</th>
-                                <th>Meeting Type</th>
-                                <th>Notes</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {
-                                data.map( row => {
-                                    return(
-                                        <tr>
-                                            <td>{row.companyName}</td>
-                                            <td>{row.date}</td>
-                                            <td>{row.duration}</td>
-                                            <td>{row.meetingType}</td>
-                                            <td>{row.notes}</td>
-                                        </tr>
-                                    )
-                                })
-                            }
-                        </tbody>
-                    </table>
-                    
-                    
-                    : <form 
+                    ? <HoursTable data={data} setModal={setModal}/>
+                    : <div
                         className={ dragActive ? "import import--active" : "import"} 
                         onDrop={dropHandler} 
                         onDragOver={handleDrag} 
                         onDragLeave={handleDrag}
-                        onSubmit={(e) => e.preventDefault()}
                     >
                         <h3>Select a CSV file to import</h3>
                         <span>drag and drop it here</span>
-                    </form>
+                    </div>
             } 
         </section>
     )

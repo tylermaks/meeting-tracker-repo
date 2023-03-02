@@ -20,7 +20,7 @@ $grey: #4D4D4D;
     position:relative;
     overflow: scroll;
     // height: 85%;
-    width: 550px;
+    min-width: 800px;
 
 
     h2{
@@ -79,4 +79,8 @@ $grey: #4D4D4D;
         border: none;
         padding-top: 0;
     }
+}
+
+.form-row{
+    gap: 3rem;
 }

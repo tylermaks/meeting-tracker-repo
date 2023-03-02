@@ -1,35 +1,50 @@
-var fs = require('fs'); 
-const { parse } = require('csv-parse')
+const Airtable = require('airtable')
 
-const handleParse = (req, res) => {
-    console.log(req.file)
-    const csv = req.file
-    if (!csv) return res.sendStatus(404)
+//SETUP AIRTABLE DATABASE
+const base = new Airtable({ apiKey: process.env.AIRTABLE_API_KEY }).base(process.env.AIRTABLE_BASE_ID)
+const table = process.env.AIRTABLE_MEETING_ID
+
+
+const handleData = (req, res) => {
+    const { userId, data } = req.body
+    if (!userId || !data) return res.sendStatus(400)
+
+    let success = true
+
+    data.map( (entry, i) => {
+        base(table).select({
+            sort: [
+                {field: 'Meeting_ID', direction: "asc"}
+            ]
+        }).eachPage(function page(records, fetchNextPage){
+            const lastEntry = records[records.length -1].fields.Meeting_ID
+        
+            base(table).create({
+                "Meeting_ID": `${Number(lastEntry) + 1 + i}`,
+                "advisorLink": [userId],
+                "CompanyName": entry.companyName,
+                "Date": entry.date,
+                "MeetingType": [entry.meetingType],
+                "Duration": Number(entry.duration),
+                "Notes": entry.notes
+             }, function(err) {
+                 if(err){
+                     console.error(err)
+                     return
+                 }
+             })
     
-    const records = []
-
-    //Initialize Parser
-    const parser = parse({
-        delimiter:','
-    })
-    //Readable Stream API to Consume Records
-    parser.on('readable', function(){
-        let record
-        while ((record = parser.read()) != null){
-            records.push(record)
-        }
-    })
-    //Catch any error
-    parser.on('error', function(err){
-        console.error(err.message)
+            fetchNextPage()
+        }, function done(err){
+            if(err){
+                success = false
+                console.error(err)
+                return
+            }
+        })
     })
 
-    parser.on('end', function(){
-        console.log(records)
-    })
-    //Open file and pipe it into the parser
-    // fs.readFileSync(req.file.buffer).pipe(parser)
-    // return res.sendStatus(204)
+    success ? res.sendStatus(204) : res.sendStatus(400)
 }
 
-module.exports = { handleParse }
+module.exports = { handleData }
