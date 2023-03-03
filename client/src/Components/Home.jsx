@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { UserProvider } from "../context/UserProvider"
 import HomeNav from "./HomeNav";
 import MenuNav from "./MenuNav";
 import Dashboard from "./Dashboard";
@@ -13,6 +14,7 @@ function Home(){
     }
 
     return(
+        <UserProvider>
             <section id="home">
                 <HomeNav />
                 <MenuNav 
@@ -22,6 +24,7 @@ function Home(){
                     dash={dash}
                 />
             </section>
+        </UserProvider>
     )
 }
 

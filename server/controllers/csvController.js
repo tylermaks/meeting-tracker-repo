@@ -9,9 +9,6 @@ const handleData = (req, res) => {
     const { userId, data } = req.body
     if (!userId || !data) return res.sendStatus(400)
 
-    console.log(userId)
-    console.log(data)
-
     let success = true
 
     data.map( (entry, i) => {

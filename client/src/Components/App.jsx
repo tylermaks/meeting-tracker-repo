@@ -1,9 +1,10 @@
 import { Routes, Route } from "react-router-dom"
-import MainNav from "./MainNav"
+
 import Authentication from "./Authentication"
-import Home from "./Home"
 import RequireAuth from "./RequireAuth";
 import Unauthorized from "./Unauthorized";
+import MainNav from "./MainNav"
+import Home from "./Home"
 import '../Styles/App.scss';
 
 

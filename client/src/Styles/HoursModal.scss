@@ -84,3 +84,15 @@ $grey: #4D4D4D;
 .form-row{
     gap: 3rem;
 }
+
+.add{
+    background-color: #fff;
+    border: 1px solid $orange;
+    color: $orange;
+    margin-left: 1.5rem;
+
+    &:hover{
+        background-color: $orange;
+        color: #fff;
+    }
+}

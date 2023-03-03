@@ -1,56 +1,32 @@
 import { useState } from 'react'
-import useAxiosPrivate from "../hooks/useAxiosPrivate";
-import useAuth from "../hooks/useAuth"
-const CSV_URL = "/csv"
+import useUser from "../hooks/useUser"
 
 function AddHoursForm({ setModal }) {
-    const axiosPrivate = useAxiosPrivate()
-    const { auth } = useAuth()
+    const { addMeeting } = useUser()
     const [companyName, setCompanyName] = useState('')
     const [date, setDate] = useState('')
     const [duration, setDuration] = useState('')
     const [meetingType, setMeetingType] = useState('Coaching')
     const [notes, setNotes] = useState('')
+    const [button, setButton] = useState('')
 
-    const meetingArr = []
+    const meetingData = {
+        company: companyName,
+        date: date,
+        meetingType: meetingType,
+        duration: Number(duration),
+        notes: notes
+    }
 
-    const handleAddMeeting = () => {
-
-        const meetingData = {
-            company: companyName,
-            date: date,
-            meetingType: meetingType,
-            duration: Number(duration),
-            notes: notes
-        }
-
-        meetingArr.push(meetingData)
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+        addMeeting(meetingData)
         setCompanyName('')
         setDate('')
         setDuration('')
         setNotes('')
-    }
-
-    
-    const handleSubmit = async (e) => {
-        e.preventDefault()
-        handleAddMeeting()
-
-        try{
-            const response = await axiosPrivate.post(
-                CSV_URL,
-                JSON.stringify({"userId": auth.id, "data": meetingArr}),
-                {
-                    headers: {'Content-Type': 'application/json'}
-                }
-            )
-            
-            if (response.status === 204){
-                setModal(false)
-            }
-        } catch (err) {
-            console.log(err.response.status)
-        }
+        setModal(false)
+        console.log(button)
     }
 
 
@@ -122,7 +98,9 @@ function AddHoursForm({ setModal }) {
                     required
                 >
                 </textarea>
-                <button>Submit</button>
+                <button id="submit" onClick={(e) => setButton(e.target.id)}>Submit</button>
+                <button id="add" className="add" onClick={(e) => setButton(e.target.id)}>Add Another Meeting</button>
+                
             </div>
         </form>
     )
