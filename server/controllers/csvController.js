@@ -9,6 +9,9 @@ const handleData = (req, res) => {
     const { userId, data } = req.body
     if (!userId || !data) return res.sendStatus(400)
 
+    console.log(userId)
+    console.log(data)
+
     let success = true
 
     data.map( (entry, i) => {
@@ -22,7 +25,7 @@ const handleData = (req, res) => {
             base(table).create({
                 "Meeting_ID": `${Number(lastEntry) + 1 + i}`,
                 "advisorLink": [userId],
-                "CompanyName": entry.companyName,
+                "CompanyName": entry.company,
                 "Date": entry.date,
                 "MeetingType": [entry.meetingType],
                 "Duration": Number(entry.duration),

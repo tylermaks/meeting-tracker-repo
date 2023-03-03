@@ -9,39 +9,43 @@ function AddHoursForm({ setModal }) {
     const [companyName, setCompanyName] = useState('')
     const [date, setDate] = useState('')
     const [duration, setDuration] = useState('')
-    const [meetingType, setMeetingType] = useState('')
+    const [meetingType, setMeetingType] = useState('Coaching')
     const [notes, setNotes] = useState('')
 
+    const meetingArr = []
 
-
-    const handleSubmit = async (e) => {
-        e.preventDefault()
-
-        const convertDate = new Date(date)
+    const handleAddMeeting = () => {
 
         const meetingData = {
             company: companyName,
-            date: `${convertDate.getMonth()}/${convertDate.getDate()}/${convertDate.getFullYear()}`,
+            date: date,
             meetingType: meetingType,
             duration: Number(duration),
             notes: notes
         }
 
+        meetingArr.push(meetingData)
+        setCompanyName('')
+        setDate('')
+        setDuration('')
+        setNotes('')
+    }
+
+    
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+        handleAddMeeting()
 
         try{
             const response = await axiosPrivate.post(
                 CSV_URL,
-                JSON.stringify({"userId": auth.id, "data": [meetingData]}),
+                JSON.stringify({"userId": auth.id, "data": meetingArr}),
                 {
                     headers: {'Content-Type': 'application/json'}
                 }
             )
             
             if (response.status === 204){
-                setCompanyName('')
-                setDate('')
-                setDuration('')
-                setNotes('')
                 setModal(false)
             }
         } catch (err) {
@@ -61,6 +65,7 @@ function AddHoursForm({ setModal }) {
                     onChange={(e) => setCompanyName(e.target.value)}
                     required
                 >
+                    <option value="" disabled selected>Select Company</option>
                     <option value="ABC Inc">ABC Inc</option>
                     <option value="123 Corp">123 Corp</option>
                     <option value="HQ">HQ</option>
