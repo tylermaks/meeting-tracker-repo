@@ -3,12 +3,14 @@ import { useNavigate, useLocation} from "react-router-dom"
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import useAuth from "../hooks/useAuth"
 const CSV_URL = "/csv"
+const COMPANIES_URL = "/companies"
 
 const UserContext = createContext({})
 
 export const UserProvider = ({ children }) => {
     const { auth } = useAuth()
     const [user, setUser] = useState({})
+    const [companies, setCompanies] = useState({})
     const axiosPrivate = useAxiosPrivate()
     const navigate = useNavigate()
     const location = useLocation()
@@ -55,9 +57,25 @@ export const UserProvider = ({ children }) => {
         getUserData()
     },[getUserData, user])
 
+    useEffect( () => {
+
+        const geteCompanyList = async () => {
+            try{
+                const response = await axiosPrivate.get(
+                    COMPANIES_URL
+                )
+                setCompanies(response?.data?.companyArr)
+            } catch(err) {
+                if (err) {console.error(err)}
+            }
+        } 
+
+        geteCompanyList()
+    },[axiosPrivate])
+
 
     return (
-        <UserContext.Provider value ={{ user, addMeeting }}>
+        <UserContext.Provider value ={{ user, addMeeting, companies }}>
             {children}
         </UserContext.Provider>
     )

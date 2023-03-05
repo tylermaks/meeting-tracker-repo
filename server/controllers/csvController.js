@@ -22,7 +22,7 @@ const handleData = (req, res) => {
             base(table).create({
                 "Meeting_ID": `${Number(lastEntry) + 1 + i}`,
                 "advisorLink": [userId],
-                "CompanyName": entry.company,
+                "CompanyName-old": entry.company,
                 "Date": entry.date,
                 "MeetingType": [entry.meetingType],
                 "Duration": Number(entry.duration),

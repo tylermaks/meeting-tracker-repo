@@ -2,7 +2,7 @@ import { useState } from 'react'
 import useUser from "../hooks/useUser"
 
 function AddHoursForm({ setModal }) {
-    const { addMeeting } = useUser()
+    const { addMeeting, companies } = useUser()
     const [companyName, setCompanyName] = useState('')
     const [date, setDate] = useState('')
     const [duration, setDuration] = useState('')
@@ -40,9 +40,16 @@ function AddHoursForm({ setModal }) {
                     required
                 >
                     <option value="" disabled selected>Select Company</option>
-                    <option value="ABC Inc">ABC Inc</option>
-                    <option value="123 Corp">123 Corp</option>
-                    <option value="HQ">HQ</option>
+                    {
+                        companies 
+                            ? companies.map( company => { 
+                                return(
+                                    <option value={company}>{company}</option>
+                                )
+                            })
+                            :null
+                    }
+             
                 </select>
 
                 <div className='form-row flex-row flex-row--space'>

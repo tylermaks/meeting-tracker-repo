@@ -24,6 +24,7 @@ app.use('/user', require('./routes/api/user'))
 app.use('/logout', require('./routes/api/logout'))
 app.use('/meeting', require('./routes/api/meeting'))
 app.use('/csv', require('./routes/api/csv'))
+app.use('/companies', require("./routes/api/companies"))
 
 
 app.listen(PORT, () => console.log(`Server is running on Port: ${PORT}`))
