@@ -17,7 +17,6 @@ function ImportFile({ setModal }){
         }
     }
 
-
     const dropHandler = async (e) => {
         e.preventDefault()
         e.stopPropagation()
@@ -33,10 +32,10 @@ function ImportFile({ setModal }){
             const cleanedData = dataset.replace(RegExp(/,\s/g), " ").replace(RegExp(/"/g), "")
             const result = cleanedData.split('\r')
 
-            result.map( (data, i) => {
+            result.forEach( (data, i) => {
                 let splitData = data.split(',')
                 let rowObj = {
-                    companyName: splitData[0].replace(RegExp(/\n/g), ""),
+                    company: splitData[0].replace(RegExp(/\n/g), ""),
                     date: splitData[1],
                     duration: splitData[2],
                     meetingType: splitData[3],

@@ -9,7 +9,6 @@ function AddHoursForm({ setModal }) {
     const [meetingType, setMeetingType] = useState('Coaching')
     const [notes, setNotes] = useState('')
     const [button, setButton] = useState('')
-
     const meetingData = {
         company: companyName,
         date: date,
@@ -18,15 +17,14 @@ function AddHoursForm({ setModal }) {
         notes: notes
     }
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault()
-        addMeeting(meetingData)
+        addMeeting([meetingData])
         setCompanyName('')
         setDate('')
         setDuration('')
         setNotes('')
-        setModal(false)
-        console.log(button)
+        if (button === 'submit') { setModal(false)}
     }
 
 

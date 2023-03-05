@@ -1,30 +1,13 @@
-import useAxiosPrivate from "../hooks/useAxiosPrivate";
-import useAuth from "../hooks/useAuth"
-const CSV_URL = '/csv'
+import useUser from "../hooks/useUser"
+
 
 function HoursTable({ data, setModal }) {
-    const { auth } = useAuth()
-    const axiosPrivate = useAxiosPrivate()
-
-
+    const { addMeeting } = useUser()
     const handleSubmit = (e) => {
         e.preventDefault()
-        try{
-            const response = axiosPrivate.post(
-                CSV_URL,
-                JSON.stringify({ "userId": auth.id, "data": data}), 
-                {
-                    headers: {'Content-Type': 'application/json'}
-                }
-            )
-
-            console.log(response)
-            setModal(false)
-        } catch (err) {
-            console.error(err)
-        }
+        addMeeting(data)
+        setModal(false)
     }
-
 
     return(
         <form onSubmit={handleSubmit}>
@@ -44,7 +27,7 @@ function HoursTable({ data, setModal }) {
                         data.map( row => {
                             return(
                                 <tr>
-                                    <td>{row.companyName}</td>
+                                    <td>{row.company}</td>
                                     <td>{row.date}</td>
                                     <td>{row.duration}</td>
                                     <td>{row.meetingType}</td>
