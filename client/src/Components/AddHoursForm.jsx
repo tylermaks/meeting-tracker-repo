@@ -19,6 +19,9 @@ function AddHoursForm({ setModal }) {
 
     const handleSubmit = (e) => {
         e.preventDefault()
+
+        console.log(meetingData)
+
         addMeeting([meetingData])
         setCompanyName('')
         setDate('')
