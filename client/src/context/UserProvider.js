@@ -55,11 +55,11 @@ export const UserProvider = ({ children }) => {
 
     useEffect( () => { 
         getUserData()
-    },[getUserData])
+    },[getUserData, user])
 
     useEffect( () => {
 
-        const geteCompanyList = async () => {
+        const getCompanyList = async () => {
             try{
                 const response = await axiosPrivate.get(
                     COMPANIES_URL
@@ -70,7 +70,7 @@ export const UserProvider = ({ children }) => {
             }
         } 
 
-        geteCompanyList()
+        getCompanyList()
     },[axiosPrivate])
 
 
