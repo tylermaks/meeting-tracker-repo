@@ -1,25 +1,43 @@
+import { useState } from 'react'
 import useUser from "../hooks/useUser"
+import sort from "../Images/sort-solid.svg"
 import "../Styles/Spreadsheet.scss"
 
 function Spreadsheet (){ 
     const { user } = useUser()
+    const [rows, setRows ] = useState(user.meetingData)
+    const columnNames = ["Company Name", "Date", "Duration", "Meeting Type", "Notes"]
+
+    // const handleClick = () => { 
+    //     setRows(rows.sort())
+    // }
 
     return(
         <table>
                 <thead>
                     <tr>
-                        <th>Company Name</th>
-                        <th>Date</th>
-                        <th>Duration (Hrs)</th>
-                        <th>Meeting Type</th>
-                        <th>Notes</th>
+                    {
+                        columnNames.map( (col, id) => {
+                            return(
+                                <th id={id} key={id}>
+                                    {col}
+                                    <img 
+                                        className="sort icon icon--small" 
+                                        src={sort} 
+                                        // onClick={handleClick}
+                                        alt={`Sort ${col}`} 
+                                    />
+                                </th>
+                            )
+                        })
+                    }
                     </tr>
                 </thead>
                 <tbody>
                     {/* RETURN TO CLEAN THIS UP */}
                     {   
-                        user.meetingData
-                        ? user.meetingData.map( (row, id) => {
+                        rows
+                        ? rows.map( (row, id) => {
                             return(
                                 <tr key={id}>
                                     <td>{row.CompanyName}</td>

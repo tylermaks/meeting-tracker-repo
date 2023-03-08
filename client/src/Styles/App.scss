@@ -79,6 +79,23 @@ input, textarea, select{
     }
 }
 
+//TABLES 
+table{
+    border-collapse: collapse;
+    margin: 1rem 0 2rem 0;
+    width: 100%;
+}
+
+tr, th, td{
+    border: 1px solid $grey;
+    padding: 0.5rem;
+    text-align: center;
+}
+
+.sort{
+    cursor: pointer;
+    margin-left: 0.5rem;
+}
 
 
 //GLOBAL UTILITY CLASSES

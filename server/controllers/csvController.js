@@ -5,17 +5,16 @@ const base = new Airtable({ apiKey: process.env.AIRTABLE_API_KEY }).base(process
 const meetings = process.env.AIRTABLE_MEETING_ID
 const companies = process.env.AIRTABLE_COMPANIES_ID
 
-const createNewMeeting = (companyId, entry, userId) => { 
+const createNewMeeting = (companyId, entry, userId, count) => { 
     base(meetings).select({
         sort: [
             {field: 'Meeting_ID', direction: "asc"}
         ]
     }).eachPage(function page(records, fetchNextPage){
-        let lastEntry = Number(records[records.length - 1].fields.Meeting_ID)
+        let lastEntry = records[records.length - 1].fields.Meeting_ID + 1 + count
         
-    
         base(meetings).create({
-            "Meeting_ID": String(lastEntry),
+            "Meeting_ID": lastEntry,
             "advisorLink": [userId],
             "CompanyNameId": [companyId.id],
             "Date": entry.date,
@@ -44,9 +43,9 @@ const handleData = (req, res) => {
     if (!userId || !data) return res.sendStatus(400)
 
     let success = true
+    let count = 0
 
-    data.map( entry => {
-        let count = 0 
+    data.forEach( entry => {
         base(companies).select({
             sort: [
                 {field: 'companyName', direction: "asc"}
@@ -54,7 +53,8 @@ const handleData = (req, res) => {
         }).eachPage(function page(records, fetchNextPage){
             let companyId = records.find(record => record.get('companyName') === entry.company)
             if (companyId) { 
-                createNewMeeting(companyId, entry, userId)
+                createNewMeeting(companyId, entry, userId, count)
+                count++
             }
 
             fetchNextPage()       
@@ -64,10 +64,6 @@ const handleData = (req, res) => {
                 console.error(err)
             }
         })
-
-        count = count + 1
-        console.log(count)
-
     })
 
     success ? res.sendStatus(204) : res.sendStatus(400)

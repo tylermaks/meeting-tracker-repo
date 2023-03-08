@@ -9,6 +9,7 @@ function AddHoursForm({ setModal }) {
     const [meetingType, setMeetingType] = useState('Coaching')
     const [notes, setNotes] = useState('')
     const [button, setButton] = useState('')
+    
     const meetingData = {
         company: companyName,
         date: date,
@@ -19,9 +20,6 @@ function AddHoursForm({ setModal }) {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-
-        console.log(meetingData)
-
         addMeeting([meetingData])
         setCompanyName('')
         setDate('')

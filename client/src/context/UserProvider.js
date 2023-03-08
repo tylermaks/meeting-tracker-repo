@@ -55,7 +55,7 @@ export const UserProvider = ({ children }) => {
 
     useEffect( () => { 
         getUserData()
-    },[getUserData, user])
+    },[getUserData])
 
     useEffect( () => {
 
