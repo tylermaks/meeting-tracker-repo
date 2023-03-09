@@ -89,6 +89,7 @@ table{
 tr, th, td{
     border: 1px solid $grey;
     padding: 0.5rem;
+    position: relative;
     text-align: center;
 }
 
@@ -120,6 +121,10 @@ tr, th, td{
         align-items: center;
         justify-content: center;
     }
+}
+
+.hidden{
+    display: none;
 }
 
 //GLOBAL CLASSES

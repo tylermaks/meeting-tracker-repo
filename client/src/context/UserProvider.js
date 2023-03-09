@@ -39,9 +39,8 @@ export const UserProvider = ({ children }) => {
                 `/user/${auth.userName}`
             )
             const meetingData = response?.data?.meetingArr
-            const companies = [] //coming soon! 
-
-            setUser({ meetingData, companies })
+       
+            setUser({ meetingData })
         } catch (err) { 
             if (err?.response?.status === 403) {
                 navigate("/", {from: location}, {replace: true})
@@ -55,10 +54,9 @@ export const UserProvider = ({ children }) => {
 
     useEffect( () => { 
         getUserData()
-    },[getUserData, user])
+    },[getUserData])
 
     useEffect( () => {
-
         const getCompanyList = async () => {
             try{
                 const response = await axiosPrivate.get(
@@ -69,9 +67,9 @@ export const UserProvider = ({ children }) => {
                 if (err) {console.error(err)}
             }
         } 
-
         getCompanyList()
-    },[axiosPrivate])
+        getUserData()
+    },[axiosPrivate, getUserData])
 
 
     return (

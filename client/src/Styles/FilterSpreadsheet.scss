@@ -1,0 +1,27 @@
+.filter-dropdown{ 
+    background-color: #fff;
+    border-radius: 0.5rem;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+    padding: 1.5rem;
+    text-align: left;
+    width: 200px;
+
+    position: absolute;
+    right:0.2rem;
+    top: 0.2rem;
+    z-index: 1;
+
+    p{
+        margin-bottom: 1rem;
+
+        // &:nth-child(3){
+        //     border-top: 1px solid black;
+        //     padding-top: 1rem;
+        // }
+    }
+
+}
+
+.hidden{
+    display: none;
+}

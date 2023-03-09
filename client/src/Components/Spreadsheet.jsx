@@ -1,12 +1,14 @@
 import { useState } from 'react'
 import useUser from "../hooks/useUser"
+import FilterSpreadsheet from './FilterSpreadsheet'
 import sort from "../Images/sort-solid.svg"
 import "../Styles/Spreadsheet.scss"
 
 function Spreadsheet (){ 
     const { user } = useUser()
     const data = user.meetingData
-    const [ascending, setAscending] = useState(true)
+    // const [ascending, setAscending] = useState(true)
+    const [dropdown, setDropdown ] = useState('')
     const [rows, setRows] = useState(data)
 
     const columnNames = [
@@ -17,14 +19,18 @@ function Spreadsheet (){
         {key: "Notes", label:"Notes"}
     ]
 
-    const handleSort = col => {
-        const sortedData = [...rows].sort((a, b) => 
-           ascending 
-            ? a[col] > b[col] ? 1 : -1 
-            : a[col] < b[col] ? 1 : -1 
-        )
-        setRows(sortedData)
-        setAscending(!ascending)
+    // const handleSort = col => {
+    //     const sortedData = [...rows].sort((a, b) => 
+    //        ascending 
+    //         ? a[col] > b[col] ? 1 : -1 
+    //         : a[col] < b[col] ? 1 : -1 
+    //     )
+    //     setRows(sortedData)
+    //     setAscending(!ascending)
+    // }
+
+    const toggleDropdown = (e) => { 
+        setDropdown(e.target.id)
     }
 
     
@@ -35,12 +41,20 @@ function Spreadsheet (){
                 {
                     columnNames.map( col => {
                         return(
-                            <th id={col.key} key={col.key}>
+                            <th key={col.key} className="column-header">
                                 {col.label}
+                                <FilterSpreadsheet
+                                    id={col.key} 
+                                    rowKey={col.key}
+                                    hidden={ dropdown === col.key ? "" : "hidden" }
+                                    // onClick={toggleDropdown}
+                                />
                                 <img 
+                                    id={col.key}
                                     className="sort icon icon--small" 
                                     src={sort} 
-                                    onClick={() => handleSort(col.key)}
+                                    onClick={toggleDropdown}
+                                    // onClick={() => handleSort(col.key)}
                                     alt={`Sort ${col.label}`} 
                                 />
                             </th>
