@@ -32,7 +32,6 @@ export const UserProvider = ({ children }) => {
         getUserData()
     }
 
-
     const getUserData = useCallback( async () => {
         try{
             const response = await axiosPrivate.get(
@@ -69,7 +68,7 @@ export const UserProvider = ({ children }) => {
         } 
         getCompanyList()
         getUserData()
-    },[axiosPrivate, getUserData])
+    },[axiosPrivate, getUserData, auth.userName])
 
 
     return (

@@ -3,21 +3,31 @@ import useUser from "../hooks/useUser"
 import sort from "../Images/sort-solid.svg"
 import "../Styles/FilterSpreadsheet.scss"
 
-function TableHeader ({ label, id }){
+function TableHeader ({ label, id, rows, setRows }){
     const { user } = useUser()
     const data = user.meetingData
     const dropdownRef = useRef(null)
     const [dropdown, setDropdown ] = useState('')
-    
+    const [filterData, setFilterData] = useState([])
+    const uniqueValues = data && [...new Set(data.map( item => item[id].toString()))].sort((a,b) => a > b ? 1 : -1)   
 
     useEffect(() => {
-        document.addEventListener("click", toggleDropdown, true)
+        document.getElementById("home").addEventListener("click", toggleDropdown)
     },[])
 
 
     const toggleDropdown = (e) => { 
         let clicked = dropdownRef.current.contains(e.target)
         !clicked ? setDropdown('') : setDropdown(e.target.id)
+    }
+
+    const handleFilter = (e) => { 
+        let clicked = e.target.id
+        setFilterData( prevState => [...prevState, clicked])
+
+        let filterRows = rows.map( row => row[id].toString()).filter( item => !filterData.includes(item))
+        console.log(filterRows)
+        // setRows(filterRows)
     }
 
     // const handleSort = col => {
@@ -32,6 +42,7 @@ function TableHeader ({ label, id }){
 
     // const [ascending, setAscending] = useState(true)
     // onClick={() => handleSort(col.key)}
+
 
 
     return(
@@ -49,9 +60,15 @@ function TableHeader ({ label, id }){
                 <p>Sort Z - A</p>
                 <p>Filter</p>
                 {
-                    data && data.map( (item, i) => {
+                    data && uniqueValues.map( (item, i) => {
                         return(
-                            <p key={i}> {item[id]} </p>
+                            <p 
+                                id={item}
+                                key={i}
+                                onClick={handleFilter}
+                            > 
+                                {item} 
+                            </p>
                         )
                     })
                 }

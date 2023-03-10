@@ -26,6 +26,8 @@ function Spreadsheet (){
                                 key={key}
                                 id={col.id}
                                 label={col.label}
+                                rows={rows}
+                                setRows={setRows}
                             />
                         )
                     })}
