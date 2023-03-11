@@ -9,7 +9,7 @@ function TableHeader ({ label, id, rows, setRows }){
     const dropdownRef = useRef(null)
     const [dropdown, setDropdown ] = useState('')
     const [filterData, setFilterData] = useState([])
-    const uniqueValues = data && [...new Set(data.map( item => item[id].toString()))].sort((a,b) => a > b ? 1 : -1)   
+    const uniqueValues = data && [...new Set(data.map( item => item[id].toString()))].sort((a,b) => a > b ? 1 : -1)  
 
     useEffect(() => {
         document.getElementById("home").addEventListener("click", toggleDropdown)
@@ -23,12 +23,12 @@ function TableHeader ({ label, id, rows, setRows }){
 
     const handleFilter = (e) => { 
         let clicked = e.target.id
-        setFilterData( prevState => [...prevState, clicked])
+        setFilterData([clicked, ...filterData])
 
-        let filterRows = rows.map( row => row[id].toString()).filter( item => !filterData.includes(item))
-        console.log(filterRows)
-        // setRows(filterRows)
+        let things = rows.filter( item => Object.values(item).some( val => filterData.includes(val)))
+        // console.log(things)
     }
+
 
     // const handleSort = col => {
     //     const sortedData = [...rows].sort((a, b) => 

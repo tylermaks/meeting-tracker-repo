@@ -36,7 +36,7 @@ function Spreadsheet (){
             <tbody>
                 {/* RETURN TO CLEAN THIS UP */}
                 {   
-                    rows
+                    (data && rows)
                     ? rows.map( (row, id) => {
                         return(
                             <tr key={id}>

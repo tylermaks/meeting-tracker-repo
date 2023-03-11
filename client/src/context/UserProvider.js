@@ -32,13 +32,29 @@ export const UserProvider = ({ children }) => {
         getUserData()
     }
 
+
     const getUserData = useCallback( async () => {
         try{
             const response = await axiosPrivate.get(
                 `/user/${auth.userName}`
             )
-            const meetingData = response?.data?.meetingArr
-       
+            
+            const meetingData = response?.data?.meetingArr.map( item => { 
+                return(
+                    {
+                        CompanyName: item.CompanyName.toString(),
+                        CompanyNameId: item.CompanyNameId.toString(),
+                        Date: item.Date,
+                        Duration: Number(item.Duration),
+                        MeetingType: item.MeetingType.toString(),
+                        Meeting_ID: item.Meeting_ID,
+                        Notes: item.Notes,
+                        advisorLink: item.advisorLink.toString(),
+                        email: item.email.toString()
+                    }
+                )
+            })
+
             setUser({ meetingData })
         } catch (err) { 
             if (err?.response?.status === 403) {
@@ -48,8 +64,9 @@ export const UserProvider = ({ children }) => {
             } 
         }
 
-    }, [auth.userName, axiosPrivate, location, navigate])
 
+
+    }, [auth.userName, axiosPrivate, location, navigate])
 
     useEffect( () => { 
         getUserData()
@@ -67,9 +84,7 @@ export const UserProvider = ({ children }) => {
             }
         } 
         getCompanyList()
-        getUserData()
-    },[axiosPrivate, getUserData, auth.userName])
-
+    },[axiosPrivate])
 
     return (
         <UserContext.Provider value ={{ user, addMeeting, companies }}>
