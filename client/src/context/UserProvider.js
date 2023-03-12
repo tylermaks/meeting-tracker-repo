@@ -33,6 +33,7 @@ export const UserProvider = ({ children }) => {
     }
 
 
+
     const getUserData = useCallback( async () => {
         try{
             const response = await axiosPrivate.get(
@@ -54,6 +55,7 @@ export const UserProvider = ({ children }) => {
                     }
                 )
             })
+       
 
             setUser({ meetingData })
         } catch (err) { 
@@ -63,9 +65,6 @@ export const UserProvider = ({ children }) => {
                 console.error(err)
             } 
         }
-
-
-
     }, [auth.userName, axiosPrivate, location, navigate])
 
     useEffect( () => { 
@@ -84,6 +83,7 @@ export const UserProvider = ({ children }) => {
             }
         } 
         getCompanyList()
+        // getUserData()
     },[axiosPrivate])
 
     return (

@@ -1,12 +1,17 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import useUser from "../hooks/useUser"
 import TableHeader from './TablerHeader'
 import "../Styles/Spreadsheet.scss"
 
 function Spreadsheet (){ 
     const { user } = useUser()
-    const data = user.meetingData
-    const [rows, setRows] = useState(data)
+    const [rows, setRows] = useState("")
+
+    
+    useEffect(() => {
+        setRows(user.meetingData)
+    },[user])
+
 
     const columnNames = [
         {id: "CompanyName", label:"Company Name"}, 
@@ -36,7 +41,7 @@ function Spreadsheet (){
             <tbody>
                 {/* RETURN TO CLEAN THIS UP */}
                 {   
-                    (data && rows)
+                    rows
                     ? rows.map( (row, id) => {
                         return(
                             <tr key={id}>
