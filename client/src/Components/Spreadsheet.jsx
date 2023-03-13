@@ -6,12 +6,15 @@ import "../Styles/Spreadsheet.scss"
 function Spreadsheet (){ 
     const { user } = useUser()
     const [rows, setRows] = useState("")
+    const [filterData, setFilterData] = useState([])
 
-    
     useEffect(() => {
         setRows(user.meetingData)
     },[user])
 
+    // useEffect(() => {
+    //     setRows(user.meetingData.filter( item => !Object.values(item).some( val => filterData.includes(val))))
+    // }, [filterData, user])
 
     const columnNames = [
         {id: "CompanyName", label:"Company Name"}, 
@@ -33,6 +36,8 @@ function Spreadsheet (){
                                 label={col.label}
                                 rows={rows}
                                 setRows={setRows}
+                                filter={filterData}
+                                setFilter={setFilterData}
                             />
                         )
                     })}

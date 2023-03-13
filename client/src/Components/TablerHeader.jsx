@@ -1,30 +1,39 @@
-import { useState, useEffect, useRef} from 'react'
+import { useState, useEffect, useRef } from 'react'
+import useUser from "../hooks/useUser"
 import sort from "../Images/sort-solid.svg"
 import "../Styles/FilterSpreadsheet.scss"
 
-function TableHeader ({ label, id, rows, setRows }){
+function TableHeader ({ label, id, rows, filterData, setFilterData }){
+    const { user } = useUser()
     const dropdownRef = useRef(null)
     const [dropdown, setDropdown ] = useState('')
-    const [filterData, setFilterData] = useState('')
+    // const [filterData, setFilterData] = useState('')
     const [list, setList] = useState('')
+    
+    // setList([...new Set(user.meetingData.map( item => item[id]))].sort((a,b) => a > b ? 1 : -1))
 
     useEffect(() => {
         document.getElementById("home").addEventListener("click", toggleDropdown)
-        rows && setList([...new Set(rows.map( item => item[id].toString()))].sort((a,b) => a > b ? 1 : -1))
-    },[rows, id])
+    },[])
+
+    useEffect(() => {
+        console.log(user.meetingData)
+        setList([...new Set(user.meetingData.map( item => item[id]))].sort((a,b) => a > b ? 1 : -1))
+    }, [user, id])
 
     const toggleDropdown = (e) => { 
         let clicked = dropdownRef.current.contains(e.target)
         !clicked ? setDropdown('') : setDropdown(e.target.id)
     }
 
-    const handleFilter = (e) => { 
-        let clicked = e.target.id
-        setFilterData([clicked, ...filterData])
+    // const handleFilter = (e) => { 
+    //     let clicked = e.target.id
+    //     setFilterData([...filterData, clicked])
+    //     // let things = rows.filter( item => Object.values(item).some( val => filterData.includes(val)))
+    //     // console.log(things)
+    // }
 
-        // let things = rows.filter( item => Object.values(item).some( val => filterData.includes(val)))
-        // console.log(things)
-    }
+
 
     // const handleSort = col => {
     //     const sortedData = [...rows].sort((a, b) => 
@@ -54,17 +63,17 @@ function TableHeader ({ label, id, rows, setRows }){
                 <p>Sort Z - A</p>
                 <p>Filter</p>
                 {
-                    list && list.map( (item, i) => {
-                        return(
-                            <p 
-                                id={item}
-                                key={i}
-                                onClick={handleFilter}
-                            > 
-                                {item} 
-                            </p>
-                        )
-                    })
+                    // list && list.map( (item, i) => {
+                    //     return(
+                    //         <p 
+                    //             id={item}
+                    //             key={i}
+                    //             // onClick={handleFilter}
+                    //         > 
+                    //             {item} 
+                    //         </p>
+                    //     )
+                    // })
                 }
             </div>
         </th>
