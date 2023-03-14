@@ -13,8 +13,8 @@ function Spreadsheet (){
     },[user])
 
     // useEffect(() => {
-    //     setRows(user.meetingData.filter( item => !Object.values(item).some( val => filterData.includes(val))))
-    // }, [filterData, user])
+    //     setRows(filter( item => !Object.values(item).some( val => filterData.includes(val))))
+    // }, [filterData, rows, user])
 
     const columnNames = [
         {id: "CompanyName", label:"Company Name"}, 

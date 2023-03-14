@@ -3,23 +3,19 @@ import useUser from "../hooks/useUser"
 import sort from "../Images/sort-solid.svg"
 import "../Styles/FilterSpreadsheet.scss"
 
-function TableHeader ({ label, id, rows, filterData, setFilterData }){
+function TableHeader ({ label, id, filterData, setFilterData }){
     const { user } = useUser()
     const dropdownRef = useRef(null)
+    const [load, setLoad] = useState(true)
     const [dropdown, setDropdown ] = useState('')
-    // const [filterData, setFilterData] = useState('')
     const [list, setList] = useState('')
-    
-    // setList([...new Set(user.meetingData.map( item => item[id]))].sort((a,b) => a > b ? 1 : -1))
 
     useEffect(() => {
         document.getElementById("home").addEventListener("click", toggleDropdown)
-    },[])
+        setList(Array.from(new Set(user.meetingData.map( item => item[id]))))
+        setLoad(false)
+    },[user, id])
 
-    useEffect(() => {
-        console.log(user.meetingData)
-        setList([...new Set(user.meetingData.map( item => item[id]))].sort((a,b) => a > b ? 1 : -1))
-    }, [user, id])
 
     const toggleDropdown = (e) => { 
         let clicked = dropdownRef.current.contains(e.target)
@@ -29,11 +25,8 @@ function TableHeader ({ label, id, rows, filterData, setFilterData }){
     // const handleFilter = (e) => { 
     //     let clicked = e.target.id
     //     setFilterData([...filterData, clicked])
-    //     // let things = rows.filter( item => Object.values(item).some( val => filterData.includes(val)))
-    //     // console.log(things)
+    //     let things = rows.filter( item => Object.values(item).some( val => filterData.includes(val)))
     // }
-
-
 
     // const handleSort = col => {
     //     const sortedData = [...rows].sort((a, b) => 
@@ -49,34 +42,42 @@ function TableHeader ({ label, id, rows, filterData, setFilterData }){
     // onClick={() => handleSort(col.key)}
 
     return(
-        <th className="column-header">
-            {label}
-            <img
-                id={id}
-                className="sort icon icon--small" 
-                ref={dropdownRef}
-                src={sort} 
-                alt={`Sort ${id}`} 
-            />
-            <div className={dropdown === id ? "filter-dropdown flex-column" : "hidden"}>
-                <p>Sort A - Z</p>
-                <p>Sort Z - A</p>
-                <p>Filter</p>
-                {
-                    // list && list.map( (item, i) => {
-                    //     return(
-                    //         <p 
-                    //             id={item}
-                    //             key={i}
-                    //             // onClick={handleFilter}
-                    //         > 
-                    //             {item} 
-                    //         </p>
-                    //     )
-                    // })
-                }
-            </div>
-        </th>
+        <>
+            { load ? (
+                 <p>Loading</p>
+            ) : (
+                <th className="column-header">
+                    {label}
+                    <img
+                        id={id}
+                        className="sort icon icon--small" 
+                        ref={dropdownRef}
+                        src={sort} 
+                        alt={`Sort ${id}`} 
+                    />
+                    <div className={dropdown === id ? "filter-dropdown flex-column" : "hidden"}>
+                        <p>Sort A - Z</p>
+                        <p>Sort Z - A</p>
+                        <p>Filter</p>
+                        {
+                            // !load && list.map( (item, i) => {
+                            //     return(
+                            //         <p 
+                            //             id={item}
+                            //             key={i}
+                            //             onClick={handleFilter}
+                            //         > 
+                            //             {item} 
+                            //         </p>
+                            //     )
+
+                            // })
+                        }
+                    </div>
+                </th>
+                )
+            }   
+        </>
     )
 }
 
