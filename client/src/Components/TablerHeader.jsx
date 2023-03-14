@@ -1,21 +1,17 @@
 import { useState, useEffect, useRef } from 'react'
-import useUser from "../hooks/useUser"
+// import useUser from "../hooks/useUser"
 import sort from "../Images/sort-solid.svg"
 import "../Styles/FilterSpreadsheet.scss"
 
-function TableHeader ({ label, id, filterData, setFilterData }){
-    const { user } = useUser()
+function TableHeader ({ label, id, filterData, setFilterData, userData }){
+    // const { user } = useUser()
     const dropdownRef = useRef(null)
-    const [load, setLoad] = useState(true)
     const [dropdown, setDropdown ] = useState('')
-    const [list, setList] = useState('')
-
+    const filteredList = useRef(Array.from(new Set(userData.meetingData.map( item => item[id]))))
+    
     useEffect(() => {
         document.getElementById("home").addEventListener("click", toggleDropdown)
-        setList(Array.from(new Set(user.meetingData.map( item => item[id]))))
-        setLoad(false)
-    },[user, id])
-
+    },[])
 
     const toggleDropdown = (e) => { 
         let clicked = dropdownRef.current.contains(e.target)
@@ -42,42 +38,36 @@ function TableHeader ({ label, id, filterData, setFilterData }){
     // onClick={() => handleSort(col.key)}
 
     return(
-        <>
-            { load ? (
-                 <p>Loading</p>
-            ) : (
-                <th className="column-header">
-                    {label}
-                    <img
-                        id={id}
-                        className="sort icon icon--small" 
-                        ref={dropdownRef}
-                        src={sort} 
-                        alt={`Sort ${id}`} 
-                    />
-                    <div className={dropdown === id ? "filter-dropdown flex-column" : "hidden"}>
-                        <p>Sort A - Z</p>
-                        <p>Sort Z - A</p>
-                        <p>Filter</p>
-                        {
-                            // !load && list.map( (item, i) => {
-                            //     return(
-                            //         <p 
-                            //             id={item}
-                            //             key={i}
-                            //             onClick={handleFilter}
-                            //         > 
-                            //             {item} 
-                            //         </p>
-                            //     )
+        <th className="column-header">
+            {label}
+            <img
+                id={id}
+                className="sort icon icon--small" 
+                ref={dropdownRef}
+                src={sort} 
+                alt={`Sort ${id}`} 
+            />
+            <div className={dropdown === id ? "filter-dropdown flex-column" : "hidden"}>
+                <p>Sort A - Z</p>
+                <p>Sort Z - A</p>
+                <p>Filter</p>
+                {
+                    filteredList && filteredList.map( (item, i) => {
+                        return(
+                            <p 
+                                id={item}
+                                key={i}
+                                // onClick={handleFilter}
+                            > 
+                                {item} 
+                            </p>
+                        )
 
-                            // })
-                        }
-                    </div>
-                </th>
-                )
-            }   
-        </>
+                    })
+                }
+            </div>
+        </th>
+  
     )
 }
 

@@ -7,7 +7,6 @@ import "../Styles/Home.scss"
 
 
 function Home(){
-
     const [dash, setDash] = useState(1)
     const handleClick = (id) => {
         setDash(id - 1) 

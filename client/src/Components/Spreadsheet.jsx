@@ -3,18 +3,14 @@ import useUser from "../hooks/useUser"
 import TableHeader from './TablerHeader'
 import "../Styles/Spreadsheet.scss"
 
-function Spreadsheet (){ 
+function Spreadsheet ({ userData }){ 
     const { user } = useUser()
-    const [rows, setRows] = useState("")
+    const [rows, setRows] = useState('')
     const [filterData, setFilterData] = useState([])
 
     useEffect(() => {
         setRows(user.meetingData)
     },[user])
-
-    // useEffect(() => {
-    //     setRows(filter( item => !Object.values(item).some( val => filterData.includes(val))))
-    // }, [filterData, rows, user])
 
     const columnNames = [
         {id: "CompanyName", label:"Company Name"}, 
@@ -38,6 +34,7 @@ function Spreadsheet (){
                                 setRows={setRows}
                                 filter={filterData}
                                 setFilter={setFilterData}
+                                userData={userData}
                             />
                         )
                     })}

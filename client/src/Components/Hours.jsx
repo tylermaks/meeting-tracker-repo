@@ -3,7 +3,7 @@ import Spreadsheet from "./Spreadsheet";
 import HoursModal from "./HoursModal";
 
 
-function Hours() {
+function Hours({userData}) {
     const [modal, setModal] = useState(false)
 
 
@@ -21,7 +21,9 @@ function Hours() {
                     Add Hours
                 </div>
             </div>
-            <Spreadsheet />
+            <Spreadsheet 
+                userData={userData}
+            />
         </section>
     )
 }
