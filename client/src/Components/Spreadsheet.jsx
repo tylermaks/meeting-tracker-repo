@@ -1,16 +1,37 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import useUser from "../hooks/useUser"
 import TableHeader from './TablerHeader'
 import "../Styles/Spreadsheet.scss"
 
 function Spreadsheet ({ userData }){ 
     const { user } = useUser()
-    const [rows, setRows] = useState('')
+    const [rows, setRows] = useState([])
     const [filterData, setFilterData] = useState([])
+
+    const filteredRows = useMemo(() => {
+        return rows?.filter( item => {
+            return Object.values(item).every(val => {
+                return !filterData.includes(val)
+            })
+        })
+    }, [rows, filterData])
 
     useEffect(() => {
         setRows(user.meetingData)
     },[user])
+
+    useEffect(() => {
+        console.log(filterData)
+    }, [filterData])
+
+
+    // const filteredRows = rows.filter(row => {
+    //     // Check if the item's name and gender match any object in filterArray
+    //     return filterData.some(filterItem => {
+    //       return row.CompanyName === filterItem.name && item.gender === filterItem.gender;
+    //     });
+    //   });
+
 
     const columnNames = [
         {id: "CompanyName", label:"Company Name"}, 
@@ -32,8 +53,8 @@ function Spreadsheet ({ userData }){
                                 label={col.label}
                                 rows={rows}
                                 setRows={setRows}
-                                filter={filterData}
-                                setFilter={setFilterData}
+                                filterData={filterData}
+                                setFilterData={setFilterData}
                                 userData={userData}
                             />
                         )
@@ -43,8 +64,7 @@ function Spreadsheet ({ userData }){
             <tbody>
                 {/* RETURN TO CLEAN THIS UP */}
                 {   
-                    rows
-                    ? rows.map( (row, id) => {
+                    filteredRows?.map((row, id) => {
                         return(
                             <tr key={id}>
                                 <td>{row.CompanyName}</td>
@@ -55,7 +75,6 @@ function Spreadsheet ({ userData }){
                             </tr>
                         )
                     })
-                    : <p>Hmm....something went wrong</p>
                 }
             </tbody>
         </table>

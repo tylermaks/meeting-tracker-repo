@@ -1,28 +1,30 @@
 import { useState, useEffect, useRef } from 'react'
-// import useUser from "../hooks/useUser"
+import useUser from "../hooks/useUser"
 import sort from "../Images/sort-solid.svg"
 import "../Styles/FilterSpreadsheet.scss"
 
-function TableHeader ({ label, id, filterData, setFilterData, userData }){
-    // const { user } = useUser()
+function TableHeader ({ label, id, filterData, setFilterData }){
+    const { user } = useUser()
     const dropdownRef = useRef(null)
     const [dropdown, setDropdown ] = useState('')
-    const filteredList = useRef(Array.from(new Set(userData.meetingData.map( item => item[id]))))
+    const [list, setList] = useState([])
     
     useEffect(() => {
         document.getElementById("home").addEventListener("click", toggleDropdown)
-    },[])
+        setList(user.meetingData)
+    },[user.meetingData])
+
+    const uniqueValues = [...new Set(list?.map(item => item[id]))]
 
     const toggleDropdown = (e) => { 
         let clicked = dropdownRef.current.contains(e.target)
         !clicked ? setDropdown('') : setDropdown(e.target.id)
     }
 
-    // const handleFilter = (e) => { 
-    //     let clicked = e.target.id
-    //     setFilterData([...filterData, clicked])
-    //     let things = rows.filter( item => Object.values(item).some( val => filterData.includes(val)))
-    // }
+    const handleFilter = (e) => { 
+        const clicked = e.target.id
+        setFilterData([...filterData, clicked])
+    }
 
     // const handleSort = col => {
     //     const sortedData = [...rows].sort((a, b) => 
@@ -52,12 +54,12 @@ function TableHeader ({ label, id, filterData, setFilterData, userData }){
                 <p>Sort Z - A</p>
                 <p>Filter</p>
                 {
-                    filteredList && filteredList.map( (item, i) => {
+                    uniqueValues.map( (item, i) => {
                         return(
                             <p 
                                 id={item}
                                 key={i}
-                                // onClick={handleFilter}
+                                onClick={handleFilter}
                             > 
                                 {item} 
                             </p>

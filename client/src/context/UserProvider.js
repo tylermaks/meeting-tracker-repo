@@ -1,20 +1,16 @@
 import { createContext, useState, useEffect, useCallback } from "react";
-import { useNavigate, useLocation} from "react-router-dom"
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import useAuth from "../hooks/useAuth"
 const CSV_URL = "/csv"
-const COMPANIES_URL = "/companies"
+// const COMPANIES_URL = "/companies"
 
 const UserContext = createContext({})
 
 export const UserProvider = ({ children }) => {
     const { auth } = useAuth()
     const [user, setUser] = useState({})
-    const [companies, setCompanies] = useState({})
+    // const [companies, setCompanies] = useState({})
     const axiosPrivate = useAxiosPrivate()
-    const navigate = useNavigate()
-    const location = useLocation()
-
     
     const addMeeting = async (data) => {
         try{ 
@@ -31,8 +27,6 @@ export const UserProvider = ({ children }) => {
 
         getUserData()
     }
-
-
 
     const getUserData = useCallback( async () => {
         try{
@@ -56,38 +50,35 @@ export const UserProvider = ({ children }) => {
                 )
             })
        
-
             setUser({ meetingData })
         } catch (err) { 
-            if (err?.response?.status === 403) {
-                navigate("/", {from: location}, {replace: true})
-            } else if (err.response) {
+            if (err.response) {
                 console.error(err)
             } 
         }
-    }, [auth.userName, axiosPrivate, location, navigate])
+    }, [auth, axiosPrivate])
 
     useEffect( () => { 
         getUserData()
     },[getUserData])
 
-    useEffect( () => {
-        const getCompanyList = async () => {
-            try{
-                const response = await axiosPrivate.get(
-                    COMPANIES_URL
-                )
-                setCompanies(response?.data?.companyArr)
-            } catch(err) {
-                if (err) {console.error(err)}
-            }
-        } 
-        getCompanyList()
-        // getUserData()
-    },[axiosPrivate])
+    // useEffect( () => {
+    //     const getCompanyList = async () => {
+    //         try{
+    //             const response = await axiosPrivate.get(
+    //                 COMPANIES_URL
+    //             )
+    //             setCompanies(response?.data?.companyArr)
+    //         } catch(err) {
+    //             if (err) {console.error(err)}
+    //         }
+    //     } 
+    //     getCompanyList()
+    //     // getUserData()
+    // },[axiosPrivate])
 
     return (
-        <UserContext.Provider value ={{ user, addMeeting, companies }}>
+        <UserContext.Provider value ={{ user, addMeeting }}>
             {children}
         </UserContext.Provider>
     )

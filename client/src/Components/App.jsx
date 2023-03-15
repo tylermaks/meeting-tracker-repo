@@ -1,5 +1,4 @@
 import { Routes, Route } from "react-router-dom"
-
 import Authentication from "./Authentication"
 import RequireAuth from "./RequireAuth";
 import Unauthorized from "./Unauthorized";
