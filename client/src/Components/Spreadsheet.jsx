@@ -20,19 +20,6 @@ function Spreadsheet ({ userData }){
         setRows(user.meetingData)
     },[user])
 
-    useEffect(() => {
-        console.log(filterData)
-    }, [filterData])
-
-
-    // const filteredRows = rows.filter(row => {
-    //     // Check if the item's name and gender match any object in filterArray
-    //     return filterData.some(filterItem => {
-    //       return row.CompanyName === filterItem.name && item.gender === filterItem.gender;
-    //     });
-    //   });
-
-
     const columnNames = [
         {id: "CompanyName", label:"Company Name"}, 
         {id: "Date", label:"Date"}, 
