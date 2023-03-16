@@ -6,7 +6,7 @@ import "../Styles/FilterSpreadsheet.scss"
 
 function TableHeader ({ label, id, rows, setRows, filterData, setFilterData }){
     const { user } = useUser()
-    const [dropdown, setDropdown ] = useState('')
+    const [dropdown, setDropdown ] = useState(false)
     const [list, setList] = useState([])
     const uniqueValues = [...new Set(list?.map(item => item[id]))]
     const dropdownRef = useRef(null)
@@ -18,10 +18,13 @@ function TableHeader ({ label, id, rows, setRows, filterData, setFilterData }){
     },[user.meetingData])
 
     const toggleDropdown = (e) => { 
-        console.log(e.target)
-        (dropdownRef.current.contains(e.target) || innerRef.current.contains(e.target))
-            ? setDropdown(e.target.id)
-            : setDropdown('')
+        (
+            dropdownRef.current && 
+            !dropdownRef.current.contains(e.target) &&
+            !innerRef.current.contains(e.target)
+        ) 
+            ? setDropdown(false)
+            : setDropdown(true)
     }
 
     const handleFilter = (e) => { 
@@ -48,7 +51,7 @@ function TableHeader ({ label, id, rows, setRows, filterData, setFilterData }){
                 src={sort} 
                 alt={`Sort ${id}`} 
             />
-            <div ref={innerRef} className={dropdown === id ? "filter-dropdown flex-column" : "hidden"}>
+            <div ref={innerRef} className={dropdown ? "filter-dropdown flex-column" : "hidden"}>
                 <span onClick={() => sortRows(id, 'ascending')}>Sort A - Z</span>
                 <span onClick={() => sortRows(id, 'descending')}>Sort Z - A</span>
                 <span>Filter</span>
