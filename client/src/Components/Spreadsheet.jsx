@@ -6,19 +6,17 @@ import "../Styles/Spreadsheet.scss"
 function Spreadsheet ({ userData }){ 
     const { user } = useUser()
     const [rows, setRows] = useState([])
-    const [filterData, setFilterData] = useState([])
+    const [filterItems, setFilterItems] = useState([])
 
     const filteredRows = useMemo(() => {
-        return rows?.filter( item => {
-            return Object.values(item).every(val => {
-                return !filterData.includes(val)
-            })
-        })
-    }, [rows, filterData])
+        return rows?.filter((item) => {
+          return !Object.values(item).some((val) => filterItems.includes(val));
+        });
+      }, [rows, filterItems]);
 
     useEffect(() => {
         setRows(user.meetingData)
-    },[user])
+    },[user.meetingData])
 
     const columnNames = [
         {id: "CompanyName", label:"Company Name"}, 
@@ -40,8 +38,8 @@ function Spreadsheet ({ userData }){
                                 label={col.label}
                                 rows={rows}
                                 setRows={setRows}
-                                filterData={filterData}
-                                setFilterData={setFilterData}
+                                filterItems={filterItems}
+                                setFilterItems={setFilterItems}
                                 userData={userData}
                             />
                         )

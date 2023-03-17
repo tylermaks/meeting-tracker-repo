@@ -10,6 +10,7 @@ $grey: #4D4D4D;
     background-color: rgba(0,0,0, 0.6);
     height: 100%;
     width: 100%;
+    z-index: 3;
 }
 
 .hours-form{
@@ -19,13 +20,11 @@ $grey: #4D4D4D;
     padding: 3rem;
     position:relative;
     overflow: scroll;
-    // height: 85%;
     min-width: 800px;
 
 
     h2{
         color: $teal;
-        // margin-bottom: 1rem;
     }
 
 

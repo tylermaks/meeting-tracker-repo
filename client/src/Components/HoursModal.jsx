@@ -6,14 +6,12 @@ import '../Styles/HoursModal.scss'
 
 
 function HoursModal({ handleClick, setModal }){
-
     const [uploadType, setUploadType] = useState(true)
 
     const handleUploadType = () => { 
         setUploadType(!uploadType)
     }
    
-
     return(
         <section className="modal flex-row flex-row--center">
             <div className='hours-form'>

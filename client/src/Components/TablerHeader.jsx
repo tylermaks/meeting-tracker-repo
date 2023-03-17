@@ -4,18 +4,18 @@ import sort from "../Images/sort-solid.svg"
 import check from "../Images/check-solid.svg"
 import "../Styles/FilterSpreadsheet.scss"
 
-function TableHeader ({ label, id, rows, setRows, filterData, setFilterData }){
+function TableHeader ({ label, id, rows, setRows, filterItems, setFilterItems }){
     const { user } = useUser()
     const [dropdown, setDropdown ] = useState(false)
-    const [list, setList] = useState([])
-    const uniqueValues = [...new Set(list?.map(item => item[id]))]
+    const [meetingData, setMeetingData] = useState([])
+    const uniqueValues = [...new Set(meetingData?.map(item => item[id]))]
     const dropdownRef = useRef(null)
     const innerRef = useRef(null)
     
     useEffect(() => {
         document.getElementById("home").addEventListener("click", toggleDropdown)
-        setList(user.meetingData)
-    },[user.meetingData])
+        setMeetingData(user.meetingData)
+    },[user])
 
     const toggleDropdown = (e) => { 
         (
@@ -27,11 +27,6 @@ function TableHeader ({ label, id, rows, setRows, filterData, setFilterData }){
             : setDropdown(true)
     }
 
-    const handleFilter = (e) => { 
-        const clicked = e.target.id
-        setFilterData([...filterData, clicked])
-    }
-
     const sortRows = (col, dir) => {
         const sortedData = [...rows].sort((a, b) => 
            dir === 'ascending'
@@ -39,6 +34,12 @@ function TableHeader ({ label, id, rows, setRows, filterData, setFilterData }){
             : a[col] < b[col] ? 1 : -1 
         )
         setRows(sortedData)
+    }
+
+    const toggleFilterItem = (item) => { 
+        filterItems.includes(item)
+            ? setFilterItems(filterItems.filter((i) => i !== item))
+            : setFilterItems([...filterItems, item])
     }
 
     return(
@@ -58,9 +59,13 @@ function TableHeader ({ label, id, rows, setRows, filterData, setFilterData }){
                 {
                     uniqueValues.map( (item, i) => {
                         return(
-                            <div id={item} key={i} onClick={handleFilter} className="flex-row"> 
-                                <img className="icon icon--small" src={check} alt="Filter Item Selected" />
-                                <p>{item}</p>
+                            <div id={item} key={i} onClick={() => toggleFilterItem(item)} className="flex-row"> 
+                                <img 
+                                    className={filterItems.includes(item) ? "hidden-checkmark icon icon--small" : "icon icon--small" }
+                                    src={check} 
+                                    alt="Filter Item Selected" 
+                                />
+                                <p id={item}>{item}</p>
                             </div>
                         )
                     })
