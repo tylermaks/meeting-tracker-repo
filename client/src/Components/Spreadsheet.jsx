@@ -16,7 +16,8 @@ function Spreadsheet ({ userData }){
 
     useEffect(() => {
         setRows(user.meetingData)
-    },[user.meetingData])
+        console.log(user.meetingData)
+    },[user])
 
     const columnNames = [
         {id: "CompanyName", label:"Company Name"}, 

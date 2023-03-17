@@ -67,17 +67,17 @@ export const UserProvider = ({ children }) => {
         } catch (err) {
             console.error(err)
         }
-
-        getUserData()
+        setTimeout( () => {
+            getUserData()
+        }, "1000")
     }
-    
-    
+
     useEffect( () => { 
         getUserData()
         getCompanyList()
     },[getUserData, getCompanyList])
 
-
+    console.log(user)
 
     return (
         <UserContext.Provider value ={{ user, companies, addMeeting }}>
