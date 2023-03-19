@@ -16,13 +16,15 @@ function Home(){
     return(
         <UserProvider>
             <section id="home">
-                <HomeNav />
                 <MenuNav 
                     handleClick={handleClick}
                 />
-                <Dashboard 
-                    dash={dash}
-                />
+                <section id="main-view">
+                    <HomeNav />
+                    <Dashboard 
+                        dash={dash}
+                    />
+                </section>
             </section>
         </UserProvider>
     )
