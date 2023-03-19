@@ -77,8 +77,6 @@ export const UserProvider = ({ children }) => {
         getCompanyList()
     },[getUserData, getCompanyList])
 
-    console.log(user)
-
     return (
         <UserContext.Provider value ={{ user, companies, addMeeting }}>
             {children}

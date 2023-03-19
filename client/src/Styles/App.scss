@@ -2,6 +2,7 @@
 $teal: #008B92;
 $grey: #4D4D4D;
 $lt-grey: #aaaaaa;
+$x-lt-grey:#ececec;
 $lt-blue: #FAF7FB;
 $orange: #ff6900;
 
@@ -86,16 +87,21 @@ input, textarea, select{
 
 //TABLES 
 table{
+    border: 1px solid $x-lt-grey;
     border-collapse: collapse;
     margin: 1rem 0 2rem 0;
     width: 100%;
 }
 
 tr, th, td{
-    border: 1px solid $grey;
+    border-block: 1px solid $x-lt-grey;
     padding: 0.5rem;
     position: relative;
-    text-align: center;
+    text-align: left;
+}
+
+th{
+    background-color: $lt-blue;
 }
 
 .sort{
@@ -115,6 +121,10 @@ tr, th, td{
 
     &--space{
         justify-content: space-between;
+    }
+
+    &--right{
+        justify-content: flex-end;
     }
 }
 

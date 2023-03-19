@@ -2,28 +2,15 @@ $grey: #4D4D4D;
 
 #user-dropdown{ 
     position: relative;
-
-    p{
-        cursor: pointer;
-    }
-}
-
-.user-info{
-
-    gap: 1.25rem;
-
-    & .icon{
-        margin-left: 0.5rem;
-    }
-
+    cursor: pointer;
 }
 
 .user-profile{
         background-color: $grey;
         border-radius: 50%;
         color: #fff;
-        height:2.25rem;
-        width: 2.25rem;
+        height: 2rem;
+        width: 2rem;
 }
 
 .logout{ 

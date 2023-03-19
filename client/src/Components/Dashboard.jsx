@@ -6,16 +6,19 @@ import "../Styles/Dashboard.scss"
 
 function Dashboard({ dash }){
     const components = [
-        <Companies />, 
-        <Hours />,
-        <Documents />, 
-        <Options />
+        {id: "Companies", component:<Companies />}, 
+        {id: "Hours", component: <Hours />},
+        {id: "Documents", component: <Documents />}, 
+        {id: "Options", components: <Options />}
     ]
 
     return(
-        <main id="dashboard">
-            {components[dash]}
-        </main>
+        <>
+            <h1 className="dashboard-title">{components[dash].id}</h1>
+            <main id="dashboard">
+                {components[dash].component}
+            </main>
+        </>
     )
 }
 
