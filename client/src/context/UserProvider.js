@@ -13,29 +13,30 @@ export const UserProvider = ({ children }) => {
     const [companies, setCompanies] = useState({})
     const axiosPrivate = useAxiosPrivate()
     
-
     const getUserData = useCallback( async () => {
         try{
             const response = await axiosPrivate.get(
                 `/user/${auth.userName}`
             )
             
-            const meetingData = response?.data?.meetingArr.map( item => { 
+            const meetingData = response?.data?.meetingArr.map( item => {
+                const record = item.fields
+                
                 return(
                     {
-                        CompanyName: item.CompanyName.toString(),
-                        CompanyNameId: item.CompanyNameId.toString(),
-                        Date: item.Date,
-                        Duration: Number(item.Duration),
-                        MeetingType: item.MeetingType.toString(),
-                        Meeting_ID: item.Meeting_ID,
-                        Notes: item.Notes,
-                        advisorLink: item.advisorLink.toString(),
-                        email: item.email.toString()
+                        record_ID: item.record_ID,
+                        CompanyName: record.CompanyName.toString(),
+                        CompanyNameId: record.CompanyNameId.toString(),
+                        Date: record.Date,
+                        Duration: Number(record.Duration),
+                        MeetingType: record.MeetingType.toString(),
+                        Meeting_ID: record.Meeting_ID,
+                        Notes: record.Notes,
+                        advisorLink: record.advisorLink.toString(),
+                        email: record.email.toString()
                     }
                 )
             })
-       
             setUser({ meetingData })
         } catch (err) { 
             if (err.response) {
@@ -69,7 +70,26 @@ export const UserProvider = ({ children }) => {
         }
         setTimeout( () => {
             getUserData()
-        }, "1000")
+        }, "500")
+    }
+
+    const deleteMeeting = async (records) => { 
+        try{
+                await axiosPrivate.delete(
+                CSV_URL, 
+                {
+                    data: records
+                }
+            )
+
+        } catch(err) {
+            if (err.response) {
+                console.error(err)
+            } 
+        }
+        setTimeout( () => {
+            getUserData()
+        }, "500")
     }
 
     useEffect( () => { 
@@ -78,7 +98,7 @@ export const UserProvider = ({ children }) => {
     },[getUserData, getCompanyList])
 
     return (
-        <UserContext.Provider value ={{ user, companies, addMeeting }}>
+        <UserContext.Provider value ={{ user, companies, addMeeting, deleteMeeting }}>
             {children}
         </UserContext.Provider>
     )

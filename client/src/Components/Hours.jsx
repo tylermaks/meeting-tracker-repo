@@ -1,26 +1,34 @@
 import { useState } from 'react'
+import useUser from "../hooks/useUser"
 import Spreadsheet from "./Spreadsheet"
 import HoursModal from "./HoursModal"
-import Trash from "../Images/trash-solid.svg"
+import TrashIcon from "../Images/trash-solid.svg"
 import "../Styles/HoursTable.scss"
 
 
 function Hours() {
+    const { deleteMeeting } = useUser()
     const [modal, setModal] = useState(false)
     const [checkedRows, setCheckedRows] = useState([])
 
     const handleClick = () => {
         setModal(!modal)
     }
- 
+
+    const handleDeleteMeetings = () => {
+        deleteMeeting(checkedRows)
+        setCheckedRows([])
+    }
+
     return(
         <section>
             {modal ? <HoursModal handleClick={handleClick} setModal={setModal}/> : null}
             <div className="flex-row flex-row--right">
-                <img 
-                    className={checkedRows.length === 0 ? "hidden" : "icon icon--md" } 
-                    src={Trash} 
-                    alt="" 
+                <img
+                    className={checkedRows.length === 0 ? "hidden" : "delete-records icon icon--md" } 
+                    src= {TrashIcon}
+                    alt="Delete Selected Rows"
+                    onClick = {handleDeleteMeetings} 
                 />
                 <div onClick={handleClick} className="btn-alt">
                     Add Hours
@@ -28,7 +36,7 @@ function Hours() {
             </div>
             <Spreadsheet 
                 checkedRows={checkedRows}
-                setRows={setCheckedRows}
+                setCheckedRows={setCheckedRows}
             />
         </section>
     )

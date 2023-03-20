@@ -19,7 +19,6 @@ function Spreadsheet ({ checkedRows, setCheckedRows }){
         setRows(user.meetingData)
     },[user])
 
-
     const filteredRows = useMemo(() => {
         return rows?.filter((item) => {
           return !Object.values(item).some((val) => filterItems.includes(val))
@@ -63,7 +62,7 @@ function Spreadsheet ({ checkedRows, setCheckedRows }){
                                     <input 
                                         type="checkbox" 
                                         name={id}
-                                        onChange={() => handleCheckbox(id)}
+                                        onChange={() => handleCheckbox(row.record_ID)}
                                     />
                                 </td>
                                 <td>{row.CompanyName}</td>

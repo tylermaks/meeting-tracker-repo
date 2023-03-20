@@ -12,7 +12,12 @@ const getUser = (req, res) => {
         filterByFormula: `advisorLink = "${req.params.id}"`
     }).eachPage(function page(records, fetchNextPage) {
         records.forEach( record => {
-            meetingArr.push(record.fields)
+            meetingArr.push(
+                {
+                    record_ID: record.id, 
+                    fields: record.fields
+                }
+            )
         })
         res.json({ meetingArr })  
               

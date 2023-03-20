@@ -12,7 +12,7 @@ const createNewMeeting = (companyId, entry, userId, count) => {
         ]
     }).eachPage(function page(records, fetchNextPage){
         let lastEntry = records[records.length - 1].fields.Meeting_ID + 1 + count
-        
+
         base(meetings).create({
             "Meeting_ID": lastEntry,
             "advisorLink": [userId],
@@ -69,4 +69,17 @@ const handleData = (req, res) => {
     success ? res.sendStatus(204) : res.sendStatus(400)
 }
 
-module.exports = { handleData }
+
+const deleteMeetingRecord = (req, res) => {
+    base(meetings).destroy(req.body),
+    function(err, deletedRecords) {
+        if (err) {
+          console.error(err);
+          return;
+        }
+        console.log('Deleted', deletedRecords.length, 'records');
+    } 
+    res.sendStatus(204)
+}
+
+module.exports = { handleData, deleteMeetingRecord }

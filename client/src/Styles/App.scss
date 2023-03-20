@@ -69,6 +69,8 @@ input, textarea, select{
 }
 
 .icon{
+    cursor: pointer;
+    
     &--small{
         height: 0.825rem;
         width: 0.825rem;
