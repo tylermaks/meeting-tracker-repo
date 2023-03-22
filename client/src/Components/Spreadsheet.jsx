@@ -1,4 +1,5 @@
 import { useState, useEffect, useMemo } from 'react'
+import ReactPaginate from 'react-paginate';
 import useUser from "../hooks/useUser"
 import TableHeader from './TablerHeader'
 import "../Styles/HoursTable.scss"
@@ -7,6 +8,9 @@ function Spreadsheet ({ checkedRows, setCheckedRows }){
     const { user } = useUser()
     const [rows, setRows] = useState([])
     const [filterItems, setFilterItems] = useState([])
+    const [pageNumber, setPageNumber] = useState(0);
+    const itemsPerPage = 10;
+
     const columnNames = [
         {id: "CompanyName", label:"Company Name"}, 
         {id: "Date", label:"Date"}, 
@@ -16,14 +20,23 @@ function Spreadsheet ({ checkedRows, setCheckedRows }){
     ]
 
     useEffect(() => {
-        setRows(user.meetingData)
+        setRows(user?.meetingData)
     },[user])
 
     const filteredRows = useMemo(() => {
-        return rows?.filter((item) => {
-          return !Object.values(item).some((val) => filterItems.includes(val))
-        });
-    }, [rows, filterItems])
+        const startIndex = pageNumber * itemsPerPage;
+        const endIndex = startIndex + itemsPerPage;
+        return rows
+          ?.filter((item) => {
+            return !Object.values(item).some((val) => filterItems.includes(val));
+          })
+          ?.slice(startIndex, endIndex);
+      }, [rows, filterItems, pageNumber]);
+
+
+    const handlePageChange = ({ selected }) => { 
+        setPageNumber(selected)
+    }
 
     const handleCheckbox = (id) => { 
         checkedRows.includes(id)
@@ -32,6 +45,7 @@ function Spreadsheet ({ checkedRows, setCheckedRows }){
     }
 
     return(
+        <>
         <table>
             <thead>
                 <tr>
@@ -76,6 +90,23 @@ function Spreadsheet ({ checkedRows, setCheckedRows }){
                 }
             </tbody>
         </table>
+            <ReactPaginate
+                pageCount={Math.ceil(rows.length / itemsPerPage)}
+                onPageChange={handlePageChange}
+                containerClassName={'pagination'}
+                activeClassName={'active'}
+                pageClassName={'page-item'}
+                previousClassName={'page-item'}
+                nextClassName={'page-item'}
+                pageLinkClassName={'page-link'}
+                previousLinkClassName={'page-link'}
+                nextLinkClassName={'page-link'}
+                breakClassName={'page-item'}
+                breakLinkClassName={'page-link'}
+            />
+            
+
+        </>
     )
 }
 

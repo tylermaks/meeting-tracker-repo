@@ -3,13 +3,12 @@ $lt-blue: #FAF7FB;
 #home{
     background-color: $lt-blue;
     display: grid;
-    flex-grow: 1;
     grid-template-columns: 0.04fr 1fr;
     grid-template-areas:
         "menu mainView"
     ;
 
-    padding-bottom: 1rem;
+    height: 100vh;
 }
 
 #main-view{ 

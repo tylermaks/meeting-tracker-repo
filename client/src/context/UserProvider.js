@@ -70,7 +70,7 @@ export const UserProvider = ({ children }) => {
         }
         setTimeout( () => {
             getUserData()
-        }, "500")
+        }, "750")
     }
 
     const deleteMeeting = async (records) => { 
@@ -89,7 +89,7 @@ export const UserProvider = ({ children }) => {
         }
         setTimeout( () => {
             getUserData()
-        }, "500")
+        }, "750")
     }
 
     useEffect( () => { 

@@ -1,4 +1,5 @@
-
+$orange: #ff6900;
+$grey: #4D4D4D;
 //DELETE RECORDS ICON
 .delete-records{ 
     margin-right: 1rem;
@@ -40,3 +41,32 @@
 .hidden-checkmark{ 
     opacity: 0;
 }
+
+
+//PAGINATION
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+  }
+  
+  .page-item {
+    margin: 0 0.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .active {
+    text-decoration: underline;
+  }
+  
+  .page-link {
+    color: $grey;
+    text-decoration: none;
+  }
+  
+  .page-link:hover {
+    cursor: pointer;
+    text-decoration: underline;
+  }
