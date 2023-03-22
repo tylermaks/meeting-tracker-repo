@@ -91,7 +91,7 @@ function Spreadsheet ({ checkedRows, setCheckedRows }){
             </tbody>
         </table>
             <ReactPaginate
-                pageCount={Math.ceil(rows.length / itemsPerPage)}
+                pageCount={Math.ceil(rows?.length / itemsPerPage)}
                 onPageChange={handlePageChange}
                 containerClassName={'pagination'}
                 activeClassName={'active'}

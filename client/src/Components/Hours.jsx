@@ -1,5 +1,4 @@
 import { useState } from 'react'
-
 import useUser from "../hooks/useUser"
 import Spreadsheet from "./Spreadsheet"
 import HoursModal from "./HoursModal"
@@ -12,8 +11,6 @@ function Hours() {
     const [modal, setModal] = useState(false)
     const [checkedRows, setCheckedRows] = useState([])
 
-
-
     const handleClick = () => {
         setModal(!modal)
     }
@@ -24,7 +21,7 @@ function Hours() {
     }
 
     return(
-        <section>
+        <section id="hours">
             {modal ? <HoursModal handleClick={handleClick} setModal={setModal}/> : null}
             <div className="flex-row flex-row--right">
                 <img

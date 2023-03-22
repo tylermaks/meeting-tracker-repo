@@ -15,7 +15,7 @@ function Dashboard({ dash }){
     return(
         <>
             <h1 className="dashboard-title">{components[dash].id}</h1>
-            <main id="dashboard">
+            <main>
                 {components[dash].component}
             </main>
         </>
