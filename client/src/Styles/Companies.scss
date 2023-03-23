@@ -1,11 +1,13 @@
+$lt-grey: #aaaaaa;
+
 .title{ 
     margin-bottom: 2rem;
 }
 
 .company-grid{ 
     display: grid; 
-    gap: 1rem;
-    grid-template-columns: repeat(3, 1fr);    
+    gap: 2rem;
+    grid-template-columns: repeat(2, 1fr);    
     margin-bottom: 5rem;
 }
 
@@ -23,6 +25,17 @@
     border-radius: 1rem;
     gap: 2rem;
     padding: 2rem;
+    text-align: center;
+
+    h3, p{
+        color: #c8befc;
+    }
+
+    span{
+        font-size: 12px;
+        color: #fff;
+    }
+
 }
 
 .cma-container{
@@ -31,15 +44,26 @@
 }
 
 .cma{ 
-    padding: 0.5rem;
+    border-radius: 0.25rem;
+    padding: 0.75rem;
     width: 100%;
 
+    &--team{
+        background-color: #fff5f4;
+        color: #e1828b;
+    }
 }
 
 .circle{
-    border-radius: 50%;
-    height: 3rem;
-    width: 3rem;
     background: rgb(66,35,190);
-    background: linear-gradient(180deg, rgba(66,35,190,1) 55%, rgba(66,35,190,0.40800070028011204) 100%);
+    background: linear-gradient(180deg, rgba(66,35,190,1) 0%, rgba(66,35,190,0) 100%);
+    border-radius: 50%;
+    font-size: 2.25rem;
+    height: 8rem;
+    margin-bottom: 1rem;
+    width: 8rem;
+
+    h2{
+        color:#fff;
+    }
 }
