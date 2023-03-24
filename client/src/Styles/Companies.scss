@@ -1,5 +1,3 @@
-$lt-grey: #aaaaaa;
-
 .title{ 
     margin-bottom: 2rem;
 }
@@ -7,7 +5,7 @@ $lt-grey: #aaaaaa;
 .company-grid{ 
     display: grid; 
     gap: 2rem;
-    grid-template-columns: repeat(2, 1fr);    
+    grid-template-columns: repeat(3, 1fr);    
     margin-bottom: 5rem;
 }
 
@@ -15,55 +13,30 @@ $lt-grey: #aaaaaa;
     background-color: #fff;
     border-radius: 1rem;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
-    display: grid;
-    grid-template-columns: 0.45fr 0.55fr;
-}
 
-.inner-card{ 
-    background: rgb(119,0,255);
-    background: linear-gradient(180deg, rgba(119,0,255,1) 0%, rgba(70,0,243,1) 100%);
-    border-radius: 1rem;
-    gap: 2rem;
-    padding: 2rem;
-    text-align: center;
+    padding: 1.5rem;
 
-    h3, p{
-        color: #c8befc;
+ 
+
+    & .program{
+        font-size: 0.875rem;
     }
 
-    span{
+    & .company-info{
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .status{
+        border-radius: 0.5rem;
+        background-color: #f0faf9;
+        color:#429d8b;
         font-size: 12px;
-        color: #fff;
+        height: 2rem;
+        padding: 0.5rem;
     }
-
-}
-
-.cma-container{
-    padding: 2rem;
-    width: 100%;
-}
-
-.cma{ 
-    border-radius: 0.25rem;
-    padding: 0.75rem;
-    width: 100%;
-
-    &--team{
-        background-color: #fff5f4;
-        color: #e1828b;
-    }
-}
-
-.circle{
-    background: rgb(66,35,190);
-    background: linear-gradient(180deg, rgba(66,35,190,1) 0%, rgba(66,35,190,0) 100%);
-    border-radius: 50%;
-    font-size: 2.25rem;
-    height: 8rem;
-    margin-bottom: 1rem;
-    width: 8rem;
 
     h2{
-        color:#fff;
+        font-size: 2.25rem;
     }
 }
