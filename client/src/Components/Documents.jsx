@@ -1,6 +1,7 @@
 function Documents(){
     return(
-        <section>
+        <section className="dashboard">
+            
         </section>
     )
 }

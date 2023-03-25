@@ -9,7 +9,7 @@ function Dashboard({ dash }){
         {id: "Companies", component:<Companies />}, 
         {id: "Hours", component: <Hours />},
         {id: "Documents", component: <Documents />}, 
-        {id: "Options", components: <Options />}
+        {id: "Options", component: <Options />}
     ]
 
     return(

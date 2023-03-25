@@ -12,10 +12,6 @@ function CompanyCard(){
                     <p>Active</p>
                 </div>
             </div>
-            {/* <div className="flex-column flex-column--center">
-                <h2>5</h2>
-                <p>Coaching Hours</p>
-            </div> */}
         </div>
     )
 }

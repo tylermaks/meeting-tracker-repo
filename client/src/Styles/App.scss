@@ -147,11 +147,32 @@ th{
     }
 }
 
+.gap{
+    &--1{
+        gap: 1rem;
+    }
+
+    &--2{
+        gap: 2rem;
+    }
+
+    &--3{
+        gap: 3rem;
+    } 
+
+    &--4{
+        gap: 4rem;
+    }
+}
+
 .hidden{
     display: none;
 }
 
 //GLOBAL CLASSES
-.dash-header{
-    margin-bottom: 4rem;
+.dashboard{ 
+    background-color: #fff;
+    border-radius: 1rem;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+    padding: 2rem;
 }
