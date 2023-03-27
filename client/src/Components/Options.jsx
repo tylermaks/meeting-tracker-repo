@@ -5,7 +5,7 @@ function Options() {
     const { auth } = useAuth()
 
     return(
-        <section id="options" className="dashboard">
+        <section id="options" className="dashboard flex-column gap--15">
             <h2>Account Information</h2>
             <div className="gap--2 flex-row">
                 <div>
@@ -36,7 +36,7 @@ function Options() {
                 />
             </div>
             <div>
-                <label htmlFor="current-password">Email</label>
+                <label htmlFor="current-password">Current Password</label>
                 <input 
                     type="password" 
                     name="current-password" 
@@ -44,7 +44,7 @@ function Options() {
                 />
                 <p>Enter your current password to update your account settings</p>
             </div>
-            <div className="flex-row gap--2">
+            <div className="flex gap--2">
                 <div>
                     <label htmlFor="new-password">New Password</label>
                     <input
@@ -52,6 +52,7 @@ function Options() {
                         name="new-password"
                         placeholder="New Password"
                     />
+                    <p>Your password must contain at least 1 uppercase letter, 1 lowercase letter, and 1 digit.</p>
                 </div>
                 <div>
                     <label htmlFor="confirm-password">Confirm New Password</label>
@@ -60,10 +61,13 @@ function Options() {
                         name="confirm-password"
                         placeholder="Confirm New Password"
                     />
+                    
                 </div>
             </div>
-           
-        
+           <div className="flex-row flex-row--right gap--15">
+                <div className="btn-alt">Reset</div>
+                <button>Save</button>
+           </div>
         </section>
     )
 }

@@ -8,6 +8,19 @@
 
 #options{
     input{
-        max-width:300px;
+        border-radius: 0.25rem;
+        line-height: 1.5rem;
+        padding: .4375rem .9375rem;
+        width: 300px;
+    }
+
+    label, p{
+        font-size: 0.75rem;
+    }
+
+    p{
+        line-height: 1rem;
+        margin-top: 0.5rem;
+        width: 300px;
     }
 }

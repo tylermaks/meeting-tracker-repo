@@ -42,8 +42,6 @@ h3{
     color: $grey;
 }
 
-
-
 button{
     background-color: $orange;
     border: none;
@@ -120,6 +118,10 @@ th{
 
 
 //GLOBAL UTILITY CLASSES
+.flex{
+    display: flex;
+}
+
 .flex-row{
     display: flex;
     align-items: center;
@@ -150,6 +152,10 @@ th{
 .gap{
     &--1{
         gap: 1rem;
+    }
+
+    &--15{
+        gap: 1.5rem;
     }
 
     &--2{
