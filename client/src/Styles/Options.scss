@@ -1,3 +1,5 @@
+$grey: #4D4D4D;
+
 .not-allowed{
     cursor: not-allowed;
 }
@@ -19,6 +21,7 @@
     }
 
     p{
+        color: $grey;
         line-height: 1rem;
         margin-top: 0.5rem;
         width: 300px;
