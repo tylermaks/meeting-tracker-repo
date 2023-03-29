@@ -8,6 +8,22 @@ $grey: #4D4D4D;
     max-width: 300px
 }
 
+.exit{ 
+    opacity: 0.75;
+    position: absolute;
+    right: 1.5rem;
+    top: 1.5rem;
+}
+
+
+.input-note{
+        color: $grey;
+        font-size: 0.75rem;
+        line-height: 1rem;
+        margin-top: 0.5rem;
+        width: 300px;
+}
+
 #options{
     input{
         border-radius: 0.25rem;
@@ -16,14 +32,22 @@ $grey: #4D4D4D;
         width: 300px;
     }
 
-    label, p{
+    label {
         font-size: 0.75rem;
     }
-
-    p{
-        color: $grey;
-        line-height: 1rem;
-        margin-top: 0.5rem;
-        width: 300px;
-    }
 }
+
+.settings-modal{
+    background-color: #fff;
+    border: 1px solid $grey;
+    border-radius: 0.5rem;
+    color: $grey;
+    font-size: 1.25rem;
+    padding: 3rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+}
+

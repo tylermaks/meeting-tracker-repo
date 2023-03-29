@@ -1,8 +1,9 @@
 import { useState } from "react"
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import useAuth from "../hooks/useAuth"
+import SettingsModal from "./SettingsModal";
 import "../Styles/Options.scss"
-import { axiosPrivate } from "../API/userData";
+const SETTINGS_URL = "/settings"
 
 function Options() {
     const { auth } = useAuth()
@@ -12,6 +13,7 @@ function Options() {
     const [currentPassword, setCurrentPassword] = useState('')
     const [newPassword, setNewPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
+    const [modal, setModal] = useState(false)
 
     // Handlers for input changes
     const handleFirstNameChange = (e) => {
@@ -45,11 +47,22 @@ function Options() {
 
         try{ 
             const response = await axiosPrivate.post(
-                `/user/${auth.userName}`
+                SETTINGS_URL,
+                JSON.stringify({
+                    "userName": auth.userName,
+                    "currentPswd": currentPassword
+                }),
+                {
+                    headers: {'Content-Type': 'application/json'},
+                    withCredentials: true
+                }
             )
-                
             
-
+            //If post request is successful show modal
+            if(response?.status === 200) {
+                console.log("working!")
+                setModal(true)
+            }
         } catch(err) { 
             console.error(err)
         }
@@ -61,6 +74,10 @@ function Options() {
     // currentPassword, newPassword, and confirmPassword are used for changing the password
     return(
         <section id="options" className="dashboard flex-column gap--15">
+            <SettingsModal 
+                modal={modal} 
+                setModal={setModal}
+            />
             <h2>Account Information</h2>
             <div className="gap--2 flex-row">
                 <div>
@@ -108,7 +125,7 @@ function Options() {
                     onChange={handleCurrentPasswordChange}
                     required
                 />
-                <p>Enter your current password to update your account settings</p>
+                <p className="input-note">Enter your current password to update your account settings</p>
             </div>
             <div className="flex gap--2">
                 <div>
@@ -121,7 +138,7 @@ function Options() {
                         value={newPassword}
                         onChange={handleNewPasswordChange}
                     />
-                    <p>Your password must contain at least 1 uppercase letter, 1 lowercase letter, and 1 digit.</p>
+                    <p className="input-note">Your password must contain at least 1 uppercase letter, 1 lowercase letter, and 1 digit.</p>
                 </div>
                 <div>
                     <label htmlFor="confirm-password">Confirm New Password</label>
@@ -136,8 +153,8 @@ function Options() {
                 </div>
             </div>
             <div className="flex-row flex-row--right gap--15">
-                <button className="btn btn--secondary">Reset</button>
-                <button className="btn btn--primary">Save</button>
+                <button onClick={handleReset} className="btn btn--secondary">Reset</button>
+                <button onClick={handleSubmit} className="btn btn--primary">Save</button>
             </div>
         </section>
     )

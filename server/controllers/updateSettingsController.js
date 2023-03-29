@@ -5,17 +5,22 @@ const bcrypt = require('bcrypt')
 const base = new Airtable({ apiKey: process.env.AIRTABLE_API_KEY }).base(process.env.AIRTABLE_BASE_ID)
 const table = process.env.AIRTABLE_ADVISORS_ID
 
-const handleAccountUpdate = (req, res) => {
+const updateSettings = (req, res) => {
     //Validate data was received
-    const { userName, currentPswd } = body.req
+    const { userName, currentPswd } = req.body
     if (!userName) return res.status(400).json({"message": "User not found"})
 
     base(table).select({
-        filterByFormula: `id = ${userName}`
+        view: "Grid view"
     }).eachPage(async function page(records, fetchNextPage){
+        //Find user in Database
+        const foundUser = records.find(record => record.get('id') === userName)
+        if (!foundUser) {
+            return res.sendStatus(401)
+        }
         //Compare currentPassword with password stored in database
-        const match = await bcrypt.compare(currentPswd, records.fields.password)
-        match ? res.status(200).json({"message": "Success"}) : res.sendStatus(401)
+        const match = await bcrypt.compare(currentPswd, foundUser.fields.password)
+        match ? res.sendStatus(200) : res.sendStatus(401)
 
         fetchNextPage()
     }, function done(err) {
@@ -26,4 +31,4 @@ const handleAccountUpdate = (req, res) => {
     })
 }
 
-module.exports = { handleAccountUpdate }
+module.exports = { updateSettings }
