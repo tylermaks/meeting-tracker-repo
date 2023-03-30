@@ -1,4 +1,4 @@
-import { useState, useEffect, errRef } from "react"
+import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import useAuth from "../hooks/useAuth"
 import axios from "../API/userData"
@@ -81,7 +81,7 @@ function LoginForm(){
                     onChange={e => setPassword(e.target.value)}
                 />
 
-                <p ref={errRef} className={errorMsg ? "errormsg" : "offscreen"} aria-live="assertive">{errorMsg}</p>
+                <p className={errorMsg ? "errormsg" : "offscreen"} aria-live="assertive">{errorMsg}</p>
 
                 <button>Log in</button>
 

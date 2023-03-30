@@ -1,7 +1,7 @@
 import Companies from "../Components/Companies"
 import Hours from "../Components/Hours"
 import Documents from "../Components/Documents"
-import Options from "../Components/Options"
+import Settings from "../Components/Settings"
 import "../Styles/Dashboard.scss"
 
 function Dashboard({ dash }){
@@ -9,7 +9,7 @@ function Dashboard({ dash }){
         {id: "Companies", component:<Companies />}, 
         {id: "Hours", component: <Hours />},
         {id: "Documents", component: <Documents />}, 
-        {id: "Settings", component: <Options />}
+        {id: "Settings", component: <Settings />}
     ]
 
     return(

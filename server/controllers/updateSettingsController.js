@@ -20,7 +20,7 @@ const updateSettings = (req, res) => {
         }
         //Compare currentPassword with password stored in database
         const match = await bcrypt.compare(currentPswd, foundUser.fields.password)
-        match ? res.sendStatus(200) : res.sendStatus(401)
+        match ? res.sendStatus(200) : res.sendStatus(400)
 
         fetchNextPage()
     }, function done(err) {
