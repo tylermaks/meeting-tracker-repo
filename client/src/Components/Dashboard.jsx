@@ -1,6 +1,6 @@
 import Companies from "../Components/Companies"
 import Hours from "../Components/Hours"
-import Documents from "../Components/Documents"
+import Reports from "../Components/Reports"
 import Settings from "../Components/Settings"
 import "../Styles/Dashboard.scss"
 
@@ -8,7 +8,7 @@ function Dashboard({ dash }){
     const components = [
         {id: "Companies", component:<Companies />}, 
         {id: "Hours", component: <Hours />},
-        {id: "Documents", component: <Documents />}, 
+        {id: "Reports", component: <Reports />}, 
         {id: "Settings", component: <Settings />}
     ]
 
