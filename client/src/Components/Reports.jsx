@@ -10,8 +10,6 @@ function Reports(){
     const { auth } = useAuth()
     const [rows, setRows] = useState([])
     const [currentMonth, setCurrentMonth] = useState(new Date().getMonth())
-    const [filteredCoachingHours, setFilteredCoachingHours] = useState([])
-    const [filteredProgramHours, setFilteredProgramHours] = useState([])
     const [coachingHourTotal, setCoachingHourTotal] = useState(0)
     const [programHourTotal, setProgramHourTotal] = useState(0)
     const monthsArr = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
@@ -22,14 +20,7 @@ function Reports(){
     },[user])
 
     const handleExportPDF = () => { 
-        exportReportPDF(
-            filteredCoachingHours, 
-            coachingHourTotal,
-            filteredProgramHours,
-            programHourTotal,
-            monthsArr[currentMonth],
-            `${auth.fName-auth.lName}`
-        )
+        exportReportPDF(monthsArr[currentMonth], auth.fName, auth.lName)
     }
  
     return(
@@ -62,7 +53,6 @@ function Reports(){
                         data={rows}
                         currentMonth={currentMonth}
                         setTotal={setCoachingHourTotal}
-                        setFilteredHours={setFilteredCoachingHours}
                         hourType="coaching"
                     /> 
                 </div>
@@ -72,12 +62,11 @@ function Reports(){
                         data={rows}
                         currentMonth={currentMonth}
                         setTotal={setProgramHourTotal}
-                        setFilteredHours={setFilteredProgramHours}
                         hourType="program"
                     /> 
                 </div>
 
-                <table className="total-table">
+                <table id="total-table">
                     <tbody>
                         <tr>
                             <td className="row-header">Coaching Total</td>

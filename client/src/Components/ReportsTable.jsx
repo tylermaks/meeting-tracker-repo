@@ -1,6 +1,6 @@
 import { useMemo, useEffect } from 'react'
 
-function ReportsTable({ data, currentMonth, hourType, setTotal, setFilteredHours }) {
+function ReportsTable({ data, currentMonth, hourType, setTotal }) {
     
     const filteredHours = useMemo(() => {
         return data?.filter(item => {
@@ -13,8 +13,7 @@ function ReportsTable({ data, currentMonth, hourType, setTotal, setFilteredHours
 
     useEffect(() => {
         setTotal && setTotal(filteredHours?.reduce((acc, item) => acc + item.Duration, 0))
-        setFilteredHours && setFilteredHours(filteredHours)
-    }, [filteredHours, setTotal, setFilteredHours])
+    }, [filteredHours, setTotal])
     
     return(
         <table id={`${hourType}-table`}>
