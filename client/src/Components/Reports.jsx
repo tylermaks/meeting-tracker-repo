@@ -1,12 +1,17 @@
 import { useState, useEffect } from 'react'
+import useAuth from '../hooks/useAuth'
 import useUser from "../hooks/useUser"
+import exportReportPDF from './ExportReportPDF'
 import ReportsTable from './ReportsTable'
 import "../Styles/Reports.scss"
 
 function Reports(){
     const { user } = useUser()
+    const { auth } = useAuth()
     const [rows, setRows] = useState([])
     const [currentMonth, setCurrentMonth] = useState(new Date().getMonth())
+    const [filteredCoachingHours, setFilteredCoachingHours] = useState([])
+    const [filteredProgramHours, setFilteredProgramHours] = useState([])
     const [coachingHourTotal, setCoachingHourTotal] = useState(0)
     const [programHourTotal, setProgramHourTotal] = useState(0)
     const monthsArr = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
@@ -15,6 +20,17 @@ function Reports(){
     useEffect(() => {
         setRows(user?.meetingData)
     },[user])
+
+    const handleExportPDF = () => { 
+        exportReportPDF(
+            filteredCoachingHours, 
+            coachingHourTotal,
+            filteredProgramHours,
+            programHourTotal,
+            monthsArr[currentMonth],
+            `${auth.fName-auth.lName}`
+        )
+    }
  
     return(
         <section className="dashboard">
@@ -35,10 +51,10 @@ function Reports(){
                             })
                         }
                     </select>
-                    <div className="btn btn--primary">Export PDF</div>
+                    <div onClick={handleExportPDF} className="btn btn--primary">Export PDF</div>
                 </div>
             </div>
-            <div className='table-container flex-column gap--2'>
+            <div id="report-table" className='table-container flex-column gap--2'>
                 <h3>{monthsArr[currentMonth] + " Report"}</h3>
                 <div>
                     <p>Coaching Hours</p>
@@ -46,7 +62,8 @@ function Reports(){
                         data={rows}
                         currentMonth={currentMonth}
                         setTotal={setCoachingHourTotal}
-                        hourType="Coaching"
+                        setFilteredHours={setFilteredCoachingHours}
+                        hourType="coaching"
                     /> 
                 </div>
                 <div>
@@ -55,7 +72,8 @@ function Reports(){
                         data={rows}
                         currentMonth={currentMonth}
                         setTotal={setProgramHourTotal}
-                        hourType="Program"
+                        setFilteredHours={setFilteredProgramHours}
+                        hourType="program"
                     /> 
                 </div>
 
