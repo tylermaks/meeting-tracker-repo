@@ -2,22 +2,23 @@ const Airtable = require('airtable')
 
 //SETUP AIRTABLE DATABASE
 const base = new Airtable({ apiKey: process.env.AIRTABLE_API_KEY }).base(process.env.AIRTABLE_BASE_ID)
-const table = process.env.AIRTABLE_COMPANIES_ID
+const table = process.env.AIRTABLE_REQUESTS_ID
 
-const getCompanies = (req, res) => {
+//Get Support Request
+const getSupportRequests = (req, res) => { 
     base(table).select({
         sort: [
-            {field: 'companyName', direction: "asc"}
+            {field: 'requestID', direction: "asc"}
         ]
     }).eachPage(function page(records, fetchNextPage){
-        const companyArr = []
+        const requestArr = []
 
         records.forEach( record => { 
-            companyArr.push(record.fields)
+            requestArr.push(record.fields)
         })
 
         fetchNextPage()
-        res.json({ companyArr })
+        res.json({ requestArr })
     }, function done(err){
         if(err){
             console.error(err)
@@ -26,4 +27,5 @@ const getCompanies = (req, res) => {
     })
 }
 
-module.exports = { getCompanies }
+
+module.exports = { getSupportRequests }

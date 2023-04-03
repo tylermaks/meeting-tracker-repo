@@ -48,13 +48,15 @@ export const UserProvider = ({ children }) => {
     const getCompanyList = useCallback (async () => {
         try{
             const response = await axiosPrivate.get(
-                COMPANIES_URL
+                COMPANIES_URL,
+                JSON.stringify({"userName":auth.userName})
             )
+            
             setCompanies(response?.data?.companyArr)
         } catch(err) {
             if (err) {console.error(err)}
         }
-    }, [axiosPrivate])
+    }, [auth.userName, axiosPrivate])
 
     const addMeeting =  async (data) => {
         try{ 

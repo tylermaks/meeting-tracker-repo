@@ -45,7 +45,7 @@ function AddHoursForm({ setModal }) {
                         companies 
                             ? companies.map( company => { 
                                 return(
-                                    <option value={company}>{company}</option>
+                                    <option value={company.companyName}>{company.companyName}</option>
                                 )
                             })
                             :null

@@ -16,7 +16,6 @@ app.use(express.json())
 app.use(cookieParser())
 
 //ROUTES
-app.use('/register', require('./routes/api/register'))
 app.use('/auth', require('./routes/api/auth'))
 app.use('/refresh', require('./routes/api/refresh'))
 app.use(verifyJWT)
@@ -26,6 +25,7 @@ app.use('/meeting', require('./routes/api/meeting'))
 app.use('/csv', require('./routes/api/csv'))
 app.use('/companies', require("./routes/api/companies"))
 app.use('/settings', require('./routes/api/settings'))
+app.use('/supportRequests', require('./routes/api/supportRequests'))
 
 
 app.listen(PORT, () => console.log(`Server is running on Port: ${PORT}`))
