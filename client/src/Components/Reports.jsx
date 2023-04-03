@@ -14,11 +14,12 @@ function Reports(){
     const [programHourTotal, setProgramHourTotal] = useState(0)
     const monthsArr = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
 
-    //set rows state on load
+    //Set rows state on load
     useEffect(() => {
         setRows(user?.meetingData)
     },[user])
 
+    //Export pdf of EIR Monthly Report
     const handleExportPDF = () => { 
         exportReportPDF(monthsArr[currentMonth], auth.fName, auth.lName)
     }
@@ -53,7 +54,7 @@ function Reports(){
                         data={rows}
                         currentMonth={currentMonth}
                         setTotal={setCoachingHourTotal}
-                        hourType="coaching"
+                        hourType="Coaching"
                     /> 
                 </div>
                 <div>
@@ -62,7 +63,7 @@ function Reports(){
                         data={rows}
                         currentMonth={currentMonth}
                         setTotal={setProgramHourTotal}
-                        hourType="program"
+                        hourType="Program"
                     /> 
                 </div>
 

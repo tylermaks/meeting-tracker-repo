@@ -1,11 +1,11 @@
 import "../Styles/Companies.scss"
 
-function CompanyCard(){
+function CompanyCard({ company }){
     return(
         <div className="company-card">
             <div className="company-info">
                 <div>
-                    <h3>Company ABC</h3>
+                    <h3>{company}</h3>
                     <p className="program">Launch & Deliver</p>
                 </div>
                 <div className="status">

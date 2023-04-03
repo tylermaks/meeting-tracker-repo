@@ -1,14 +1,20 @@
 import { useMemo, useEffect } from 'react'
 
 function ReportsTable({ data, currentMonth, hourType, setTotal }) {
-    
+
     const filteredHours = useMemo(() => {
-        return data?.filter(item => {
-          const dateMonth = new Date(item.Date).getMonth()
-          const isMatchingMonth = dateMonth === Number(currentMonth)
-          const isCoachingMeeting = item.MeetingType.toLowerCase() === hourType
-          return isMatchingMonth && isCoachingMeeting
+        //Filter data by month 
+        const filteredData = data?.filter(item => {
+            const dateMonth = new Date(item.Date + ' PST').getMonth()
+            const isMatchingMonth = dateMonth === Number(currentMonth)
+            const isCoachingMeeting = item.MeetingType === hourType
+            return isMatchingMonth && isCoachingMeeting
         });
+
+        // Sort the filtered data by date
+        filteredData?.sort((a, b) => new Date(a.Date + ' PST') - new Date(b.Date + ' PST'));
+        return filteredData;
+
     }, [data, currentMonth, hourType])
 
     useEffect(() => {
@@ -16,7 +22,7 @@ function ReportsTable({ data, currentMonth, hourType, setTotal }) {
     }, [filteredHours, setTotal])
     
     return(
-        <table id={`${hourType}-table`}>
+        <table id={`${hourType.toLowerCase()}-table`}>
             <thead>
                 <tr>
                     <th>Company Name</th>
