@@ -55,6 +55,7 @@ $grey: #4D4D4D;
 
 .support-request{
     margin-top: 1.5rem;
+    height: 6rem;
 
     & .request-header{
         font-size: 12px;
@@ -67,3 +68,9 @@ $grey: #4D4D4D;
     }
 }
 
+.card-btn{
+    background-color: #0d3b66;
+    border-radius: 15px;
+    color: #fff;
+    cursor: pointer;
+}

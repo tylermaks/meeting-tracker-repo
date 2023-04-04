@@ -33,8 +33,7 @@ function SupportRequests(){
                 supportRequests.map( (request, i) => { 
                     return(
                         <CompanyCard
-                            key={request.id}
-                            id={`${request.companyName}-${i}`} 
+                            key={i}
                             company={request.companyName}
                             program={request.currentProgram}
                             status={request.Status}

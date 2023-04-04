@@ -1,8 +1,6 @@
-import { useState } from 'react'
 import "../Styles/Companies.scss"
 
-function CompanyCard({ id, company, program, status, request }){
-    const [clicked, setClicked] = useState("")
+function CompanyCard({ company, program, status, request }){
 
     //Set colour for status 
     const statusColour = () => { 
@@ -13,45 +11,32 @@ function CompanyCard({ id, company, program, status, request }){
         }
     }
 
-    const handleClick = (e) => { 
-        setClicked('')
-        setClicked(e.target.id)
-    }
-
 
     return(
-        <div 
-            id={id}
-            onClick={handleClick} 
-            className={request ? "company-card company-card--pointer" : "company-card"}
-        >
-            {
-                clicked === id
-                    ? <div>
-                        <p>Click Confirmed</p>
+        <div className="company-card"> 
+            <div> 
+                <div className="company-info">
+                    <div>
+                        <h3>{company}</h3>
+                        <p className="program">{program}</p>
                     </div>
-            
-            
-                    :<div> 
-                        <div className="company-info">
-                            <div>
-                                <h3>{company}</h3>
-                                <p className="program">{program}</p>
+                    <div className={statusColour()}>
+                        <p>{status}</p>
+                    </div>
+                </div>
+                {
+                    request && 
+                        <div class="flex-column flex-column--space">
+                            <div className="support-request">
+                                <p className="request-header">Support request:</p>
+                                <p className="request-text">"{request}"</p>
                             </div>
-                            <div className={statusColour()}>
-                                <p>{status}</p>
+                            <div class="flex-row flex-row--center card-btn">
+                                <span>Connect</span>
                             </div>
                         </div>
-                        {
-                            request
-                                ? <div className="support-request">
-                                    <p className="request-header">Support request:</p>
-                                    <p className="request-text">"{request}"</p>
-                                </div>
-                                : null
-                        }
-                    </div>
-            }
+                }
+            </div>
         </div>
     )
 }

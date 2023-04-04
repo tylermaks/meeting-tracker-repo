@@ -7,9 +7,9 @@ import "../Styles/Home.scss"
 
 
 function Home(){
-    const [dash, setDash] = useState(1)
+    const [activeDashboard, setActiveDashboard] = useState(1)
     const handleClick = (id) => {
-        setDash(id - 1) 
+        setActiveDashboard(id - 1) 
     }
 
     return(
@@ -17,11 +17,12 @@ function Home(){
             <section id="home">
                 <MenuNav 
                     handleClick={handleClick}
+                    activeDashboard={activeDashboard} //adjusting for handleClick
                 />
                 <section id="main-view">
                     <HomeNav />
                     <Dashboard 
-                        dash={dash}
+                        activeDashboard={activeDashboard}
                     />
                 </section>
             </section>
