@@ -1,8 +1,8 @@
 import { useState } from 'react'
-import useUser from "../../hooks/useUser"
+import useAppData from "../../hooks/useAppData"
 
 function AddHoursForm({ setModal }) {
-    const { addMeeting, companies } = useUser()
+    const { addMeeting, companyList } = useAppData()
     const [companyName, setCompanyName] = useState('')
     const [date, setDate] = useState('')
     const [duration, setDuration] = useState('')
@@ -42,13 +42,12 @@ function AddHoursForm({ setModal }) {
                 >
                     <option value="" disabled selected>Select Company</option>
                     {
-                        companies 
-                            ? companies.map( company => { 
-                                return(
-                                    <option value={company.companyName}>{company.companyName}</option>
-                                )
-                            })
-                            :null
+                        companyList && companyList.map( company => { 
+                            return(
+                                <option value={company.companyName}>{company.companyName}</option>
+                            )
+                        })
+
                     }
              
                 </select>

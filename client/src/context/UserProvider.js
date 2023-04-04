@@ -2,18 +2,18 @@ import { createContext, useState, useEffect, useCallback } from "react";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import useAuth from "../hooks/useAuth"
 
-const CSV_URL = "/csv"
+const MEETING_URL = "/meeting"
 const COMPANIES_URL = "/companies"
-
 const UserContext = createContext({})
 
 export const UserProvider = ({ children }) => {
     const { auth } = useAuth()
-    const [user, setUser] = useState([])
-    const [companies, setCompanies] = useState({})
+    const [meetingList, setMeetingList] = useState([])
+    const [companyList, setCompanyList] = useState({})
     const axiosPrivate = useAxiosPrivate()
     
-    const getUserData = useCallback( async () => {
+    //Get meeting data based on current user
+    const getMeetingData = useCallback( async () => {
         try{
             const response = await axiosPrivate.get(
                 `/user/${auth.userName}`
@@ -37,7 +37,7 @@ export const UserProvider = ({ children }) => {
                     }
                 )
             })
-            setUser({ meetingData })
+            setMeetingList({ meetingData })
         } catch (err) { 
             if (err.response) {
                 console.error(err)
@@ -45,6 +45,7 @@ export const UserProvider = ({ children }) => {
         }
     }, [auth, axiosPrivate])
 
+    //Get company data including Company Name, EIRs, Status, Program, etc.
     const getCompanyList = useCallback (async () => {
         try{
             const response = await axiosPrivate.get(
@@ -52,16 +53,17 @@ export const UserProvider = ({ children }) => {
                 JSON.stringify({"userName":auth.userName})
             )
             
-            setCompanies(response?.data?.companyArr)
+            setCompanyList(response?.data?.companyArr)
         } catch(err) {
             if (err) {console.error(err)}
         }
     }, [auth.userName, axiosPrivate])
 
+    //Post new meeting submitted through AddHourModal component
     const addMeeting =  async (data) => {
         try{ 
             await axiosPrivate.post(
-                CSV_URL,
+                MEETING_URL,
                 JSON.stringify({"userId": auth.id, "data": data}),
                 {
                     headers: {'Content-Type': 'application/json'}
@@ -71,14 +73,15 @@ export const UserProvider = ({ children }) => {
             console.error(err)
         }
         setTimeout( () => {
-            getUserData()
+            getMeetingData()
         }, "750")
     }
 
+    //Delete selected meeting
     const deleteMeeting = async (records) => { 
         try{
                 await axiosPrivate.delete(
-                CSV_URL, 
+                MEETING_URL, 
                 {
                     data: records
                 }
@@ -90,17 +93,19 @@ export const UserProvider = ({ children }) => {
             } 
         }
         setTimeout( () => {
-            getUserData()
+            getMeetingData()
         }, "750")
     }
 
+
+    //Render Meeting and Company data on load
     useEffect( () => { 
-        getUserData()
+        getMeetingData()
         getCompanyList()
-    },[getUserData, getCompanyList])
+    },[getMeetingData, getCompanyList])
 
     return (
-        <UserContext.Provider value ={{ user, companies, addMeeting, deleteMeeting }}>
+        <UserContext.Provider value ={{ meetingList, companyList, addMeeting, deleteMeeting }}>
             {children}
         </UserContext.Provider>
     )

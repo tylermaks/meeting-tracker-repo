@@ -1,11 +1,11 @@
 import { useState, useEffect, useRef } from 'react'
-import useUser from "../../hooks/useUser"
+import useAppData from "../../hooks/useAppData"
 import sort from "../../Images/sort-solid.svg"
 import check from "../../Images/check-solid.svg"
 import "../../Styles/HoursTable.scss"
 
 function TableHeader ({ label, id, rows, setRows, filterItems, setFilterItems }){
-    const { user } = useUser()
+    const { meetingList } = useAppData()
     const [dropdown, setDropdown ] = useState(false)
     const [meetingData, setMeetingData] = useState([])
     const uniqueValues = [...new Set(meetingData?.map(item => item[id]))]
@@ -14,8 +14,8 @@ function TableHeader ({ label, id, rows, setRows, filterItems, setFilterItems })
     
     useEffect(() => {
         document.getElementById("home").addEventListener("click", toggleDropdown)
-        setMeetingData(user.meetingData)
-    },[user])
+        setMeetingData(meetingList?.meetingData)
+    },[meetingList])
 
     const toggleDropdown = (e) => { 
         (

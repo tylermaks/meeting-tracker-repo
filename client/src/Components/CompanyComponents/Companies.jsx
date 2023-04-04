@@ -1,13 +1,13 @@
-import useUser from "../../hooks/useUser";
+import useAppData from "../../hooks/useAppData";
 import useAuth from "../../hooks/useAuth"
 import CompanyCard from "./CompanyCard";
 import SupportRequests from "./SupportRequests";
 import "../../Styles/Companies.scss"
 
 function Companies() {
-    const { companies } = useUser()
+    const { companyList } = useAppData()
     const { auth } = useAuth()
-    const filteredCompanies = companies?.filter( company => company.idLeadEIR.toString() === auth.userName)
+    const filteredCompanies = companyList?.filter( company => company.idLeadEIR.toString() === auth.userName)
 
     return(
         <section id="companies">

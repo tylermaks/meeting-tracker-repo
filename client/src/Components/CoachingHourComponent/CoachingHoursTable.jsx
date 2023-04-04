@@ -1,11 +1,11 @@
 import { useState, useEffect, useMemo } from 'react'
 import ReactPaginate from 'react-paginate';
-import useUser from "../../hooks/useUser"
+import useAppData from "../../hooks/useAppData"
 import TableHeader from './CoachingHoursTableHeader'
 import "../../Styles/HoursTable.scss"
 
 function CoachingHoursTable ({ checkedRows, setCheckedRows }){ 
-    const { user } = useUser()
+    const { meetingList } = useAppData()
     const [rows, setRows] = useState([])
     const [filterItems, setFilterItems] = useState([])
     const [pageNumber, setPageNumber] = useState(0);
@@ -20,8 +20,8 @@ function CoachingHoursTable ({ checkedRows, setCheckedRows }){
     ]
 
     useEffect(() => {
-        setRows(user?.meetingData)
-    },[user])
+        setRows(meetingList?.meetingData)
+    },[meetingList])
 
     const filteredRows = useMemo(() => {
         const startIndex = pageNumber * itemsPerPage;

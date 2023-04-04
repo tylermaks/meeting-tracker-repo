@@ -20,7 +20,7 @@ function UserDropdown(){
                 {auth.fName[0]}{auth.lName[0]}
             </div>            
             {   
-                dropdown ? <Logout /> : null
+                dropdown && <Logout />
             }
         </div>
     )

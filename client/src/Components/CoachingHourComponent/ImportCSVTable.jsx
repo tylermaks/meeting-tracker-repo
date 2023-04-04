@@ -1,8 +1,7 @@
-import useUser from "../../hooks/useUser"
-
+import useAppData from "../../hooks/useAppData"
 
 function ImportCSVTable({ data, setModal }) {
-    const { addMeeting } = useUser()
+    const { addMeeting } = useAppData()
     const handleSubmit = (e) => {
         e.preventDefault()
         addMeeting(data)

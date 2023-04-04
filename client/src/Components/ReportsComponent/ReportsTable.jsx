@@ -17,6 +17,7 @@ function ReportsTable({ data, currentMonth, hourType, setTotal }) {
 
     }, [data, currentMonth, hourType])
 
+    //Send total data to Reports Component 
     useEffect(() => {
         setTotal && setTotal(filteredHours?.reduce((acc, item) => acc + item.Duration, 0))
     }, [filteredHours, setTotal])

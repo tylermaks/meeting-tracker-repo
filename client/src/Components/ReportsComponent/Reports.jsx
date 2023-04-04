@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react'
 import useAuth from '../../hooks/useAuth'
-import useUser from "../../hooks/useUser"
+import useAppData from "../../hooks/useAppData"
 import exportReportPDF from './ExportReportPDF'
 import ReportsTable from './ReportsTable'
 import "../../Styles/Reports.scss"
 
 function Reports(){
-    const { user } = useUser()
+    const { meetingList } = useAppData()
     const { auth } = useAuth()
     const [rows, setRows] = useState([])
     const [currentMonth, setCurrentMonth] = useState(new Date().getMonth())
@@ -16,8 +16,8 @@ function Reports(){
 
     //Set rows state on load
     useEffect(() => {
-        setRows(user?.meetingData)
-    },[user])
+        setRows(meetingList?.meetingData)
+    },[meetingList])
 
     //Export pdf of EIR Monthly Report
     const handleExportPDF = () => { 

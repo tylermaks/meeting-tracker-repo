@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import useUser from "../../hooks/useUser"
+import useAppData from "../../hooks/useAppData"
 import CoachingHoursTable from './CoachingHoursTable'
 import AddHoursModal from "./AddHoursModal"
 import TrashIcon from "../../Images/trash-solid.svg"
@@ -7,7 +7,7 @@ import "../../Styles/HoursTable.scss"
 
 
 function CoachingHours() {
-    const { deleteMeeting } = useUser()
+    const { deleteMeeting } = useAppData()
     const [modal, setModal] = useState(false)
     const [checkedRows, setCheckedRows] = useState([])
 
@@ -22,7 +22,7 @@ function CoachingHours() {
 
     return(
         <section id="hours">
-            {modal ? <AddHoursModal handleClick={handleClick} setModal={setModal}/> : null}
+            {modal && <AddHoursModal handleClick={handleClick} setModal={setModal}/>}
             <div className="flex-row flex-row--right">
                 <img
                     className={checkedRows.length === 0 ? "hidden" : "delete-records icon icon--md" } 
