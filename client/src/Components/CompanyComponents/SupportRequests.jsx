@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react' 
-import useAxiosPrivate from "../hooks/useAxiosPrivate";
+import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import CompanyCard from './CompanyCard';
 
 function SupportRequests(){

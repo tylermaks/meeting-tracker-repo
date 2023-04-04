@@ -1,5 +1,5 @@
-import useAxiosPrivate from "../hooks/useAxiosPrivate";
-import useAuth from "../hooks/useAuth"
+import useAxiosPrivate from "../../hooks/useAxiosPrivate";
+import useAuth from "../../hooks/useAuth"
 
 function Logout(){
     const { setAuth } = useAuth()

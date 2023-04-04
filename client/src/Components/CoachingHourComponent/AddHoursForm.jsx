@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import useUser from "../hooks/useUser"
+import useUser from "../../hooks/useUser"
 
 function AddHoursForm({ setModal }) {
     const { addMeeting, companies } = useUser()
@@ -104,8 +104,8 @@ function AddHoursForm({ setModal }) {
                     required
                 >
                 </textarea>
-                <button id="submit" onClick={(e) => setButton(e.target.id)}>Submit</button>
-                <button id="add" className="add" onClick={(e) => setButton(e.target.id)}>Add Another Meeting</button>
+                <button className='btn btn--primary' onClick={(e) => setButton(e.target.id)}>Submit</button>
+                <button className="btn btn--secondary add-btn" onClick={(e) => setButton(e.target.id)}>Add Another Meeting</button>
                 
             </div>
         </form>

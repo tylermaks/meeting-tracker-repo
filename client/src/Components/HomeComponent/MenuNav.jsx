@@ -1,9 +1,9 @@
 import { useState } from "react"
-import bolt from "../Images/bolt-solid.svg"
-import meetings from "../Images/calendar-regular.svg"
-import files from "../Images/file-lines-solid.svg"
-import gear from "../Images/gear-solid.svg"
-import "../Styles/MenuNav.scss"
+import bolt from "../../Images/bolt-solid.svg"
+import meetings from "../../Images/calendar-regular.svg"
+import files from "../../Images/file-lines-solid.svg"
+import gear from "../../Images/gear-solid.svg"
+import "../../Styles/MenuNav.scss"
 
 const menuOptions = [
     { id: 1, name: "Companies", icon: bolt },

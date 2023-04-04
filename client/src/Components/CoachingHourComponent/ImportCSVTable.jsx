@@ -1,7 +1,7 @@
-import useUser from "../hooks/useUser"
+import useUser from "../../hooks/useUser"
 
 
-function HoursTable({ data, setModal }) {
+function ImportCSVTable({ data, setModal }) {
     const { addMeeting } = useUser()
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -43,4 +43,4 @@ function HoursTable({ data, setModal }) {
     )
 }
 
-export default HoursTable
+export default ImportCSVTable

@@ -1,13 +1,13 @@
-import Companies from "../Components/Companies"
-import Hours from "../Components/Hours"
-import Reports from "../Components/Reports"
-import Settings from "../Components/Settings"
-import "../Styles/Dashboard.scss"
+import Companies from "../CompanyComponents/Companies"
+import CoachingHours from "../CoachingHourComponent/CoachingHours"
+import Reports from "../ReportsComponent/Reports"
+import Settings from "../SettingsComponent/Settings"
+import "../../Styles/Dashboard.scss"
 
 function Dashboard({ activeDashboard }){
     const components = [
         {id: "Companies", component:<Companies />}, 
-        {id: "Hours", component: <Hours />},
+        {id: "Coaching Hours", component: <CoachingHours />},
         {id: "Reports", component: <Reports />}, 
         {id: "Settings", component: <Settings />}
     ]

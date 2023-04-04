@@ -1,5 +1,5 @@
-import Exit from "../Images/xmark-solid.svg"
-import "../Styles/Options.scss"
+import Exit from "../../Images/xmark-solid.svg"
+import "../../Styles/Settings.scss"
 
 function SettingsModal({ modal, setModal }){ 
 

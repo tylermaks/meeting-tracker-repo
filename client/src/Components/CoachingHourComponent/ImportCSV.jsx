@@ -1,8 +1,8 @@
 import { useState } from 'react'
-import HoursTable from './HoursTable'
-import "../Styles/Import.scss"
+import ImportCSVTable from './ImportCSVTable'
+import "../../Styles/Import.scss"
 
-function ImportFile({ setModal }){
+function ImportCSV({ setModal }){
     const [dragActive, setDragActive] = useState(false)
     const [data, setData] = useState('')
 
@@ -57,7 +57,7 @@ function ImportFile({ setModal }){
             {/* Will return to clean this up */}
             {
                 data 
-                    ? <HoursTable data={data} setModal={setModal}/>
+                    ? <ImportCSVTable data={data} setModal={setModal}/>
                     : <div
                         className={ dragActive ? "import import--active" : "import"} 
                         onDrop={dropHandler} 
@@ -72,4 +72,4 @@ function ImportFile({ setModal }){
     )
 }
 
-export default ImportFile
+export default ImportCSV

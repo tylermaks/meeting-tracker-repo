@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
-import useAuth from "../hooks/useAuth"
-import axios from "../API/userData"
+import useAuth from "../../hooks/useAuth"
+import axios from "../../API/userData"
 const LOGIN_URL = '/auth'
 
 function LoginForm(){
@@ -55,8 +55,6 @@ function LoginForm(){
             } else { 
                 setErrorMsg("Login Failed")
             }
-
-            // errRef.current.focus()
         }
     }
   
@@ -83,12 +81,12 @@ function LoginForm(){
 
                 <p className={errorMsg ? "errormsg" : "offscreen"} aria-live="assertive">{errorMsg}</p>
 
-                <button>Log in</button>
+                <button className="btn btn--primary">Log in</button>
 
-                <div>
+                {/* <div>
                     <span>Register Here</span>
                     <a href=".login">Lost you password?</a>
-                </div>
+                </div> */}
         </form>
     )
 }

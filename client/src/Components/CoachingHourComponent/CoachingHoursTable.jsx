@@ -1,10 +1,10 @@
 import { useState, useEffect, useMemo } from 'react'
 import ReactPaginate from 'react-paginate';
-import useUser from "../hooks/useUser"
-import TableHeader from './TablerHeader'
-import "../Styles/HoursTable.scss"
+import useUser from "../../hooks/useUser"
+import TableHeader from './CoachingHoursTableHeader'
+import "../../Styles/HoursTable.scss"
 
-function Spreadsheet ({ checkedRows, setCheckedRows }){ 
+function CoachingHoursTable ({ checkedRows, setCheckedRows }){ 
     const { user } = useUser()
     const [rows, setRows] = useState([])
     const [filterItems, setFilterItems] = useState([])
@@ -110,4 +110,4 @@ function Spreadsheet ({ checkedRows, setCheckedRows }){
     )
 }
 
-export default Spreadsheet;
+export default CoachingHoursTable;

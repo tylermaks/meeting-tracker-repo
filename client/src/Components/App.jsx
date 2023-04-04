@@ -1,9 +1,9 @@
 import { Routes, Route } from "react-router-dom"
-import Authentication from "./Authentication"
-import RequireAuth from "./RequireAuth";
-import Unauthorized from "./Unauthorized";
+import Authentication from "./AuthenticationComponent/Authentication"
+import RequireAuth from "./AuthenticationComponent/RequireAuth";
+import Unauthorized from "./AuthenticationComponent/Unauthorized";
 
-import Home from "./Home"
+import Home from "./HomeComponent/Home";
 import '../Styles/App.scss';
 
 

@@ -1,4 +1,4 @@
-import "../Styles/Companies.scss"
+import "../../Styles/Companies.scss"
 
 function CompanyCard({ company, program, status, request }){
 

@@ -1,9 +1,9 @@
 import { useState } from 'react'
-import { UserProvider } from "../context/UserProvider"
+import { UserProvider } from "../../context/UserProvider"
 import HomeNav from "./HomeNav";
 import MenuNav from "./MenuNav";
 import Dashboard from "./Dashboard";
-import "../Styles/Home.scss"
+import "../../Styles/Home.scss"
 
 
 function Home(){

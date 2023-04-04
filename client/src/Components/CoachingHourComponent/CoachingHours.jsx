@@ -1,12 +1,12 @@
 import { useState } from 'react'
-import useUser from "../hooks/useUser"
-import Spreadsheet from "./Spreadsheet"
-import HoursModal from "./HoursModal"
-import TrashIcon from "../Images/trash-solid.svg"
-import "../Styles/HoursTable.scss"
+import useUser from "../../hooks/useUser"
+import CoachingHoursTable from './CoachingHoursTable'
+import AddHoursModal from "./AddHoursModal"
+import TrashIcon from "../../Images/trash-solid.svg"
+import "../../Styles/HoursTable.scss"
 
 
-function Hours() {
+function CoachingHours() {
     const { deleteMeeting } = useUser()
     const [modal, setModal] = useState(false)
     const [checkedRows, setCheckedRows] = useState([])
@@ -22,7 +22,7 @@ function Hours() {
 
     return(
         <section id="hours">
-            {modal ? <HoursModal handleClick={handleClick} setModal={setModal}/> : null}
+            {modal ? <AddHoursModal handleClick={handleClick} setModal={setModal}/> : null}
             <div className="flex-row flex-row--right">
                 <img
                     className={checkedRows.length === 0 ? "hidden" : "delete-records icon icon--md" } 
@@ -30,11 +30,11 @@ function Hours() {
                     alt="Delete Selected Rows"
                     onClick = {handleDeleteMeetings} 
                 />
-                <div onClick={handleClick} className="btn-alt">
+                <div onClick={handleClick} className="btn btn--primary">
                     Add Hours
                 </div>
             </div>
-            <Spreadsheet 
+            <CoachingHoursTable 
                 checkedRows={checkedRows}
                 setCheckedRows={setCheckedRows}
             />
@@ -42,4 +42,4 @@ function Hours() {
     )
 }
 
-export default Hours;
+export default CoachingHours;

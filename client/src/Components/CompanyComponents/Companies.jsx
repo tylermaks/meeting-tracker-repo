@@ -1,8 +1,8 @@
-import useUser from "../hooks/useUser"
-import useAuth from "../hooks/useAuth"
+import useUser from "../../hooks/useUser";
+import useAuth from "../../hooks/useAuth"
 import CompanyCard from "./CompanyCard";
 import SupportRequests from "./SupportRequests";
-import "../Styles/Companies.scss"
+import "../../Styles/Companies.scss"
 
 function Companies() {
     const { companies } = useUser()

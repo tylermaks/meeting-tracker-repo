@@ -1,8 +1,8 @@
 import { useState, useEffect, useRef } from 'react'
-import useUser from "../hooks/useUser"
-import sort from "../Images/sort-solid.svg"
-import check from "../Images/check-solid.svg"
-import "../Styles/HoursTable.scss"
+import useUser from "../../hooks/useUser"
+import sort from "../../Images/sort-solid.svg"
+import check from "../../Images/check-solid.svg"
+import "../../Styles/HoursTable.scss"
 
 function TableHeader ({ label, id, rows, setRows, filterItems, setFilterItems }){
     const { user } = useUser()

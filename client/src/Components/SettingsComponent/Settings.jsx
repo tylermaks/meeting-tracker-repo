@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react"
-import useAxiosPrivate from "../hooks/useAxiosPrivate";
-import useAuth from "../hooks/useAuth"
+import useAxiosPrivate from "../../hooks/useAxiosPrivate";
+import useAuth from "../../hooks/useAuth"
 import SettingsModal from "./SettingsModal";
-import "../Styles/Options.scss"
+import "../../Styles/Settings.scss"
 const SETTINGS_URL = "/settings"
 
 function Settings() {

@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react'
-import useAuth from '../hooks/useAuth'
-import useUser from "../hooks/useUser"
+import useAuth from '../../hooks/useAuth'
+import useUser from "../../hooks/useUser"
 import exportReportPDF from './ExportReportPDF'
 import ReportsTable from './ReportsTable'
-import "../Styles/Reports.scss"
+import "../../Styles/Reports.scss"
 
 function Reports(){
     const { user } = useUser()

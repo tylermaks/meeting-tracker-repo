@@ -1,7 +1,7 @@
 import { useState } from 'react'
-import useAuth from "../hooks/useAuth"
-import Logout from './Logout'
-import '../Styles/UserDropdown.scss'
+import useAuth from "../../hooks/useAuth"
+import Logout from '../AuthenticationComponent/Logout'
+import '../../Styles/UserDropdown.scss'
 
 function UserDropdown(){ 
     const { auth } = useAuth()
