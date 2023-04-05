@@ -7,7 +7,8 @@ function UserDropdown(){
     const { auth } = useAuth()
     const [dropdown, setDropdown] = useState(false)
 
-    const handleClick = () => {
+    //Set dropdown
+    const handleDropdownClick = () => {
         setDropdown(!dropdown)
     }
 
@@ -15,7 +16,7 @@ function UserDropdown(){
         <div id="user-dropdown" className="flex-col">
             <div 
                 className="user-profile flex-row flex-row--center"
-                onClick={handleClick}
+                onClick={handleDropdownClick}
             >
                 {auth.fName[0]}{auth.lName[0]}
             </div>            

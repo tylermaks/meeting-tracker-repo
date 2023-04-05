@@ -18,6 +18,8 @@ function AddHoursForm({ setModal }) {
         notes: notes
     }
 
+    //Send meeting meetingData to backend through the addMeeting hook, then reset form inputs
+    //If the user hits submit, close modal - if user hits Add Another Meeting keep modal open 
     const handleSubmit = (e) => {
         e.preventDefault()
         addMeeting([meetingData])

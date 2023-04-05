@@ -8,7 +8,7 @@ const useAxiosPrivate = () =>{
     const { auth } = useAuth()
 
     useEffect( () => {
-
+        //Set Axios interceptor to create authorization header if one does not exist, includes access token from authProvider
         const requestIntercept = axiosPrivate.interceptors.request.use(
             config => {
                 if (!config.headers['Authorization']){
@@ -19,6 +19,7 @@ const useAxiosPrivate = () =>{
         )
 
         const responseIntercept = axiosPrivate.interceptors.response.use(
+            //Handle 403 error codes by attempting to refresh access token and resending request with new token
             response => response,
             async (error) => {
                 const prevRequest = error?.config

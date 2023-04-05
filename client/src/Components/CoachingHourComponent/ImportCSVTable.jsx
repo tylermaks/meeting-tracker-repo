@@ -1,11 +1,12 @@
 import useAppData from "../../hooks/useAppData"
 
-function ImportCSVTable({ data, setModal }) {
+function ImportCSVTable({ csvTableData, setAddHoursModal }) {
     const { addMeeting } = useAppData()
+    
     const handleSubmit = (e) => {
         e.preventDefault()
-        addMeeting(data)
-        setModal(false)
+        addMeeting(csvTableData)
+        setAddHoursModal(false)
     }
 
     return(
@@ -23,9 +24,9 @@ function ImportCSVTable({ data, setModal }) {
                 </thead>
                 <tbody>
                     {
-                        data.map( row => {
+                        csvTableData?.map( (row, i) => {
                             return(
-                                <tr>
+                                <tr key={i}>
                                     <td>{row.company}</td>
                                     <td>{row.date}</td>
                                     <td>{row.duration}</td>
@@ -37,7 +38,7 @@ function ImportCSVTable({ data, setModal }) {
                     }
                 </tbody>
             </table>
-            <button>Submit</button>
+            <button className="btn btn--primary">Submit</button>
         </form>
     )
 }

@@ -5,6 +5,7 @@ function Logout(){
     const { setAuth } = useAuth()
     const axiosPrivate = useAxiosPrivate()
 
+    //Send request to backend and reset Auth variable
     const handleLogout = async () => {
         try{
             const response = await axiosPrivate.get("/logout")

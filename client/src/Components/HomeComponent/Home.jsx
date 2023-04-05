@@ -8,7 +8,8 @@ import "../../Styles/Home.scss"
 
 function Home(){
     const [activeDashboard, setActiveDashboard] = useState(1)
-    const handleClick = (id) => {
+    //Set current dashboard view
+    const handleSetDashboardClick = (id) => {
         setActiveDashboard(id - 1) 
     }
 
@@ -16,7 +17,7 @@ function Home(){
         <UserProvider>
             <section id="home">
                 <MenuNav 
-                    handleClick={handleClick}
+                    handleSetDashboardClick={handleSetDashboardClick}
                     activeDashboard={activeDashboard} //adjusting for handleClick
                 />
                 <section id="main-view">

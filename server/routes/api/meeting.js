@@ -1,9 +1,9 @@
 const express = require("express")
 const router = express.Router()
-const meetingController = require("../../controllers/meetingController")
+const updateMeetingController = require("../../controllers/updateMeetingsController")
 
-router.post("/", meetingController.handleData)
-router.delete("/", meetingController.deleteMeetingRecord)
+router.post("/", updateMeetingController.addNewMeeting)
+router.delete("/", updateMeetingController.deleteMeetingRecord)
 
 
 module.exports = router

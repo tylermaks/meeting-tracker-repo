@@ -2,11 +2,11 @@ import { useState } from 'react'
 import ImportCSVTable from './ImportCSVTable'
 import "../../Styles/Import.scss"
 
-function ImportCSV({ setModal }){
+function ImportCSV({ setAddHoursModal }){
     const [dragActive, setDragActive] = useState(false)
-    const [data, setData] = useState('')
+    const [csvTableData, setCsvTableData] = useState('')
 
-    const handleDrag = (e) => {
+    const handleDragEvent = (e) => {
         e.preventDefault()
         e.stopPropagation()
 
@@ -17,7 +17,7 @@ function ImportCSV({ setModal }){
         }
     }
 
-    const dropHandler = async (e) => {
+    const handleDropEvent = async (e) => {
         e.preventDefault()
         e.stopPropagation()
         setDragActive(false)
@@ -32,6 +32,7 @@ function ImportCSV({ setModal }){
             const cleanedData = dataset.replace(RegExp(/,\s/g), " ").replace(RegExp(/"/g), "")
             const result = cleanedData.split('\r')
 
+            //Slipt data from CSV File into row objects, and add them to the CSV Data Array -- this data is used to populate the ImportCSVTable
             result.forEach( (data, i) => {
                 let splitData = data.split(',')
                 let rowObj = {
@@ -47,7 +48,7 @@ function ImportCSV({ setModal }){
                 }
             })
 
-            setData(csvData)
+            setCsvTableData(csvData)
         }
     }
 
@@ -56,13 +57,13 @@ function ImportCSV({ setModal }){
         <section id="csv-loader" className="flex-row flex-row--center">
             {/* Will return to clean this up */}
             {
-                data 
-                    ? <ImportCSVTable data={data} setModal={setModal}/>
+                csvTableData
+                    ? <ImportCSVTable csvTableData={csvTableData} setAddHoursModal={setAddHoursModal}/>
                     : <div
                         className={ dragActive ? "import import--active" : "import"} 
-                        onDrop={dropHandler} 
-                        onDragOver={handleDrag} 
-                        onDragLeave={handleDrag}
+                        onDrop={handleDropEvent} 
+                        onDragOver={handleDragEvent} 
+                        onDragLeave={handleDragEvent}
                     >
                         <h3>Select a CSV file to import</h3>
                         <span>drag and drop it here</span>

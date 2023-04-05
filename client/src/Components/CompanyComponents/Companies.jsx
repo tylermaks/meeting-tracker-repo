@@ -7,17 +7,17 @@ import "../../Styles/Companies.scss"
 function Companies() {
     const { companyList } = useAppData()
     const { auth } = useAuth()
-    const filteredCompanies = companyList?.filter( company => company.idLeadEIR.toString() === auth.userName)
+    const filteredCompanies = companyList?.filter( company => company.idLeadEIR.toString() === auth.userName) //provides only the companies working with user
 
     return(
         <section id="companies">
             <h2 className="title">Your Companies</h2>
             <div id="user-companies" className="company-grid">
                 {
-                    filteredCompanies?.map(item=> { 
+                    filteredCompanies?.map((item, i) => { 
                         return(
                             <CompanyCard 
-                                key={item.id}
+                                key={i}
                                 company={item.companyName}
                                 program={item.CurrentProgram}
                                 status={item.Status}

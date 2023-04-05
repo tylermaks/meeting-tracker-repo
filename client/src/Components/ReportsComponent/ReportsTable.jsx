@@ -5,9 +5,9 @@ function ReportsTable({ data, currentMonth, hourType, setTotal }) {
     const filteredHours = useMemo(() => {
         //Filter data by month 
         const filteredData = data?.filter(item => {
-            const dateMonth = new Date(item.Date + ' PST').getMonth()
+            const dateMonth = new Date(item.date + ' PST').getMonth()
             const isMatchingMonth = dateMonth === Number(currentMonth)
-            const isCoachingMeeting = item.MeetingType === hourType
+            const isCoachingMeeting = item.meetingType === hourType
             return isMatchingMonth && isCoachingMeeting
         });
 
@@ -19,7 +19,7 @@ function ReportsTable({ data, currentMonth, hourType, setTotal }) {
 
     //Send total data to Reports Component 
     useEffect(() => {
-        setTotal && setTotal(filteredHours?.reduce((acc, item) => acc + item.Duration, 0))
+        setTotal && setTotal(filteredHours?.reduce((acc, item) => acc + item.duration, 0))
     }, [filteredHours, setTotal])
     
     return(
@@ -33,12 +33,12 @@ function ReportsTable({ data, currentMonth, hourType, setTotal }) {
             </thead>
             <tbody>
                 {
-                    filteredHours && filteredHours.map( row => { 
+                    filteredHours && filteredHours.map( (row, i) => { 
                         return(
-                            <tr>
-                                <td>{row.CompanyName}</td>
-                                <td>{row.Duration}</td>
-                                <td>{row.Date}</td>
+                            <tr key={i}>
+                                <td>{row.companyName}</td>
+                                <td>{row.duration}</td>
+                                <td>{row.date}</td>
                             </tr>
                         )
                     })

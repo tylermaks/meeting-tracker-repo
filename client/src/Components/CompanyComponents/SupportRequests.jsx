@@ -5,9 +5,9 @@ import CompanyCard from './CompanyCard';
 function SupportRequests(){
     const axiosPrivate = useAxiosPrivate()
     const SUPPORT_REQUESTS = '/supportRequests'
-
     const [supportRequests, setSupportRequests] = useState([])
 
+    //Send get request to retreive Support Request Data
     const getSupportRequests = useCallback (async () => {
         try{   
             const response = await axiosPrivate.get(
@@ -21,7 +21,7 @@ function SupportRequests(){
         }
     }, [axiosPrivate])
 
-
+    //Call getSupportRequest on load
     useEffect(() => {
         getSupportRequests()
     }, [getSupportRequests])

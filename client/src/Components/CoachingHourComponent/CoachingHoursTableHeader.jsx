@@ -4,7 +4,7 @@ import sort from "../../Images/sort-solid.svg"
 import check from "../../Images/check-solid.svg"
 import "../../Styles/HoursTable.scss"
 
-function TableHeader ({ label, id, rows, setRows, filterItems, setFilterItems }){
+function CoachingHoursTableHeader ({ label, id, rows, setRows, filterItems, setFilterItems }){
     const { meetingList } = useAppData()
     const [dropdown, setDropdown ] = useState(false)
     const [meetingData, setMeetingData] = useState([])
@@ -12,11 +12,14 @@ function TableHeader ({ label, id, rows, setRows, filterItems, setFilterItems })
     const dropdownRef = useRef(null)
     const innerRef = useRef(null)
     
+    //Load and click event to detect if clickevent is outside of header dropdown
+    //Set meetingData to be parsed into dropdown components
     useEffect(() => {
         document.getElementById("home").addEventListener("click", toggleDropdown)
         setMeetingData(meetingList?.meetingData)
     },[meetingList])
 
+    //Toggle header dropdowns
     const toggleDropdown = (e) => { 
         (
             dropdownRef.current && 
@@ -27,6 +30,7 @@ function TableHeader ({ label, id, rows, setRows, filterItems, setFilterItems })
             : setDropdown(true)
     }
 
+    //Sort rows from A -> Z and Z -> A
     const sortRows = (col, dir) => {
         const sortedData = [...rows].sort((a, b) => 
            dir === 'ascending'
@@ -36,6 +40,7 @@ function TableHeader ({ label, id, rows, setRows, filterItems, setFilterItems })
         setRows(sortedData)
     }
 
+    //Select items to include in the filterItems state array
     const toggleFilterItem = (item) => { 
         filterItems.includes(item)
             ? setFilterItems(filterItems.filter((i) => i !== item))
@@ -77,4 +82,4 @@ function TableHeader ({ label, id, rows, setRows, filterItems, setFilterItems })
 }
 
 
-export default TableHeader
+export default CoachingHoursTableHeader

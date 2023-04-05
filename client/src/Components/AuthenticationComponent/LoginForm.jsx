@@ -14,12 +14,12 @@ function LoginForm(){
     const [password, setPassword] = useState('')
     const [errorMsg, setErrorMsg] = useState('')
 
-    //EFFECTS
+    //Set error message if login fails
     useEffect(() => {
         setErrorMsg('')
     }, [userName, password])
 
-    //FUNCTIONS
+    //Post request to backend to verify userName and Password
     const handleSubmit = async (e) => {
         e.preventDefault()
         try{
@@ -82,11 +82,6 @@ function LoginForm(){
                 <p className={errorMsg ? "errormsg" : "offscreen"} aria-live="assertive">{errorMsg}</p>
 
                 <button className="btn btn--primary">Log in</button>
-
-                {/* <div>
-                    <span>Register Here</span>
-                    <a href=".login">Lost you password?</a>
-                </div> */}
         </form>
     )
 }

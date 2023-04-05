@@ -1,12 +1,11 @@
-//IMPORTS
 const jwt = require('jsonwebtoken')
 const Airtable = require('airtable')
 
-//SETUP AIRTABLE DATABASE
+//Setup AirTable 
 const base = new Airtable({ apiKey: process.env.AIRTABLE_API_KEY }).base(process.env.AIRTABLE_BASE_ID)
 const table = process.env.AIRTABLE_ADVISORS_ID
 
-//FUNCTION
+//Create refreshToken and send it to AirTable to be used in authentication 
 const handleRefreshToken = (req, res) => {
     const cookies = req.cookies
     if (!cookies?.jwt) return res.sendStatus(401)
@@ -16,11 +15,11 @@ const handleRefreshToken = (req, res) => {
     base(table).select({
         view: "Grid view"
     }).eachPage(function page(records, fetchNextPage) {
-        //FIND USER
+        //Find user
         const foundUser = records.find(record => record.get('refreshToken') === refreshToken)
         if (!foundUser) return res.sendStatus(403)
 
-        //VARIFY TOKEN
+        //Varify Token 
         jwt.verify(
             refreshToken,
             process.env.REFRESH_TOKEN,

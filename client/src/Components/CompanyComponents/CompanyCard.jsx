@@ -26,12 +26,12 @@ function CompanyCard({ company, program, status, request }){
                 </div>
                 {
                     request && 
-                        <div class="flex-column flex-column--space">
+                        <div className="flex-column flex-column--space">
                             <div className="support-request">
                                 <p className="request-header">Support request:</p>
                                 <p className="request-text">"{request}"</p>
                             </div>
-                            <div class="flex-row flex-row--center card-btn">
+                            <div className="flex-row flex-row--center card-btn">
                                 <span>Connect</span>
                             </div>
                         </div>

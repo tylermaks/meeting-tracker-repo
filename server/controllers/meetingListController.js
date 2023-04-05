@@ -1,15 +1,16 @@
 const Airtable = require('airtable')
 
-//SETUP AIRTABLE DATABASE
+//Setup AirTable
 const base = new Airtable({ apiKey: process.env.AIRTABLE_API_KEY }).base(process.env.AIRTABLE_BASE_ID)
 const table = process.env.AIRTABLE_MEETING_ID
 
 
-const getUser = (req, res) => {
+const getMeetingList = (req, res) => {
+    const { userName } = req.body
     const meetingArr = []
 
     base(table).select({
-        filterByFormula: `advisorLink = "${req.params.id}"`
+        filterByFormula: `advisorLink = "${userName}"`
     }).eachPage(function page(records, fetchNextPage) {
         records.forEach( record => {
             meetingArr.push(
@@ -23,8 +24,6 @@ const getUser = (req, res) => {
               
         fetchNextPage()
     }, function done(err){
-        //Catching empty Array might be needed here...return later
-
         if (err) {
             console.log(err)
             return
@@ -33,4 +32,4 @@ const getUser = (req, res) => {
 } 
     
 
-module.exports = { getUser }
+module.exports = { getMeetingList }

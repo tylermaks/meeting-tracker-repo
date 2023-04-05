@@ -38,7 +38,7 @@ function Reports(){
                         {
                             monthsArr.map((month, i) => { 
                                 return(
-                                    <option value={i}>{month}</option>
+                                    <option key={i} value={i}>{month}</option>
                                 ) 
                             })
                         }

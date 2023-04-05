@@ -12,9 +12,7 @@ const menuOptions = [
     { id:4, name: "Options", icon: gear }
 ]
 
-
-
-function MenuNav({ handleClick, activeDashboard }){
+function MenuNav({ handleSetDashboardClick, activeDashboard }){
     const [hover, setHover] = useState([])
     
     return(
@@ -25,7 +23,7 @@ function MenuNav({ handleClick, activeDashboard }){
                         <div 
                             key={option.id} 
                             className= "menu-opt flex-column" 
-                            onClick={() => handleClick(option.id)}
+                            onClick={() => handleSetDashboardClick(option.id)}
                             onMouseEnter={() => setHover([...hover, option.id])}
                             onMouseLeave={() => setHover(hover.filter( i => i !== option.id))}
                         >

@@ -1,9 +1,8 @@
-//IMPORTS
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const Airtable = require('airtable')
 
-//SETUP AIRTABLE DATABASE
+//Setup AirTable
 const base = new Airtable({ apiKey: process.env.AIRTABLE_API_KEY }).base(process.env.AIRTABLE_BASE_ID)
 const table = process.env.AIRTABLE_ADVISORS_ID
 
@@ -13,17 +12,17 @@ const handleLogin = (req, res) => {
     const { email, pswd } = req.body
     if (!email || !pswd) return res.status(400).json({"message": "Email and password are required"})
     
-    //CHECK AIRTABLE FOR USER AND PASSWORD 
+    //Check AirTable for UserName and Password
     base(table).select({
         view: "Grid view"
     }).eachPage(async function page(records, fetchNextPage) {
-        //FIND USER
+        //Find user
         const foundUser = records.find(record => record.get('id') === email)
         if (!foundUser) {
             return res.sendStatus(401)
         }
 
-        //MATCH PASSWORD
+        //Match password
         const match = await bcrypt.compare(pswd, foundUser.fields.password)
         if (match) {
             const id = foundUser.id
@@ -54,7 +53,7 @@ const handleLogin = (req, res) => {
                 { expiresIn: '1d'}
             )
             
-            //SAVE REFRESHTOKEN TO AIRTABLE
+            //Save refreshToken to Airtable
             base(table).update(foundUser.id, {
                 "refreshToken": refreshToken
             }, err => {

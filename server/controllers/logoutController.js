@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken')
 const Airtable = require('airtable')
 
-//SETUP AIRTABLE DATABASE
+//Setup AirTable
 const base = new Airtable({ apiKey: process.env.AIRTABLE_API_KEY }).base(process.env.AIRTABLE_BASE_ID)
 const table = process.env.AIRTABLE_ADVISORS_ID
 
@@ -14,9 +14,9 @@ const handleLogout= (req, res) => {
     base(table).select({
         view: "Grid view"
     }).eachPage(function page(records, fetchNextPage) {
-        //FIND USER
+        //Find user
         const foundUser = records.find(record => record.get('refreshToken') === refreshToken)
-        //DELETE TOKEN IF USER FOUND
+        //Delete token if user found
         if (foundUser) {
             base(table).update(foundUser.id, {
                 "refreshToken": ''
@@ -32,12 +32,11 @@ const handleLogout= (req, res) => {
         fetchNextPage()
     }, function done(err) {
         if (err) {
-            //IF USER IS NOT FOUND AND COOKIE EXISTS, CLEAR COOKIE
+            //If user is not found and cookie exisits, clear cookie
             if (!foundUser){
                 res.clearCookie('jwt', {httpOnly: true, sameSite:'None', secure: true})
                 return res.sendStatus(204)
             }
-            
             console.error(err) 
             return
         } 

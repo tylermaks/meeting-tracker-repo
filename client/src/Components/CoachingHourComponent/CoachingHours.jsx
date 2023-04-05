@@ -8,13 +8,15 @@ import "../../Styles/HoursTable.scss"
 
 function CoachingHours() {
     const { deleteMeeting } = useAppData()
-    const [modal, setModal] = useState(false)
+    const [addHoursModal, setAddHoursModal] = useState(false)
     const [checkedRows, setCheckedRows] = useState([])
 
-    const handleClick = () => {
-        setModal(!modal)
+    //Open modal if button is clicked
+    const handleAddMeetingClick = () => {
+        setAddHoursModal(!addHoursModal)
     }
 
+    //Delete the selected meeting(s) and clear checkedRows state
     const handleDeleteMeetings = () => {
         deleteMeeting(checkedRows)
         setCheckedRows([])
@@ -22,7 +24,7 @@ function CoachingHours() {
 
     return(
         <section id="hours">
-            {modal && <AddHoursModal handleClick={handleClick} setModal={setModal}/>}
+            {addHoursModal && <AddHoursModal handleClick={handleAddMeetingClick} setAddHoursModal={setAddHoursModal}/>}
             <div className="flex-row flex-row--right">
                 <img
                     className={checkedRows.length === 0 ? "hidden" : "delete-records icon icon--md" } 
@@ -30,7 +32,7 @@ function CoachingHours() {
                     alt="Delete Selected Rows"
                     onClick = {handleDeleteMeetings} 
                 />
-                <div onClick={handleClick} className="btn btn--primary">
+                <div onClick={handleAddMeetingClick} className="btn btn--primary">
                     Add Hours
                 </div>
             </div>

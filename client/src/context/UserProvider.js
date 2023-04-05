@@ -3,6 +3,7 @@ import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import useAuth from "../hooks/useAuth"
 
 const MEETING_URL = "/meeting"
+const MEETING_LIST_URL = "/meetingList"
 const COMPANIES_URL = "/companies"
 const UserContext = createContext({})
 
@@ -11,32 +12,33 @@ export const UserProvider = ({ children }) => {
     const [meetingList, setMeetingList] = useState([])
     const [companyList, setCompanyList] = useState({})
     const axiosPrivate = useAxiosPrivate()
-    
-    //Get meeting data based on current user
+
+    //GET request for meeting data based on current user
     const getMeetingData = useCallback( async () => {
         try{
-            const response = await axiosPrivate.get(
-                `/user/${auth.userName}`
+            const response = await axiosPrivate.post(
+                MEETING_LIST_URL,
+                JSON.stringify({"userName":auth.userName})
             )
             
             const meetingData = response?.data?.meetingArr.map( item => {
                 const record = item.fields
-                
                 return(
                     {
                         record_ID: item.record_ID,
-                        CompanyName: record.CompanyName.toString(),
-                        CompanyNameId: record.CompanyNameId.toString(),
-                        Date: record.Date,
-                        Duration: Number(record.Duration),
-                        MeetingType: record.MeetingType.toString(),
-                        Meeting_ID: record.Meeting_ID,
-                        Notes: record.Notes,
+                        companyName: record.companyName.toString(),
+                        companyNameId: record.companyNameId.toString(),
+                        date: record.date,
+                        duration: Number(record.duration),
+                        meetingType: record.meetingType.toString(),
+                        meeting_ID: record.meeting_ID,
+                        notes: record.notes,
                         advisorLink: record.advisorLink.toString(),
                         email: record.email.toString()
                     }
                 )
             })
+
             setMeetingList({ meetingData })
         } catch (err) { 
             if (err.response) {
@@ -45,7 +47,7 @@ export const UserProvider = ({ children }) => {
         }
     }, [auth, axiosPrivate])
 
-    //Get company data including Company Name, EIRs, Status, Program, etc.
+    //GET request for company data including Company Name, EIRs, Status, Program, etc.
     const getCompanyList = useCallback (async () => {
         try{
             const response = await axiosPrivate.get(
@@ -59,7 +61,7 @@ export const UserProvider = ({ children }) => {
         }
     }, [auth.userName, axiosPrivate])
 
-    //Post new meeting submitted through AddHourModal component
+    //POST request for new meeting submitted through AddHourModal component
     const addMeeting =  async (data) => {
         try{ 
             await axiosPrivate.post(
