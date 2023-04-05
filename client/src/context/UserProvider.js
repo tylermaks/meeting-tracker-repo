@@ -40,9 +40,10 @@ export const UserProvider = ({ children }) => {
             })
 
             setMeetingList({ meetingData })
-        } catch (err) { 
-            if (err.response) {
-                console.error(err)
+        } catch (error) { 
+            if (error.response) {
+                console.error(error)
+                console.log("Failed to get meeting list")
             } 
         }
     }, [auth, axiosPrivate])
@@ -50,16 +51,13 @@ export const UserProvider = ({ children }) => {
     //GET request for company data including Company Name, EIRs, Status, Program, etc.
     const getCompanyList = useCallback (async () => {
         try{
-            const response = await axiosPrivate.get(
-                COMPANIES_URL,
-                JSON.stringify({"userName":auth.userName})
-            )
-            
+            const response = await axiosPrivate.get(COMPANIES_URL)
             setCompanyList(response?.data?.companyArr)
-        } catch(err) {
-            if (err) {console.error(err)}
+        } catch(error) {
+            console.error(error)
+            console.log("Failed to get company list")
         }
-    }, [auth.userName, axiosPrivate])
+    }, [axiosPrivate])
 
     //POST request for new meeting submitted through AddHourModal component
     const addMeeting =  async (data) => {
@@ -71,8 +69,9 @@ export const UserProvider = ({ children }) => {
                     headers: {'Content-Type': 'application/json'}
                 }
             )
-        } catch (err) {
-            console.error(err)
+        } catch (error) {
+            console.error(error)
+            console.log("Failed to add meeting to database")
         }
         setTimeout( () => {
             getMeetingData()
@@ -89,10 +88,9 @@ export const UserProvider = ({ children }) => {
                 }
             )
 
-        } catch(err) {
-            if (err.response) {
-                console.error(err)
-            } 
+        } catch(error) {
+            console.error(error)
+            console.log("Failed to delete meeting to database")
         }
         setTimeout( () => {
             getMeetingData()

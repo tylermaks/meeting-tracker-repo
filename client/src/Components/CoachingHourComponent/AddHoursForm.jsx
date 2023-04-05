@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import useAppData from "../../hooks/useAppData"
 
-function AddHoursForm({ setModal }) {
+function AddHoursForm({ setAddHoursModal }) {
     const { addMeeting, companyList } = useAppData()
     const [companyName, setCompanyName] = useState('')
     const [date, setDate] = useState('')
@@ -27,7 +27,7 @@ function AddHoursForm({ setModal }) {
         setDate('')
         setDuration('')
         setNotes('')
-        if (button === 'submit') { setModal(false)}
+        button === 'submit' && setAddHoursModal(false)
     }
 
 
@@ -44,9 +44,9 @@ function AddHoursForm({ setModal }) {
                 >
                     <option value="" disabled selected>Select Company</option>
                     {
-                        companyList && companyList.map( company => { 
+                        companyList && companyList.map( (company, i) => { 
                             return(
-                                <option value={company.companyName}>{company.companyName}</option>
+                                <option key={i} value={company.companyName}>{company.companyName}</option>
                             )
                         })
 
@@ -105,7 +105,7 @@ function AddHoursForm({ setModal }) {
                     required
                 >
                 </textarea>
-                <button className='btn btn--primary' onClick={(e) => setButton(e.target.id)}>Submit</button>
+                <button id="submit" className='btn btn--primary' onClick={(e) => setButton(e.target.id)}>Submit</button>
                 <button className="btn btn--secondary add-btn" onClick={(e) => setButton(e.target.id)}>Add Another Meeting</button>
                 
             </div>

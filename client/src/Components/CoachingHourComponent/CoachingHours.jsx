@@ -20,6 +20,9 @@ function CoachingHours() {
     const handleDeleteMeetings = () => {
         deleteMeeting(checkedRows)
         setCheckedRows([])
+        //Reset checkboxes in DOM
+        const checkboxes = document.querySelectorAll('input[type="checkbox"]')
+        checkboxes.forEach( checkbox => checkbox.checked = false)
     }
 
     return(

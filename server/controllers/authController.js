@@ -2,81 +2,53 @@ const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const Airtable = require('airtable')
 
-//Setup AirTable
+//Setup Airtable
 const base = new Airtable({ apiKey: process.env.AIRTABLE_API_KEY }).base(process.env.AIRTABLE_BASE_ID)
 const table = process.env.AIRTABLE_ADVISORS_ID
 
-//LOGIN 
-const handleLogin = (req, res) => {
-    //Validate POST request
+const handleLogin = async (req, res) => {
     const { email, pswd } = req.body
-    if (!email || !pswd) return res.status(400).json({"message": "Email and password are required"})
+    if (!email || !pswd) {
+        return res.status(400).json({"message": "Email and password are required"})
+    }
     
-    //Check AirTable for UserName and Password
-    base(table).select({
-        view: "Grid view"
-    }).eachPage(async function page(records, fetchNextPage) {
-        //Find user
+    try {
+        const records = await base(table).select({
+            view: "Grid view"
+        }).all()
+        
         const foundUser = records.find(record => record.get('id') === email)
         if (!foundUser) {
             return res.sendStatus(401)
         }
 
-        //Match password
         const match = await bcrypt.compare(pswd, foundUser.fields.password)
         if (match) {
-            const id = foundUser.id
-            const username = foundUser.fields.id
-            const roles = foundUser.fields.role 
-            const fName = foundUser.fields.firstName
-            const lName = foundUser.fields.lastName
+            const { id, fields: { id: username, role: roles, firstName: fName, lastName: lName } } = foundUser
     
             const accessToken = jwt.sign(
-                { 
-                    "UserInfo": {
-                        "username": username,
-                        "roles": roles
-                    }
-                },
+                { "UserInfo": { username, roles } },
                 process.env.ACCESS_TOKEN,
                 { expiresIn: '900s'}
             )
             
             const refreshToken = jwt.sign(
-                {           
-                    "UserInfo": {
-                        "username": username,
-                        "roles": roles
-                    }
-                },
+                { "UserInfo": { username, roles } },
                 process.env.REFRESH_TOKEN,
                 { expiresIn: '1d'}
             )
             
-            //Save refreshToken to Airtable
-            base(table).update(foundUser.id, {
-                "refreshToken": refreshToken
-            }, err => {
-                if (err) {
-                    console.error(err)
-                    return
-                }
-            })
-
-            res.cookie('jwt', refreshToken, {httpOnly: true, sameSite:'None', secure: true, maxAge: 24 * 60 * 60 * 1000})
-            res.json({ id, roles, accessToken, fName, lName})
-            console.log("Success!")
+            await base(table).update(foundUser.id, { "refreshToken": refreshToken })
+            
+            res.cookie('jwt', refreshToken, { httpOnly: true, sameSite: 'None', secure: true, maxAge: 24 * 60 * 60 * 1000 })
+            res.json({ id, roles, accessToken, fName, lName })
         } else {
             return res.sendStatus(401)
         }
-
-        fetchNextPage();
-    }, function done(err) {
-        if (err) {
-            console.error(err)
-            return
-        } 
-    })
+    } catch (error) {
+        console.error(error)
+        return res.sendStatus(500)
+    }
 }
 
 

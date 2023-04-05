@@ -13,11 +13,8 @@ function Logout(){
                 setAuth({})
             }
         } catch (error) {
-            if (error.repsonse) {
-                console.log(error.response.data)
-                console.log(error.response.status)
-                console.log(error.response.headers) 
-            } 
+            console.error(error)
+            console.log("Unable to logout")
         }
     }
 

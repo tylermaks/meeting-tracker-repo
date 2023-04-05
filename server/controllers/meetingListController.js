@@ -5,31 +5,26 @@ const base = new Airtable({ apiKey: process.env.AIRTABLE_API_KEY }).base(process
 const table = process.env.AIRTABLE_MEETING_ID
 
 
-const getMeetingList = (req, res) => {
-    const { userName } = req.body
-    const meetingArr = []
-
-    base(table).select({
+const getAdvisorMeetingList = async (req, res) => {
+    const { userName } = req.body;
+    const meetingArr = [];
+  
+    try {
+      const records = await base(table).select({
         filterByFormula: `advisorLink = "${userName}"`
-    }).eachPage(function page(records, fetchNextPage) {
-        records.forEach( record => {
-            meetingArr.push(
-                {
-                    record_ID: record.id, 
-                    fields: record.fields
-                }
-            )
-        })
-        res.json({ meetingArr })  
-              
-        fetchNextPage()
-    }, function done(err){
-        if (err) {
-            console.log(err)
-            return
-        }
-    })
-} 
-    
-
-module.exports = { getMeetingList }
+      }).all();
+  
+      records.forEach(record => {
+        const { id: record_ID, fields } = record;
+        meetingArr.push({ record_ID, fields });
+      });
+  
+      res.json({ meetingArr });
+    } catch (error) {
+      console.error(error);
+      console.log("Unable to get advisor meeting list");
+      res.sendStatus(500);
+    }
+  };
+  
+  module.exports = { getAdvisorMeetingList };

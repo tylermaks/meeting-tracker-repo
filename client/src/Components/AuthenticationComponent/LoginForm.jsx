@@ -44,13 +44,13 @@ function LoginForm(){
             setPassword('')
             navigate("/home", { replace: true })
 
-        } catch (err) {
-            console.log(err.response.status)
-            if(!err?.response){
+        } catch (error) {
+            console.error(error.response.status)
+            if(!error?.response){
                 setErrorMsg('No Server Response')
-            } else if (err.reponse?.status === 400) { 
+            } else if (error?.reponse?.status === 400) { 
                 setErrorMsg("Missing Username or Password")
-            } else if (err.reponse?.status === 401) {
+            } else if (error?.reponse?.status === 401) {
                 setErrorMsg("Username or Password is incorrect")
             } else { 
                 setErrorMsg("Login Failed")

@@ -15,9 +15,8 @@ function SupportRequests(){
             )
             setSupportRequests(response?.data?.requestArr)
         } catch (err) {
-            if (err.response) {
-                console.error(err)
-            } 
+            console.error(err)
+            console.log("Unable to loag support request")
         }
     }, [axiosPrivate])
 

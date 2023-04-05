@@ -1,31 +1,31 @@
 const Airtable = require('airtable')
 
-//SETUP AIRTABLE DATABASE
 const base = new Airtable({ apiKey: process.env.AIRTABLE_API_KEY }).base(process.env.AIRTABLE_BASE_ID)
 const table = process.env.AIRTABLE_REQUESTS_ID
 
-//Get Support Request
-const getSupportRequests = (req, res) => { 
-    base(table).select({
-        sort: [
-            {field: 'requestID', direction: "asc"}
-        ]
-    }).eachPage(function page(records, fetchNextPage){
-        const requestArr = []
+const getSupportRequests = (req, res) => {
+    const requestArr = []
 
-        records.forEach( record => { 
-            requestArr.push(record.fields)
+    base(table)
+        .select({
+            sort: [{field: 'requestID', direction: 'asc'}],
         })
-
-        fetchNextPage()
-        res.json({ requestArr })
-    }, function done(err){
-        if(err){
-            console.error(err)
-            return
-        }
-    })
+        .eachPage(
+            async (records, fetchNextPage) => {
+                for (const record of records) {
+                    requestArr.push(record.fields)
+                }
+                await fetchNextPage()
+            },
+            (error) => {
+                if (error) {
+                    console.error(error)
+                    console.log('Unable to retrieve support request list')
+                } else {
+                    res.json({ requestArr })
+                }
+            }
+        )
 }
-
 
 module.exports = { getSupportRequests }

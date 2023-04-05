@@ -3,7 +3,7 @@ const router = express.Router()
 const meetingListController = require("../../controllers/meetingListController")
 
 router.route("/")
-    .post(meetingListController.getMeetingList)
+    .post(meetingListController.getAdvisorMeetingList)
 
 
 module.exports = router

@@ -25,7 +25,7 @@ function AddHoursModal({ handleClick, setAddHoursModal }){
                 </div>
                     {
                         modalFormView
-                            ? <AddHoursForm setModal={setAddHoursModal}/> 
+                            ? <AddHoursForm setAddHoursModal={setAddHoursModal}/> 
                             : <ImportCSV setAddHoursModal={setAddHoursModal}/>
                     }
             </div>

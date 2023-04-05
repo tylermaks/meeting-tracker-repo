@@ -77,6 +77,7 @@ function CoachingHoursTable ({ checkedRows, setCheckedRows }){
                                     <input 
                                         type="checkbox" 
                                         name={id}
+                                        className="table-checkbox"
                                         onChange={() => addCheckboxToState(row.record_ID)}
                                     />
                                 </td>
