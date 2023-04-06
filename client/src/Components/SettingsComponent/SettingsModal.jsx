@@ -1,5 +1,5 @@
 import Exit from "../../Images/xmark-solid.svg"
-import "../../Styles/Settings.scss"
+import "../../Styles/SettingsStyles/SettingsModal.scss"
 
 function SettingsModal({ modal, setModal }){ 
     const repoLink = "https://github.com/tylermaks/meeting-tracker-repo/tree/main/client/src/Components/SettingsComponent"

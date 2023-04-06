@@ -1,0 +1,49 @@
+/////////////////
+/// MENU NAV ///
+///////////////
+$lt-blue: #FAF7FB;
+
+#menu-nav{
+    background-color: #0d3b66;
+    gap: 3.25rem;
+    grid-area: menu;
+    padding-top: 1.5rem;
+    padding-left: 0.25rem;
+
+    div{
+        cursor: pointer;
+    }
+}
+
+.menu-icon{
+    filter: invert(100%) grayscale(100%) brightness(200%); 
+
+    &--active{
+        filter: grayscale(100%); 
+    }
+}
+
+.menu-option{ 
+   border-top-left-radius: 15px;
+   border-bottom-left-radius: 15px;
+   border-top-right-radius: -15px;
+   display: flex;
+   justify-content: center;
+   padding:0.5rem;
+   position: relative; 
+
+   &--active{
+    background-color: $lt-blue;
+    width: 100%;
+   }
+}
+
+.main-menu-hover{  
+    border-radius: 5px; 
+    background-color: #212529;
+    color: #fff;
+    padding: 0.25rem;
+    position: absolute;
+    top: 4px;
+    left: 130%;
+}

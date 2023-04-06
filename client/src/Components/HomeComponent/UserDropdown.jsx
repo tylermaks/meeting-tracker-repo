@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import useAuth from "../../hooks/useAuth"
 import Logout from '../AuthenticationComponent/Logout'
-import '../../Styles/UserDropdown.scss'
+import '../../Styles/Home/UserDropdown.scss'
 
 function UserDropdown(){ 
     const { auth } = useAuth()
@@ -13,9 +13,9 @@ function UserDropdown(){
     }
 
     return(
-        <div id="user-dropdown" className="flex-col">
+        <div>
             <div 
-                className="user-profile flex-row flex-row--center"
+                className="user-circle flex-row flex-row--center"
                 onClick={handleDropdownClick}
             >
                 {auth.fName[0]}{auth.lName[0]}

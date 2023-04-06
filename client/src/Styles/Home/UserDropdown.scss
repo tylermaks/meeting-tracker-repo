@@ -1,25 +1,26 @@
+//////////////////////
+/// USER DROPDOWN ///
+////////////////////
 $grey: #4D4D4D;
 
-#user-dropdown{ 
-    position: relative;
-    cursor: pointer;
-}
-
-.user-profile{
+.user-circle{
         background-color: $grey;
         border-radius: 50%;
         color: #fff;
+        cursor: pointer;
         height: 2rem;
         width: 2rem;
+        position: relative;
 }
 
 .logout{ 
     position: absolute;
-    top: 2.75rem;
-    right:0;
+    top: 4.5rem;
+    right:7.5rem;
 
     border-radius: 0.25rem;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+    cursor: pointer;
     background-color: #fff;
     padding: 0.75rem 1.5rem;
     text-align: right;

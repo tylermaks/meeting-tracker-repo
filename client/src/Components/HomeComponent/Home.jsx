@@ -3,7 +3,7 @@ import { UserProvider } from "../../context/UserProvider"
 import HomeNav from "./HomeNav";
 import MenuNav from "./MenuNav";
 import Dashboard from "./Dashboard";
-import "../../Styles/Home.scss"
+import "../../Styles/Home/Home.scss"
 
 
 function Home(){

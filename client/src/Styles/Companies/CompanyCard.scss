@@ -1,0 +1,49 @@
+//////////////////////
+/// COMPANY CARDS ///
+////////////////////
+.company-card{
+    padding: 1.5rem !important;
+
+    p{
+        font-size: 14px;
+    }
+}
+
+.status{
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+
+    &--green{
+        background-color: #f0faf9;
+        
+        p{
+            color:#429d8b !important;
+            font-size: 12px !important;
+        }
+    }
+
+    &--orange{
+        background-color: #fffaf1;
+
+        p{
+            color: #ffcd32 !important;
+            font-size: 12px !important;
+        }
+    }
+}
+
+.support-request{
+    height: 6rem;
+    margin-top: 1.5rem;
+
+    & :first-child{
+        font-weight: 600;
+    }
+}
+
+.card-btn{
+    background-color: #0d3b66;
+    border-radius: 15px;
+    color: #fff;
+    cursor: pointer;
+}

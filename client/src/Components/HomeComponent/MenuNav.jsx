@@ -3,7 +3,7 @@ import bolt from "../../Images/bolt-solid.svg"
 import meetings from "../../Images/calendar-regular.svg"
 import files from "../../Images/file-lines-solid.svg"
 import gear from "../../Images/gear-solid.svg"
-import "../../Styles/MenuNav.scss"
+import "../../Styles/Home/MenuNav.scss"
 
 const menuOptions = [
     { id: 1, name: "Companies", icon: bolt },
@@ -22,19 +22,18 @@ function MenuNav({ handleSetDashboardClick, activeDashboard }){
                     return(
                         <div 
                             key={option.id} 
-                            className= "menu-opt flex-column" 
+                            className={option.id === activeDashboard + 1 
+                                ? "menu-option menu-option--active flex-row flex-row--center" 
+                                : "menu-option flex-row flex-row--center"}
                             onClick={() => handleSetDashboardClick(option.id)}
                             onMouseEnter={() => setHover([...hover, option.id])}
                             onMouseLeave={() => setHover(hover.filter( i => i !== option.id))}
                         >
-                            <div className={option.id === activeDashboard + 1 ? "icon-active icon-container" : "icon-container"}>
-                                <img 
-                                    className={option.id === activeDashboard + 1 ? "icon--active icon--lg" : "icon icon--lg"}
-                                    src={option.icon} 
-                                    alt={`${option.name} Icon`} 
-                                />
-                            </div>
-                           
+                            <img 
+                                className={option.id === activeDashboard + 1 ? "menu-icon--active icon--lg" : "menu-icon icon--lg"}
+                                src={option.icon} 
+                                alt={`${option.name} Icon`} 
+                            />   
                             <div className={hover.includes(option.id) ? "main-menu-hover" : "hidden"}>
                                 {option.name}
                             </div>

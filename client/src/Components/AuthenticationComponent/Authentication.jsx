@@ -1,5 +1,5 @@
 import LoginForm from './LoginForm'
-import "../../Styles/Login.scss"
+import "../../Styles/Authentication/Login.scss"
 
 function Authentication(){
     return(

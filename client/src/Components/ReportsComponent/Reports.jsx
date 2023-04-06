@@ -3,7 +3,7 @@ import useAuth from '../../hooks/useAuth'
 import useAppData from "../../hooks/useAppData"
 import exportReportPDF from './ExportReportPDF'
 import ReportsTable from './ReportsTable'
-import "../../Styles/Reports.scss"
+import "../../Styles/Reports/Reports.scss"
 
 function Reports(){
     const { meetingList } = useAppData()
@@ -46,7 +46,7 @@ function Reports(){
                     <div onClick={handleExportPDF} className="btn btn--primary">Export PDF</div>
                 </div>
             </div>
-            <div id="report-table" className='table-container flex-column gap--2'>
+            <div className='flex-column gap--3'>
                 <h3>{monthsArr[currentMonth] + " Report"}</h3>
                 <div>
                     <p>Coaching Hours</p>

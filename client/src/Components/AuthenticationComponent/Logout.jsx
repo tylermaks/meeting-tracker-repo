@@ -2,6 +2,7 @@ import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import useAuth from "../../hooks/useAuth"
 
 function Logout(){
+    //Hooks
     const { setAuth } = useAuth()
     const axiosPrivate = useAxiosPrivate()
 

@@ -5,7 +5,7 @@ function SupportRequests(){
     const { supportRequestList } = useAppData()
 
     return(
-        <section id="browse-companies" className="company-grid">
+        <section className="card-grid">
             {
                 supportRequestList && supportRequestList.map( (request, i) => { 
                     return(

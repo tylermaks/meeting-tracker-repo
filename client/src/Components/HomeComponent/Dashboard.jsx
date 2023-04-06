@@ -2,7 +2,6 @@ import Companies from "../CompanyComponents/Companies"
 import CoachingHours from "../CoachingHourComponent/CoachingHours"
 import Reports from "../ReportsComponent/Reports"
 import Settings from "../SettingsComponent/Settings"
-import "../../Styles/Dashboard.scss"
 
 function Dashboard({ activeDashboard }){
     const components = [
@@ -14,7 +13,7 @@ function Dashboard({ activeDashboard }){
 
     return(
         <>
-            <h1 className="dashboard-title">{components[activeDashboard].id}</h1>
+            <h1>{components[activeDashboard].id}</h1>
             <main>
                 {components[activeDashboard].component}
             </main>

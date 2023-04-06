@@ -2,7 +2,7 @@ import { useState, useEffect } from "react"
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import useAuth from "../../hooks/useAuth"
 import SettingsModal from "./SettingsModal";
-import "../../Styles/Settings.scss"
+import "../../Styles/SettingsStyles/Settings.scss"
 const SETTINGS_URL = "/settings"
 
 function Settings() {
@@ -113,7 +113,7 @@ function Settings() {
     // firstName and lastName are used for updating account information
     // currentPassword, newPassword, and confirmPassword are used for changing the password
     return(
-        <section id="settings" className="dashboard flex-column gap--15">
+        <section id="settings" className="dashboard flex-column gap--2">
             <SettingsModal 
                 modal={modal} 
                 setModal={setModal}
@@ -159,7 +159,7 @@ function Settings() {
                 <input 
                     type="password" 
                     name="current-password" 
-                    placeholder="Enter Current Password"
+                    placeholder="Current Password"
                     autoComplete="off"
                     value={currentPassword}
                     onChange={handleCurrentPasswordChange}
@@ -199,15 +199,11 @@ function Settings() {
                         onBlur = {updateMatchMsg}
                     />
                     <p className="input-note" style={matchMsg ? {color: "red"}:null}>
-                        {
-                            matchMsg
-                                ? `${matchMsg}`
-                                : null
-                        }
+                        { matchMsg && `${matchMsg}`}
                     </p>
                 </div>
             </div>
-            <div className="flex-row flex-row--right gap--15">
+            <div className="flex-row flex-row--right gap--1">
                 <button onClick={handleReset} className="btn btn--secondary">Reset</button>
                 <button onClick={handleSubmit} className="btn btn--primary">Save</button>
             </div>

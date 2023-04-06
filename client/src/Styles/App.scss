@@ -1,4 +1,6 @@
-//VARIABLES
+/////////////////
+/// VARIABLES //
+///////////////
 $teal: #008B92;
 $grey: #4D4D4D;
 $lt-grey: #aaaaaa;
@@ -6,23 +8,16 @@ $x-lt-grey:#ececec;
 $lt-blue: #FAF7FB;
 $orange: #ff6900;
 
-
-//SETUP
-*,
-*::before, 
-*::after{
+//////////////
+/// SETUP ///
+////////////
+*, *::before, *::after{
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
-html, 
-body, 
-.App{ 
-    min-height: 100vh;
-}
-
-.root{
+html, body, .App, .root{ 
     min-height: 100vh;
 }
 
@@ -30,14 +25,16 @@ body, textarea{
     font-family: "Poppins", sans-serif;
 }
 
-.App{
-    display: flex; 
-    flex-direction: column;
+//////////////////////////////////////////////
+/// FONTS, BUTTONS, ICONS, & FORM ELEMENTS ///
+//////////////////////////////////////////////
+h1, h2, h3, p, label{
+    color: $grey;
 }
 
-//FONTS & BUTTONS & ICONS & FORMS
-h1, h2, h3{
-    color: $grey;
+h1{
+    padding: 3.5rem 0 2.5rem 0;
+    font-size: 2.25rem;
 }
 
 p{
@@ -67,18 +64,20 @@ p{
     }
 }
 
-
-
 input, textarea, select{
     border: 1px solid $lt-grey;
+    border-radius: 0.25rem;
     color: $grey;
-    font-size: 1rem;
     display: block;
-    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    line-height: 1.5rem;
+    padding: .4375rem .9375rem;
 }
 
 label{
     display:block;
+    font-size: 0.75rem;
+    font-weight: 600;
     margin-bottom: 0.5rem;
 }
 
@@ -101,7 +100,9 @@ label{
     }
 }
 
-//TABLES 
+///////////////
+/// TABLES ///
+/////////////
 table{
     border: 1px solid $x-lt-grey;
     border-collapse: collapse;
@@ -120,7 +121,9 @@ th{
     background-color: $lt-blue;
 }
 
-//GLOBAL UTILITY CLASSES
+///////////////////////
+/// UTILITY CLASSES ///
+///////////////////////
 .flex{
     display: flex;
 }
@@ -161,28 +164,15 @@ th{
         gap: 1rem;
     }
 
-    &--15{
-        gap: 1.5rem;
-    }
-
     &--2{
         gap: 2rem;
     }
-
-    &--3{
-        gap: 3rem;
-    } 
-
-    &--4{
-        gap: 4rem;
-    }
 }
 
-.hidden{
-    display: none;
-}
 
-//GLOBAL CLASSES
+///////////////////////
+/// GLOBAL CLASSES ///
+/////////////////////
 .dashboard{ 
     background-color: #fff;
     border-radius: 1rem;
@@ -191,8 +181,20 @@ th{
 }
 
 .exit{
-    position: absolute;
-    top: 1.5rem;
-    right: 1.5rem;
     cursor: pointer;
+    opacity: 0.75;
+    position: absolute;
+    right: 1.5rem;
+    top: 1.5rem;
+}
+
+.card-grid{ 
+    display: grid; 
+    gap: 2rem;
+    grid-template-columns: repeat(3, 1fr);    
+    margin-bottom: 5rem;
+}
+
+.hidden{
+    display: none;
 }

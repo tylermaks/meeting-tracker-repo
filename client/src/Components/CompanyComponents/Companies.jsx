@@ -2,7 +2,7 @@ import useAppData from "../../hooks/useAppData";
 import useAuth from "../../hooks/useAuth"
 import CompanyCard from "./CompanyCard";
 import SupportRequests from "./SupportRequests";
-import "../../Styles/Companies.scss"
+import "../../Styles/Companies/Companies.scss"
 
 function Companies() {
     const { companyList } = useAppData()
@@ -11,8 +11,8 @@ function Companies() {
 
     return(
         <section id="companies">
-            <h2 className="title">Your Companies</h2>
-            <div id="user-companies" className="company-grid">
+            <h2>Your Companies</h2>
+            <div className="card-grid">
                 {
                     filteredCompanies?.map((item, i) => { 
                         return(
