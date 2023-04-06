@@ -5,12 +5,14 @@ import useAuth from "../hooks/useAuth"
 const MEETING_URL = "/meeting"
 const MEETING_LIST_URL = "/meetingList"
 const COMPANIES_URL = "/companies"
+const SUPPORT_REQUESTS = '/supportRequests'
 const UserContext = createContext({})
 
 export const UserProvider = ({ children }) => {
     const { auth } = useAuth()
     const [meetingList, setMeetingList] = useState([])
     const [companyList, setCompanyList] = useState({})
+    const [supportRequestList, setSupportRequestList] = useState([])
     const axiosPrivate = useAxiosPrivate()
 
     //GET request for meeting data based on current user
@@ -48,16 +50,6 @@ export const UserProvider = ({ children }) => {
         }
     }, [auth, axiosPrivate])
 
-    //GET request for company data including Company Name, EIRs, Status, Program, etc.
-    const getCompanyList = useCallback (async () => {
-        try{
-            const response = await axiosPrivate.get(COMPANIES_URL)
-            setCompanyList(response?.data?.companyArr)
-        } catch(error) {
-            console.error(error)
-            console.log("Failed to get company list")
-        }
-    }, [axiosPrivate])
 
     //POST request for new meeting submitted through AddHourModal component
     const addMeeting =  async (data) => {
@@ -77,6 +69,30 @@ export const UserProvider = ({ children }) => {
             getMeetingData()
         }, "750")
     }
+
+    //GET request for company data including Company Name, EIRs, Status, Program, etc.
+    const getCompanyList = useCallback (async () => {
+        try{
+            const response = await axiosPrivate.get(COMPANIES_URL)
+            setCompanyList(response?.data?.companyArr)
+        } catch(error) {
+            console.error(error)
+            console.log("Failed to get company list")
+        }
+    }, [axiosPrivate])
+
+    //Send get request to retreive Support Request Data
+    const getSupportRequests = useCallback (async () => {
+        try{   
+            const response = await axiosPrivate.get(
+                SUPPORT_REQUESTS
+            )
+            setSupportRequestList(response?.data?.requestArr)
+        } catch (err) {
+            console.error(err)
+            console.log("Unable to loag support request")
+        }
+    }, [axiosPrivate])
 
     //Delete selected meeting
     const deleteMeeting = async (records) => { 
@@ -100,12 +116,13 @@ export const UserProvider = ({ children }) => {
 
     //Render Meeting and Company data on load
     useEffect( () => { 
+        getSupportRequests()
         getMeetingData()
         getCompanyList()
-    },[getMeetingData, getCompanyList])
+    },[getMeetingData, getCompanyList, getSupportRequests])
 
     return (
-        <UserContext.Provider value ={{ meetingList, companyList, addMeeting, deleteMeeting }}>
+        <UserContext.Provider value ={{ meetingList, companyList, supportRequestList, addMeeting, deleteMeeting }}>
             {children}
         </UserContext.Provider>
     )

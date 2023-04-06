@@ -1,0 +1,32 @@
+/////////////////////////////
+/// COACHING HOURS TABLE ///
+///////////////////////////
+$grey: #4D4D4D;
+
+//PAGINATION
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.page-item {
+  margin: 0 0.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.active {
+  text-decoration: underline;
+}
+
+.page-link {
+  color: $grey;
+  text-decoration: none;
+}
+
+.page-link:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}

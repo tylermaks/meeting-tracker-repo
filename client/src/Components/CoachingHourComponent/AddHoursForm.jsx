@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import useAppData from "../../hooks/useAppData"
+import "../../Styles/CoachingHours/AddHoursForm.scss"
 
 function AddHoursForm({ setAddHoursModal }) {
     const { addMeeting, companyList } = useAppData()
@@ -32,7 +33,7 @@ function AddHoursForm({ setAddHoursModal }) {
 
 
     return(
-        <form className="flex-col" onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit}>
             <div className="inner-form">
                 <label htmlFor="company-name">Company Name</label>
                 <select 
@@ -54,7 +55,7 @@ function AddHoursForm({ setAddHoursModal }) {
              
                 </select>
 
-                <div className='form-row flex-row flex-row--space'>
+                <div className='flex-row flex-row--space'>
                     <div>
                         <label htmlFor="date">Date</label>
                         <input 
@@ -99,14 +100,14 @@ function AddHoursForm({ setAddHoursModal }) {
                 <label htmlFor="notes">Notes</label>
                 <textarea 
                     name="notes" 
-                    id="notes" 
+                    id="form-notes" 
                     value={notes}
                     onChange={(e) => setNotes(e.target.value)}  
                     required
                 >
                 </textarea>
                 <button id="submit" className='btn btn--primary' onClick={(e) => setButton(e.target.id)}>Submit</button>
-                <button className="btn btn--secondary add-btn" onClick={(e) => setButton(e.target.id)}>Add Another Meeting</button>
+                <button className="btn btn--secondary" onClick={(e) => setButton(e.target.id)}>Add Another Meeting</button>
                 
             </div>
         </form>

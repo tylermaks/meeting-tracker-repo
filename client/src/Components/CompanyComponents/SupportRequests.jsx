@@ -1,35 +1,13 @@
-import { useState, useEffect, useCallback } from 'react' 
-import useAxiosPrivate from "../../hooks/useAxiosPrivate";
+import useAppData from "../../hooks/useAppData"
 import CompanyCard from './CompanyCard';
 
 function SupportRequests(){
-    const axiosPrivate = useAxiosPrivate()
-    const SUPPORT_REQUESTS = '/supportRequests'
-    const [supportRequests, setSupportRequests] = useState([])
-
-    //Send get request to retreive Support Request Data
-    const getSupportRequests = useCallback (async () => {
-        try{   
-            const response = await axiosPrivate.get(
-                SUPPORT_REQUESTS
-            )
-            setSupportRequests(response?.data?.requestArr)
-        } catch (err) {
-            console.error(err)
-            console.log("Unable to loag support request")
-        }
-    }, [axiosPrivate])
-
-    //Call getSupportRequest on load
-    useEffect(() => {
-        getSupportRequests()
-    }, [getSupportRequests])
-
+    const { supportRequestList } = useAppData()
 
     return(
         <section id="browse-companies" className="company-grid">
             {
-                supportRequests.map( (request, i) => { 
+                supportRequestList && supportRequestList.map( (request, i) => { 
                     return(
                         <CompanyCard
                             key={i}

@@ -2,7 +2,7 @@ import { useState, useEffect, useMemo } from 'react'
 import ReactPaginate from 'react-paginate';
 import useAppData from "../../hooks/useAppData"
 import CoachingHoursTableHeader from './CoachingHoursTableHeader'
-import "../../Styles/HoursTable.scss"
+import "../../Styles/CoachingHours/CoachingHoursTable.scss"
 
 function CoachingHoursTable ({ checkedRows, setCheckedRows }){ 
     const { meetingList } = useAppData()
@@ -12,11 +12,11 @@ function CoachingHoursTable ({ checkedRows, setCheckedRows }){
     const itemsPerPage = 10;
 
     const columnNames = [
-        {id: "CompanyName", label:"Company Name"}, 
-        {id: "Date", label:"Date"}, 
-        {id: "Duration", label: "Duration"},
-        {id: "MeetingType", label: "Meeting Type"},
-        {id: "Notes", label:"Notes"}
+        {id: "companyName", label:"Company Name"}, 
+        {id: "date", label:"Date"}, 
+        {id: "duration", label: "Duration"},
+        {id: "meetingType", label: "Meeting Type"},
+        {id: "notes", label:"Notes"}
     ]
 
     //Set rows state on load, and update if meetingList changes 
@@ -77,7 +77,6 @@ function CoachingHoursTable ({ checkedRows, setCheckedRows }){
                                     <input 
                                         type="checkbox" 
                                         name={id}
-                                        className="table-checkbox"
                                         onChange={() => addCheckboxToState(row.record_ID)}
                                     />
                                 </td>

@@ -1,0 +1,39 @@
+////////////////////////////////////
+/// COACHING HOURS TABLE HEADER ///
+//////////////////////////////////
+.filter-dropdown{ 
+    border-radius: 0.5rem;
+    text-align: left;
+    overflow: scroll;
+    height: 350px;
+    width: 240px;
+
+    position: absolute;
+    right:0.2rem;
+    top: 0.2rem;
+    z-index: 1;
+
+    p, img{
+        cursor: pointer;
+    }
+
+    div{
+        padding-left: 0.75rem;
+    }
+
+    img{
+        margin-right: 0.75rem;
+    }
+}
+
+.sort{
+    margin-left: 0.5rem;
+}
+
+.hidden-checkmark{
+    opacity: 0;
+}
+
+#notes{
+    display:none;
+}

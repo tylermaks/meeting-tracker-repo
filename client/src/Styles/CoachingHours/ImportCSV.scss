@@ -1,32 +1,16 @@
+//////////////////
+/// IMPORT CSV ///
+//////////////////
 $grey: #4D4D4D;
 $teal: #008B92;
 
-#drop-zone{
-    border: 1px dashed $grey;
-    height: 400px;
-    width: 100%
-}
-
 .import{
-    display: flex; 
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-
     border: 2px dashed $teal;
     border-radius: 0.5rem;
     margin-top: 3rem;
     padding-block: 4rem;
     width: 100%;
     height: 400px;
-
-    & > *{ 
-        pointer-events: none;
-    }
-
-    img{
-        margin: 2rem;
-    }
 
     h3{ 
         color: $teal;

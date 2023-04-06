@@ -2,6 +2,7 @@ import Exit from "../../Images/xmark-solid.svg"
 import "../../Styles/Settings.scss"
 
 function SettingsModal({ modal, setModal }){ 
+    const repoLink = "https://github.com/tylermaks/meeting-tracker-repo/tree/main/client/src/Components/SettingsComponent"
 
     const handleClick = () => {
         setModal(false)
@@ -26,7 +27,7 @@ function SettingsModal({ modal, setModal }){
                 has been limited.
             </p>
             <p>
-                I've included the code in the comments in the github repository, feel free to check it out <a href="https://github.com/tylermaks/meeting-tracker-repo/blob/main/server/controllers/updateAccountController.js">here.</a>
+                I've included the code in the comments in the github repository, feel free to check it out <a href={repoLink}>here.</a>
             </p>
             <p>
                 Thansk again,<br></br>

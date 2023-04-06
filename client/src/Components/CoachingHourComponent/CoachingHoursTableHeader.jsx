@@ -2,21 +2,22 @@ import { useState, useEffect, useRef } from 'react'
 import useAppData from "../../hooks/useAppData"
 import sort from "../../Images/sort-solid.svg"
 import check from "../../Images/check-solid.svg"
-import "../../Styles/HoursTable.scss"
+import "../../Styles/CoachingHours/CoachingHoursTableHeader.scss"
 
 function CoachingHoursTableHeader ({ label, id, rows, setRows, filterItems, setFilterItems }){
     const { meetingList } = useAppData()
     const [dropdown, setDropdown ] = useState(false)
-    const [meetingData, setMeetingData] = useState([])
-    const uniqueValues = [...new Set(meetingData?.map(item => item[id]))]
+    const [dropdownData, setDropdownData] = useState([])
+    const uniqueValues = [...new Set(dropdownData?.map(item => item[id]))]
     const dropdownRef = useRef(null)
     const innerRef = useRef(null)
-    
+
+
     //Load and click event to detect if clickevent is outside of header dropdown
     //Set meetingData to be parsed into dropdown components
     useEffect(() => {
         document.getElementById("home").addEventListener("click", toggleDropdown)
-        setMeetingData(meetingList?.meetingData)
+        setDropdownData(meetingList?.meetingData)
     },[meetingList])
 
     //Toggle header dropdowns
@@ -48,8 +49,8 @@ function CoachingHoursTableHeader ({ label, id, rows, setRows, filterItems, setF
     }
 
     return(
-        <th className="column-header">
-            {label}
+        <th>
+            <span>{label}</span>
             <img
                 id={id}
                 className="sort icon icon--small" 
@@ -57,9 +58,9 @@ function CoachingHoursTableHeader ({ label, id, rows, setRows, filterItems, setF
                 src={sort} 
                 alt={`Sort ${id}`} 
             />
-            <div ref={innerRef} className={dropdown ? "filter-dropdown flex-column" : "hidden"}>
-                <span onClick={() => sortRows(id, 'ascending')}>Sort A - Z</span>
-                <span onClick={() => sortRows(id, 'descending')}>Sort Z - A</span>
+            <div ref={innerRef} className={dropdown ? "filter-dropdown dashboard flex-column gap--05" : "hidden"}>
+                <p onClick={() => sortRows(id, 'ascending')}>Sort A - Z</p>
+                <p onClick={() => sortRows(id, 'descending')}>Sort Z - A</p>
                 <span>Filter</span>
                 {
                     uniqueValues.map( (item, i) => {

@@ -3,7 +3,6 @@ import useAppData from "../../hooks/useAppData"
 import CoachingHoursTable from './CoachingHoursTable'
 import AddHoursModal from "./AddHoursModal"
 import TrashIcon from "../../Images/trash-solid.svg"
-import "../../Styles/HoursTable.scss"
 
 
 function CoachingHours() {
@@ -26,9 +25,9 @@ function CoachingHours() {
     }
 
     return(
-        <section id="hours">
+        <section className="dashboard">
             {addHoursModal && <AddHoursModal handleClick={handleAddMeetingClick} setAddHoursModal={setAddHoursModal}/>}
-            <div className="flex-row flex-row--right">
+            <div className="flex-row flex-row--right gap--1">
                 <img
                     className={checkedRows.length === 0 ? "hidden" : "delete-records icon icon--md" } 
                     src= {TrashIcon}
