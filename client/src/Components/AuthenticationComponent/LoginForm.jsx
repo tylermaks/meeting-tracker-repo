@@ -57,7 +57,7 @@ function LoginForm() {
   };
 
   return (
-    <form id="login-form" className="flex-column gap--1" onSubmit={handleSubmit}>
+    <form id="login-form" className="login-form flex-column gap--1" onSubmit={handleSubmit}>
       <label htmlFor="email" className="offscreen">
         Email
       </label>

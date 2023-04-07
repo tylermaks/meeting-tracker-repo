@@ -9,11 +9,12 @@ $orange: #ff6900;
     width: 100%;
 }
 
-#login-form{
+.login-form{
     border: 1px solid $lt-grey;
     padding: 3rem;
     max-width: 400px;
-    width: 100%;
+    min-width: 250px;
+    width: 90%;
 
     button{
         margin-top: 1.5rem
@@ -31,3 +32,4 @@ $orange: #ff6900;
     position: absolute;
     left: -9999px;
 }
+

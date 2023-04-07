@@ -1,0 +1,36 @@
+//////////////
+/// LOGIN ///
+////////////
+$lt-grey: #aaaaaa;
+
+.welcome-modal{
+    background: #fff;
+    border: 1px solid $lt-grey;
+    height: 100vh;
+    width: 50px;
+    position: absolute;
+    top: 0rem;
+    left: 0rem;
+
+    &--active{
+        padding: 3rem;
+        width: 400px;
+    }
+
+    ul{
+
+        li{
+            font-weight: 600;
+            list-style: none;
+        }
+    }
+
+    img{
+        position: absolute;
+        top: 50%;
+        right: 1rem;
+        transform: translateY(-50%);
+        opacity: 80%;
+    }
+    
+}
