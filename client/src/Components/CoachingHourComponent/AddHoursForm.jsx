@@ -45,7 +45,7 @@ function AddHoursForm({ setAddHoursModal }) {
                 >
                     <option value="" disabled selected>Select Company</option>
                     {
-                        companyList && companyList.map( (company, i) => { 
+                        companyList && companyList?.map( (company, i) => { 
                             return(
                                 <option key={i} value={company.companyName}>{company.companyName}</option>
                             )

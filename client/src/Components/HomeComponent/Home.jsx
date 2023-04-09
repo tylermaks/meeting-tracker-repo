@@ -4,6 +4,7 @@ import HomeNav from "./HomeNav";
 import MenuNav from "./MenuNav";
 import Dashboard from "./Dashboard";
 import "../../Styles/Home/Home.scss"
+import MobileNav from './MobileNav';
 
 
 function Home(){
@@ -19,6 +20,9 @@ function Home(){
                 <MenuNav 
                     handleSetDashboardClick={handleSetDashboardClick}
                     activeDashboard={activeDashboard} //adjusting for handleClick
+                />
+                <MobileNav 
+                    handleSetDashboardClick={handleSetDashboardClick}
                 />
                 <section id="main-view">
                     <HomeNav />

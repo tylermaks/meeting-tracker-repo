@@ -119,7 +119,7 @@ function Settings() {
                 setModal={setModal}
             />
             <h2>Account Information</h2>
-            <div className="gap--2 flex-row">
+            <div className="gap--2 flex">
                 <div>
                     <label htmlFor="fName">First Name</label>
                     <input 

@@ -4,7 +4,7 @@ import leftChevron from '../../Images/chevron-left-solid.svg'
 import "../../Styles/Authentication/WelcomeModal.scss"
 
 function WelcomeModal(){ 
-    const [welcomeModal, setWelcomeModal] = useState(true)
+    const [welcomeModal, setWelcomeModal] = useState(false)
 
     const toggleModal = () => {
         setWelcomeModal(!welcomeModal)

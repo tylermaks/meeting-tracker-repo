@@ -1,8 +1,9 @@
 import UserDropdown from "./UserDropdown";
+import "../../Styles/Home/Home.scss"
 
 function HomeNav(){
     return(
-        <div className="flex-row flex-row--space">
+        <div id="home-nav" className="flex-row flex-row--space">
             <h2>Logo</h2>
             <UserDropdown />
         </div>

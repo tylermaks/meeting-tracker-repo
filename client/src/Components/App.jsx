@@ -14,6 +14,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Authentication />} />
             <Route path="/unauthorized" element={<Unauthorized />} />
+            <Route path="*" element={<Unauthorized />} />
 
             {/* PROTECTED ROUTE */}
             <Route element={<RequireAuth allowedRoles={[2001]} />}>

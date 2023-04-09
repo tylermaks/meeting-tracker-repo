@@ -26,12 +26,12 @@ function Reports(){
  
     return(
         <section className="dashboard">
-            <div className="flex-row flex-row--space">
+            <div className="report-header">
                 <h2>Monthly Hour Report</h2>
                 <div className='flex-row gap--15'>
                     <select 
                         name="months" 
-                        id="months"
+                        id="months-select"
                         defaultValue={currentMonth}
                         onChange={(e) => setCurrentMonth(e.target.value)}
                     >
@@ -43,7 +43,7 @@ function Reports(){
                             })
                         }
                     </select>
-                    <div onClick={handleExportPDF} className="btn btn--primary">Export PDF</div>
+                    <div id="export-pdf-btn" onClick={handleExportPDF} className="btn btn--primary">Export PDF</div>
                 </div>
             </div>
             <div className='flex-column gap--3'>

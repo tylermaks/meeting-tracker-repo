@@ -47,3 +47,10 @@ $lt-blue: #FAF7FB;
     top: 4px;
     left: 130%;
 }
+
+//MOBILE FRIENDLY
+@media only screen and (max-width: 991px){
+    #menu-nav{ 
+        display: none;
+    }
+}

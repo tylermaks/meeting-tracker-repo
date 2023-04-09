@@ -19,3 +19,19 @@ $lt-blue: #FAF7FB;
     overflow: scroll;
     padding: 1.5rem 7.5rem;
 }
+
+
+@media only screen and (max-width: 991px){
+    #home{ 
+        display: flex;
+        flex-direction: column;
+    }
+
+    #main-view{ 
+        padding: 2rem;
+    }
+
+    #home-nav{
+        display: none;
+    }
+}
