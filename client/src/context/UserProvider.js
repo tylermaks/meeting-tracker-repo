@@ -20,6 +20,7 @@ export const UserProvider = ({ children }) => {
         try{
             const response = await axiosPrivate.get(COMPANIES_URL)
             setCompanyList(response?.data?.companyArr)
+            console.log(response?.data?.companyArr)
         } catch(error) {
             console.error(error)
             console.log("Failed to get company list")
