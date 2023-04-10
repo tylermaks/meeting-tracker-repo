@@ -1,4 +1,3 @@
-require('dotenv').config()
 const express = require('express')
 const credentials = require('./middleware/credentials')
 const cors = require('cors')
@@ -26,8 +25,8 @@ app.use('/.netlify/functions/settings', require('./routes/api/settings'))
 app.use('/.netlify/functions/supportRequests', require('./routes/api/supportRequests'))
 
 exports.handler = async (event, context) => {
-  const PORT = process.env.PORT || 9000;
-  const server = app.listen(PORT, () => console.log(`Server is running on Port: ${PORT}`))
+  const PORT = 9000;
+//   const server = app.listen(PORT, () => console.log(`Server is running on Port: ${PORT}`))
 
   return {
     statusCode: 200,
