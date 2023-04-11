@@ -1,4 +1,13 @@
-const refreshTokenController = require("./controllers/refreshTokenController")
+// const express = require("express")
+// const router = express.Router()
+// const refreshTokenController = require("../../controllers/refreshTokenController")
+
+// router.get("/", refreshTokenController.handleRefreshToken)
+
+
+// module.exports = router
+
+const refreshTokenController = require("../../server/controllers/refreshTokenController")
 
 const handler = async (event) => {
   if (event.httpMethod !== 'POST') {
