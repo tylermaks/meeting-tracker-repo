@@ -1,4 +1,4 @@
-const authController = require("../../server/controllers/authController")
+const authController = require("../../controllers/authController")
 
 exports.handler = async (event, context) => {
   if (event.httpMethod !== 'POST') {
