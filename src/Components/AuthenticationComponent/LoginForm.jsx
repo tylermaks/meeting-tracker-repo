@@ -4,7 +4,7 @@ import useAuth from "../../hooks/useAuth";
 import axios from "../../API/userData";
 import "../../Styles/Authentication/Login.scss";
 
-// const LOGIN_URL = "/auth";
+const LOGIN_URL = "/auth";
 
 function LoginForm() {
   // Hooks
@@ -23,7 +23,7 @@ function LoginForm() {
 
   const handleLogin = async () => {
     try {
-      const response = await axios.post({
+      const response = await axios.post(LOGIN_URL, {
         email: userName,
         pswd: password,
       });
