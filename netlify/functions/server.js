@@ -9,7 +9,7 @@ const serverless = require('serverless-http');
 
 //SETUP
 app.use(credentials)
-app.use(cors(corsOptionsDelegate))
+// app.use(cors(corsOptionsDelegate))
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
 app.use(cookieParser())
