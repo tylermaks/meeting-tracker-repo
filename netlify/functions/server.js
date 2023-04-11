@@ -53,7 +53,7 @@ app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', origin);
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-    res.setHeader('Access-Control-Allow-Credentials', 'true'); // add this line if you're using cookies
+    res.setHeader('Access-Control-Allow-Credentials', 'true'); 
     next();
 })
 
@@ -64,14 +64,6 @@ app.use('/refresh', require('./refresh'))
 app.use(verifyJWT)
 app.use('/meetingList', require('./meetingList'))
 app.use('/logout', require('./logout'))
-
-// Set headers for all responses
-app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', '*')
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE')
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization')
-  next()
-})
 
 module.exports.handler = serverless(app);
 
