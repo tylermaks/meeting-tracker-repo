@@ -23,7 +23,7 @@ function LoginForm() {
 
   const handleLogin = async () => {
     try {
-      const response = await axios.post(LOGIN_URL, {
+      const response = await axios.post({
         email: userName,
         pswd: password,
       });
