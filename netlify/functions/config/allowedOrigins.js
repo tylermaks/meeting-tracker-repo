@@ -1,3 +1,3 @@
-const allowedOrigins = ['http://127.0.0.1:3000', 'http://localhost:3000','http://127.0.0.1:5000', 'http://localhost:5000', 'https://golden-pastelito-f5afa8.netlify.app/.netlify/functions/auth']
+const allowedOrigins = [ 'https://golden-pastelito-f5afa8.netlify.app/.netlify/functions/auth', 'https://golden-pastelito-f5afa8.netlify.app/.netlify/functions/auth']
 
 module.exports = allowedOrigins
