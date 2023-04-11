@@ -1,6 +1,7 @@
 const authController = require("./controllers/authController")
 
 exports.handler = async (event, context) => {
+  console.log(event.httpMethod)
   if (event.httpMethod !== 'POST') {
     return { statusCode: 405, body: 'Method Not Allowed' }
   }
