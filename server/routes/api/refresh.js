@@ -1,8 +1,17 @@
-const express = require("express")
-const router = express.Router()
-const refreshTokenController = require("../../controllers/refreshTokenController")
+const authController = require("../../server/controllers/authController")
 
-router.get("/", refreshTokenController.handleRefreshToken)
+const handler = async (event) => {
+  if (event.httpMethod !== 'POST') {
+    return { statusCode: 405, body: 'Method Not Allowed' }
+  }
 
+  try {
+    const body = JSON.parse(event.body)
+    const result = await authController.handleLogin(body)
+    return { statusCode: 200, body: JSON.stringify(result) }
+  } catch (err) {
+    return { statusCode: 500, body: err.toString() }
+  }
+}
 
-module.exports = router
+module.exports = { handler }
