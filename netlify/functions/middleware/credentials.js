@@ -1,11 +1,24 @@
-const allowedOrigins = require("../config/allowedOrigins")
+const allowedOrigins = require("../config/allowedOrigins");
 
-const credentials = (req, res, next) => {
-    const origin = req.headers.origin
-    if(allowedOrigins?.includes(origin)){
-        res.header('Access-Control-Allow-Credentials', true)
-    }
-    next()
-}
+exports.handler = function (event, context, callback) {
+  const origin = event.headers.origin;
 
-module.exports = credentials
+  if (allowedOrigins.includes(origin)) {
+    const response = {
+      statusCode: 200,
+      headers: {
+        "Access-Control-Allow-Origin": origin,
+        "Access-Control-Allow-Credentials": true,
+      },
+    };
+    return callback(null, response);
+  }
+
+  const response = {
+    statusCode: 403,
+    body: JSON.stringify({
+      error: "Not allowed to access this resource from this origin.",
+    }),
+  };
+  return callback(null, response);
+};
