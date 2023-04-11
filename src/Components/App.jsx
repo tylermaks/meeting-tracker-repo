@@ -12,7 +12,7 @@ function App() {
     <>
       <main className="App">
         <HashRouter>
-          <Routes>
+          <Switch>
             <Route path="/" element={<Authentication />} />
             <Route path="/unauthorized" element={<Unauthorized />} />
             <Route path="*" element={<Unauthorized />} />
@@ -21,7 +21,7 @@ function App() {
             <Route element={<RequireAuth allowedRoles={[2001]} />}>
               <Route path="home" element={<Home />} />
             </Route>
-          </Routes>
+          </Switch>
         </HashRouter>
       </main>
     </>
