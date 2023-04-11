@@ -7,7 +7,7 @@ const base = new Airtable({ apiKey: process.env.AIRTABLE_API_KEY }).base(process
 const table = process.env.AIRTABLE_ADVISORS_ID
 
 const handleLogin = async (req, res) => {
-    const { email, pswd } = req.body
+    const { email, pswd } = req.data
     if (!email || !pswd) {
         return res.status(400).json({"message": "Email and password are required"})
     }
