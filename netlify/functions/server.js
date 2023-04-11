@@ -16,9 +16,9 @@ app.use(cookieParser())
 
 //ROUTES
 app.use('/.netlify/functions/server/auth', require('./auth'))
-app.use('/.netlify/functions/server/refresh', require('../../server/routes/api/refresh'))
+app.use('/.netlify/functions/server/refresh', require('./refresh'))
 app.use(verifyJWT)
-app.use('/.netlify/functions/server/meetingList', require('../../server/routes/api/meetingList'))
+// app.use('/.netlify/functions/server/meetingList', require('../../server/routes/api/meetingList'))
 // app.use('/.netlify/functions/server/logout', require('./routes/api/logout'))
 // app.use('/.netlify/functions/server/meeting', require('./routes/api/meeting'))
 // app.use('/.netlify/functions/server/companies', require("./routes/api/companies"))
