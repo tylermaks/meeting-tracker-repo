@@ -1,21 +1,27 @@
 const express = require('express')
-const credentials = require('../../server/middleware/credentials')
-const cors = require('cors')
+// const credentials = require('../../server/middleware/credentials')
+// const cors = require('cors')
 const cookieParser = require('cookie-parser')
-const corsOptionsDelegate = require('../../server/config/cors')
+// const corsOptionsDelegate = require('../../server/config/cors')
 const app = express()
 const verifyJWT = require('../../server/middleware/verifyJWT')
 const serverless = require('serverless-http');
 
+//CORS
+app.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', '*')
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE')
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization')
+    next()
+})
+
 //SETUP
-app.use(credentials)
-app.use(cors(corsOptionsDelegate))
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
 app.use(cookieParser())
 
 //ROUTES
-app.use('/.netlify/functions/auth', require('./auth'))
+app.use('/auth', require('./auth'))
 app.use('/refresh', require('./refresh'))
 app.use(verifyJWT)
 app.use('/meetingList', require('./meetingList'))
