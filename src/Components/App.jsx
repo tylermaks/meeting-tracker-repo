@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom"
+import { Routes, Route, HashRouter } from "react-router-dom"
 import Authentication from "./AuthenticationComponent/Authentication"
 import RequireAuth from "./AuthenticationComponent/RequireAuth";
 import Unauthorized from "./AuthenticationComponent/Unauthorized";
@@ -11,6 +11,7 @@ function App() {
   return (
     <>
       <main className="App">
+        <HashRouter>
           <Routes>
             <Route path="/" element={<Authentication />} />
             <Route path="/unauthorized" element={<Unauthorized />} />
@@ -18,9 +19,10 @@ function App() {
 
             {/* PROTECTED ROUTE */}
             <Route element={<RequireAuth allowedRoles={[2001]} />}>
-                <Route path="home" element={<Home />} />
+              <Route path="home" element={<Home />} />
             </Route>
           </Routes>
+        </HashRouter>
       </main>
     </>
   );
