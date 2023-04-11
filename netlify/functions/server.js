@@ -15,7 +15,7 @@ app.use(express.json())
 app.use(cookieParser())
 
 //ROUTES
-app.use('/auth', require('./auth'))
+app.use('/.netlify/functions/auth', require('./auth'))
 app.use('/refresh', require('./refresh'))
 app.use(verifyJWT)
 app.use('/meetingList', require('./meetingList'))
