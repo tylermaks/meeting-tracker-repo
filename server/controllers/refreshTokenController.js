@@ -18,26 +18,22 @@ const handleRefreshToken = async (req, res) => {
       view: 'Grid view',
     }).all();
 
-
     const foundUser = records?.find(record => record.get('refreshToken') === refreshToken);
-    if (!foundUser) {
-      return res.sendStatus(403);
-    }
+    if (!foundUser) { return res.sendStatus(403);}
 
     const decoded = jwt.verify(refreshToken, process.env.REFRESH_TOKEN);
-    if (foundUser.fields.id !== decoded.UserInfo.username) {
-      return res.sendStatus(403);
-    }
+    if (foundUser.fields.id !== decoded.UserInfo.username) { return res.sendStatus(403);}
 
+    const roles = Object.values(foundUser.roles)
     const accessToken = jwt.sign(
       {
         username: decoded.UserInfo.username,
         roles: decoded.UserInfo.roles,
       },
       process.env.ACCESS_TOKEN,
-      { expiresIn: '30s' },
+      { expiresIn: '900s' },
     );
-    res.json({ accessToken });
+    res.json({ roles, accessToken });
   } catch (error) {
     console.error(error);
     console.log('An error occurred while assigning the JWT token');

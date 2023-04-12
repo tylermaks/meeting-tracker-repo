@@ -22,6 +22,7 @@ const useAxiosPrivate = () =>{
             //Handle 403 error codes by attempting to refresh access token and resending request with new token
             response => response,
             async (error) => {
+                console.log(error)
                 const prevRequest = error?.config
                 if (error?.response?.status === 403 && !prevRequest?.sent) {
                     prevRequest.sent = true

@@ -2,6 +2,7 @@ import { Routes, Route } from "react-router-dom"
 import Authentication from "./AuthenticationComponent/Authentication"
 import RequireAuth from "./AuthenticationComponent/RequireAuth";
 import Unauthorized from "./AuthenticationComponent/Unauthorized";
+import PersistLogin from "./AuthenticationComponent/PersistLogin";
 
 import Home from "./HomeComponent/Home";
 import '../Styles/App.scss';
@@ -17,8 +18,10 @@ function App() {
             <Route path="*" element={<Unauthorized />} />
 
             {/* PROTECTED ROUTE */}
-            <Route element={<RequireAuth allowedRoles={[2001]} />}>
-                <Route path="home" element={<Home />} />
+            <Route element={<PersistLogin />}>
+              <Route element={<RequireAuth allowedRoles={[2001]} />}>
+                  <Route path="home" element={<Home />} />
+              </Route>
             </Route>
           </Routes>
       </main>

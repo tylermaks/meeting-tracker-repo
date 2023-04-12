@@ -1,29 +1,29 @@
 require('dotenv').config()
 const express = require('express')
+const cookieParser = require('cookie-parser')
 const credentials = require('./middleware/credentials')
 const cors = require('cors')
-const cookieParser = require('cookie-parser')
 const corsOptionsDelegate = require('./config/cors')
 const app = express()
 const verifyJWT = require('./middleware/verifyJWT')
 const PORT = 5000
 const path = require('path');
 
+app.use(cookieParser())
 // Serve static files from the React app
 app.use(express.static(path.join(__dirname, '..', 'client', 'build')))
 
-// Serve the index.html file as the default page for all other routes
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '..', 'client', 'build', 'index.html'))
- })
-
+// // Serve the index.html file as the default page for all other routes
+// app.get('*', (req, res) => {
+//     res.sendFile(path.join(__dirname, '..', 'client', 'build', 'index.html'))
+//  })
 
 //SETUP
 app.use(credentials)
 app.use(cors(corsOptionsDelegate))
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
-app.use(cookieParser())
+
 
 //ROUTES
 app.use('/auth', require('./routes/api/auth'))
