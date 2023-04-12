@@ -9,24 +9,18 @@ const verifyJWT = require('./middleware/verifyJWT')
 const PORT = 5000
 const path = require('path');
 
-app.use(cookieParser())
+
 // Serve static files from the React app
 app.use(express.static(path.join(__dirname, '..', 'client', 'build')))
 
-<<<<<<< HEAD
 // // Serve the index.html file as the default page for all other routes
 // app.get('*', (req, res) => {
 //     res.sendFile(path.join(__dirname, '..', 'client', 'build', 'index.html'))
 //  })
-=======
-// Serve the index.html file as the default page for all other routes
-// app.get('*', (req, res) => {
-//     res.sendFile(path.join(__dirname, '..', 'client', 'build', 'index.html'))
-//  })
 
->>>>>>> a24592116f28e95a8fff783419e5f7463abd6120
 
 //SETUP
+app.use(cookieParser())
 app.use(credentials)
 app.use(cors(corsOptionsDelegate))
 app.use(express.urlencoded({ extended: false }))
