@@ -33,7 +33,16 @@ function CoachingHoursTable ({ checkedRows, setCheckedRows }){
             return !Object.values(item).some((val) => filterItems.includes(val));
           })
           ?.slice(startIndex, endIndex);
-      }, [rows, filterItems, pageNumber]);
+    }, [rows, filterItems, pageNumber]);
+
+    const sortedFilteredRows = filteredRows?.sort(function(a, b) {
+        // Convert the date strings to Date objects for comparison
+        var dateA = new Date(a.date);
+        var dateB = new Date(b.date);
+        // Compare the dates and return a value indicating their relative order
+        return dateB - dateA;
+      });
+    
 
     //Advances the page in paginated component
     const handlePageChange = ({ selected }) => { 
@@ -70,7 +79,7 @@ function CoachingHoursTable ({ checkedRows, setCheckedRows }){
             </thead>
             <tbody>
                 {   
-                    filteredRows?.map((row, id) => {
+                    sortedFilteredRows?.map((row, id) => {
                         return(
                             <tr key={id}>
                                 <td>

@@ -11,14 +11,14 @@ function UserDropdown(){
     const handleDropdownClick = () => {
         setDropdown(!dropdown)
     }
-
+    
     return(
         <div>
             <div 
                 className="user-circle flex-row flex-row--center"
                 onClick={handleDropdownClick}
             >
-                {auth.fName[0]}{auth.lName[0]}
+             {auth?.fName[0]}{auth?.lName[0]}
             </div>            
             {   
                 dropdown && <Logout />

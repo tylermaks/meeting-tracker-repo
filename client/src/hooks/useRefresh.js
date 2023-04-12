@@ -9,17 +9,10 @@ const useRefresh = () => {
         const response = await axios.get('/refresh', {
             withCredentials: true
         })
-               
-        //Add the token to the authProvider 
-        console.log(response.data.roles)
-        console.log("working!")
+        
+        const { accessToken, userName, roles, fName, lName } = response.data;
+        setAuth({ roles, userName, fName, lName, accessToken });
 
-        setAuth(prev => {
-            return { 
-                ...prev, 
-                roles: response.data.roles,
-                accessToken: response.data.accessToken}
-        })
         return response.data.accessToken
     }
     

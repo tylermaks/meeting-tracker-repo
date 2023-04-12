@@ -49,7 +49,7 @@ function CoachingHoursTableHeader ({ label, id, rows, setRows, filterItems, setF
     }
 
     return(
-        <th>
+        <th id={`${id}-header`}>
             <span>{label}</span>
             <img
                 id={id}
