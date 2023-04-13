@@ -11,7 +11,7 @@ const useRefresh = () => {
                 withCredentials: true
             })
     
-            console.log(response?.data)
+            console.log(response)
             
             const { accessToken, userName, roles, fName, lName } = response.data;
             setAuth({ roles, userName, fName, lName, accessToken });

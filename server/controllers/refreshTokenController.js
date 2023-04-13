@@ -7,6 +7,7 @@ const table = process.env.AIRTABLE_ADVISORS_ID;
 
 const handleRefreshToken = async (req, res) => {
   try {
+    res.type('json')
     const cookies = req.cookies;
     if (!cookies?.jwt) return res.sendStatus(401);
     const refreshToken = cookies.jwt;
@@ -17,7 +18,6 @@ const handleRefreshToken = async (req, res) => {
 
     const foundUser = records?.find(record => record.get('refreshToken') === refreshToken);
     if (!foundUser) { return res.sendStatus(403);}
-
 
     const decoded = jwt.verify(refreshToken, process.env.REFRESH_TOKEN);
     if (foundUser.fields.id !== decoded.UserInfo.username) { return res.sendStatus(403);}
