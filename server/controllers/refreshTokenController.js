@@ -6,6 +6,7 @@ const base = new Airtable({ apiKey: process.env.AIRTABLE_API_KEY }).base(process
 const table = process.env.AIRTABLE_ADVISORS_ID;
 
 const handleRefreshToken = async (req, res) => {
+  console.log("made it to the refreshController")
   try {
     const cookies = req.cookies;
     if (!cookies?.jwt) return res.sendStatus(401);
