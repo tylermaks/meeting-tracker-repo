@@ -8,7 +8,6 @@ const useAxiosPrivate = () =>{
     const { auth } = useAuth()
 
     useEffect( () => {
-        console.log("axiosPrivate working!")
         //Set Axios interceptor to create authorization header if one does not exist, includes access token from authProvider
         const requestIntercept = axiosPrivate.interceptors.request.use(
             config => {

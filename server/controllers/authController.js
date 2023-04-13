@@ -7,8 +7,6 @@ const base = new Airtable({ apiKey: process.env.AIRTABLE_API_KEY }).base(process
 const table = process.env.AIRTABLE_ADVISORS_ID
 
 const handleLogin = async (req, res) => {
-    console.log("authController working!")
-
     const { email, pswd } = req.body
     if (!email || !pswd) {
         return res.status(400).json({"message": "Email and password are required"})
@@ -42,7 +40,7 @@ const handleLogin = async (req, res) => {
             
             await base(table).update(foundUser.id, { "refreshToken": refreshToken })
             
-            res.cookie('jwt', refreshToken, { httpOnly: true, sameSite: 'None', secure: true, domain:"meeting-tracker.onrender.com", maxAge: 24 * 60 * 60 * 1000 })
+            res.cookie('jwt', refreshToken, { httpOnly: true, sameSite: 'None', secure: true, maxAge: 24 * 60 * 60 * 1000 })
             res.json({ id, roles, accessToken, fName, lName })
         } else {
             return res.sendStatus(401)

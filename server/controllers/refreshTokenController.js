@@ -6,13 +6,10 @@ const base = new Airtable({ apiKey: process.env.AIRTABLE_API_KEY }).base(process
 const table = process.env.AIRTABLE_ADVISORS_ID;
 
 const handleRefreshToken = async (req, res) => {
-  console.log("made it to the refreshController")
   try {
     const cookies = req.cookies;
     if (!cookies?.jwt) return res.sendStatus(401);
     const refreshToken = cookies.jwt;
-
-    console.log(`Received cookie: ${cookies}`)
 
     const records = await base(table).select({
       view: 'Grid view',
@@ -25,7 +22,6 @@ const handleRefreshToken = async (req, res) => {
     const decoded = jwt.verify(refreshToken, process.env.REFRESH_TOKEN);
     if (foundUser.fields.id !== decoded.UserInfo.username) { return res.sendStatus(403);}
 
-    console.log(`Found user: ${foundUser.fields}`)
     const { id, fields: { id: userName, role: roles, firstName: fName, lastName: lName } } = foundUser
 
     const accessToken = jwt.sign(

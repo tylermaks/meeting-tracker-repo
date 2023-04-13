@@ -7,18 +7,19 @@ const PersistLogin = () => {
     const [isLoading, setIsLoading] = useState(true);
     const { auth } = useAuth();
     const refresh = useRefresh();
-    console.log("made it to persist login")
+
+
     useEffect(() => {
         const verifyRefreshToken = async () => {
             try {
                 console.log("made it to persist login try block")
-                await refresh();
+                await refresh()
             }
             catch (err) {
-                console.error(err);
+                console.error(err)
             }
             finally {
-                setIsLoading(false);
+                setIsLoading(false)
             }
         }
 
