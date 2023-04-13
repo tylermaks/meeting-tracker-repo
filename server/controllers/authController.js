@@ -40,7 +40,7 @@ const handleLogin = async (req, res) => {
             
             await base(table).update(foundUser.id, { "refreshToken": refreshToken })
             
-            res.cookie('jwt', refreshToken, { httpOnly: true, sameSite: 'lax', secure: true, maxAge: 24 * 60 * 60 * 1000 })
+            res.cookie('jwt', refreshToken, { httpOnly: true, sameSite: 'None', secure: true, maxAge: 24 * 60 * 60 * 1000 })
             res.json({ id, roles, accessToken, fName, lName })
         } else {
             return res.sendStatus(401)
