@@ -13,11 +13,11 @@ root.render(
   <React.StrictMode>
     <BrowserRouter>
       <AuthProvider>
-        <Router history={createBrowserHistory()}>
+        <Route history={createBrowserHistory()}>
           <Routes>
             <Route path="/*" element={<App />}/>
           </Routes>
-        </Router>
+        </Route>
       </AuthProvider>
     </BrowserRouter>
   </React.StrictMode>
