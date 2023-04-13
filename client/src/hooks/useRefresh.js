@@ -8,7 +8,10 @@ const useRefresh = () => {
         //GET Requst for refesh token 
         try{
             const response = await axios.get('/refresh', {
-                headers: {'Content-Type': 'application/json'},
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
                 withCredentials: true
             })
     
