@@ -19,9 +19,9 @@ function App() {
 
             {/* PROTECTED ROUTE */}
             <Route element={<PersistLogin />}>
-              <Route element={<RequireAuth allowedRoles={[2001]} />}>
+              {/* <Route element={<RequireAuth allowedRoles={[2001]} />}> */}
                   <Route path="home" element={<Home />} />
-              </Route>
+              {/* </Route> */}
             </Route>
           </Routes>
       </main>
