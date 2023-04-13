@@ -20,7 +20,10 @@ app.use(express.static(path.join(__dirname, '..', 'client', 'build')))
 
 
 //SETUP
-app.use(cookieParser())
+app.use(cookieParser(process.env.REFRESH_TOKEN, {
+    sameSite: 'lax',
+    secure: true
+}))
 app.use(credentials)
 app.use(cors(corsOptionsDelegate))
 app.use(express.urlencoded({ extended: false }))
