@@ -22,7 +22,7 @@ const handleRefreshToken = async (req, res) => {
     const decoded = jwt.verify(refreshToken, process.env.REFRESH_TOKEN);
     if (foundUser.fields.id !== decoded.UserInfo.username) { return res.sendStatus(403);}
 
-    const { id, fields: { id: userName, role: roles, firstName: fName, lastName: lName } } = foundUser
+    const { fields: { id: userName, role: roles, firstName: fName, lastName: lName } } = foundUser
 
     const accessToken = jwt.sign(
       {

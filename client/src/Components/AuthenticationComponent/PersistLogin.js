@@ -8,11 +8,9 @@ const PersistLogin = () => {
     const { auth } = useAuth();
     const refresh = useRefresh();
 
-
     useEffect(() => {
         const verifyRefreshToken = async () => {
             try {
-                console.log("made it to persist login try block")
                 await refresh()
             }
             catch (err) {
@@ -27,11 +25,6 @@ const PersistLogin = () => {
         // Avoids unwanted call to verifyRefreshToken
         !auth?.accessToken ? verifyRefreshToken() : setIsLoading(false);
     }, [auth?.accessToken, refresh])
-
-    useEffect(() => {
-        console.log(`isLoading: ${isLoading}`)
-        console.log(`aT: ${JSON.stringify(auth?.accessToken)}`)
-    }, [isLoading, auth?.accessToken])
 
     return (
         <>
