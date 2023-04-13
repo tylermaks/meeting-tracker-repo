@@ -9,6 +9,8 @@ const useRefresh = () => {
         const response = await axios.get('/refresh', {
             withCredentials: true
         })
+
+        console.log(`useRefresh: ${response?.data}`)
         
         const { accessToken, userName, roles, fName, lName } = response.data;
         setAuth({ roles, userName, fName, lName, accessToken });
