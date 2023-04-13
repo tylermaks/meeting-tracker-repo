@@ -21,6 +21,7 @@ app.use(express.static(path.join(__dirname, '..', 'client', 'build')))
 
 //SETUP
 app.use(cookieParser(process.env.REFRESH_TOKEN, {
+    httpOnly: true,
     sameSite: 'None',
     secure: true
 }))
