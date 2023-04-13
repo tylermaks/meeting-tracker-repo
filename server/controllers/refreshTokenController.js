@@ -11,6 +11,8 @@ const handleRefreshToken = async (req, res) => {
     if (!cookies?.jwt) return res.sendStatus(401);
     const refreshToken = cookies.jwt;
 
+    console.log(`Received cookie: ${cookies}`)
+
     const records = await base(table).select({
       view: 'Grid view',
     }).all();
@@ -22,7 +24,8 @@ const handleRefreshToken = async (req, res) => {
     const decoded = jwt.verify(refreshToken, process.env.REFRESH_TOKEN);
     if (foundUser.fields.id !== decoded.UserInfo.username) { return res.sendStatus(403);}
 
-    const { fields: { id: userName, role: roles, firstName: fName, lastName: lName } } = foundUser
+    console.log(`Found user: ${foundUser.fields}`)
+    const { id, fields: { id: userName, role: roles, firstName: fName, lastName: lName } } = foundUser
 
     const accessToken = jwt.sign(
       {
@@ -32,7 +35,8 @@ const handleRefreshToken = async (req, res) => {
       process.env.ACCESS_TOKEN,
       { expiresIn: '900s' },
     );
-    res.json({ userName, fName, lName, roles, accessToken });
+
+    res.json({ id, userName, fName, lName, roles, accessToken });
   } catch (error) {
     console.error(error);
     console.log('An error occurred while assigning the JWT token');
