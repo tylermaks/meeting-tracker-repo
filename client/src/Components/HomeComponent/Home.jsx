@@ -9,7 +9,6 @@ import MobileNav from './MobileNav';
 
 function Home(){
     const [activeDashboard, setActiveDashboard] = useState(1)
-    console.log("home component!")
 
     //Set current dashboard view
     const handleSetDashboardClick = (id) => {
