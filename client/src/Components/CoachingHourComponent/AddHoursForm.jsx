@@ -19,6 +19,7 @@ function AddHoursForm({ setAddHoursModal }) {
         notes: notes
     }
 
+    console.log(companyList)
     //Send meeting meetingData to backend through the addMeeting hook, then reset form inputs
     //If the user hits submit, close modal - if user hits Add Another Meeting keep modal open 
     const handleSubmit = (e) => {
@@ -47,7 +48,7 @@ function AddHoursForm({ setAddHoursModal }) {
                     {
                         companyList && companyList?.map( (company, i) => { 
                             return(
-                                <option key={i} value={company.companyName}>{company.companyName}</option>
+                                <option key={i} value={company}>{company}</option>
                             )
                         })
 
